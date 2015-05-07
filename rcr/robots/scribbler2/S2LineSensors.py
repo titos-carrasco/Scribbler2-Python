@@ -17,7 +17,6 @@ class S2LineSensors:
         finally:
             self.s2.unlock()
 
-
     def getRightLine( self ):
         try:
             self.s2.lock()

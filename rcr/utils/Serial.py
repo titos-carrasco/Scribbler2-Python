@@ -83,15 +83,21 @@ class Serial:
             self.unlock()
 
     def flushRead( self, timex ):
-        timex = timex / 1000.0
-        t1 = time.time()
-        t2 = t1
-        while( t2 -t1 <= timex ):
-            try:
-                self.serial.read(1)
-            except:
-                pass
-            t2 = time.time()
+        try:
+            self.lock()
+            timex = timex / 1000.0
+            t1 = time.time()
+            t2 = t1
+            while( t2 -t1 <= timex ):
+                try:
+                    self.serial.read(1)
+                except:
+                    pass
+                t2 = time.time()
+        except Exception as e:
+            raise
+        finally:
+            self.unlock()
 
     def readUInt8( self ):
         b = self.read(1)
