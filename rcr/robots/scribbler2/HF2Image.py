@@ -5,3 +5,6 @@ class HF2Image:
         self.width = width
         self.height = height
         self.image = image
+
+    def __str__( self ):
+        return "F2Camera(%d, %d, %d)" % ( self.width, self.height, len( self.image ) )

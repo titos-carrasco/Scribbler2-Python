@@ -3,17 +3,16 @@
 import serial
 import threading
 import time
+import Utils
 
 class Serial:
     def __init__( self, port, bauds, timeout ):
-        self.realTimeOut = 1.0
-        self.userTimeOut = timeout
-        self.maxTries = self.userTimeOut/self.realTimeOut
+        self.maxTries = timeout
         self.mylock = threading.Lock()
         try:
             self.serial = serial.Serial(port, baudrate=bauds, bytesize=8,
                                        parity='N', stopbits=1,
-                                       timeout=self.realTimeOut / 1000.0 )
+                                       timeout=0 )
             self.serial.flushInput()
             self.serial.flushOutput()
         except Exception as e:
@@ -39,27 +38,6 @@ class Serial:
         finally:
             self.unlock()
 
-    def readLine( self, maxChars ):
-        try:
-            self.lock()
-            bytes = ''
-            pos = 0
-            tries = 0
-            while( pos < maxChars + 1 and tries < self.maxTries ):
-                b = self.serial.read(1)
-                if( b == '' ):
-                    tries = tries + 1
-                    continue
-                if( b == "\n" ):
-                    return bytes
-                bytes = bytes + b
-                tries = 0
-            raise serial.SerialTimeoutException
-        except Exception as e:
-            raise
-        finally:
-            self.unlock()
-
     def read( self, nbytes ):
         try:
             self.lock()
@@ -69,6 +47,7 @@ class Serial:
             while( pos < nbytes and tries < self.maxTries ):
                 b = self.serial.read(1)
                 if( b == '' ):
+                    Utils.pause(1)
                     tries = tries + 1
                     continue
                 bytes[ pos ] = b
@@ -82,18 +61,40 @@ class Serial:
         finally:
             self.unlock()
 
+    def readLine( self, maxChars ):
+        try:
+            self.lock()
+            bytes = ''
+            pos = 0
+            tries = 0
+            while( pos < maxChars + 1 and tries < self.maxTries ):
+                b = self.serial.read(1)
+                if( b == '' ):
+                    Utils.pause(1)
+                    tries = tries + 1
+                    continue
+                if( b == "\n" ):
+                    return bytes
+                bytes = bytes + b
+                tries = 0
+            raise serial.SerialTimeoutException
+        except Exception as e:
+            raise
+        finally:
+            self.unlock()
+
     def flushRead( self, timex ):
         try:
             self.lock()
-            timex = timex / 1000.0
-            t1 = time.time()
-            t2 = t1
-            while( t2 -t1 <= timex ):
+            t = time.time()
+            end = t + timex / 1000.0
+            while( t < timex ):
                 try:
-                    self.serial.read(1)
+                    if(self.serial.read(1)==''):
+                        Utils.pause(1);
                 except:
                     pass
-                t2 = time.time()
+                t = time.time()
         except Exception as e:
             raise
         finally:

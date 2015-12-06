@@ -3,7 +3,6 @@
 from HF2Image import HF2Image
 
 class F2Camera:
-    SCRIBBLER_FORWARD = 2
     IMAGE_LARGE = 1
     IMAGE_SMALL = 2
     IMAGE_GRAYJPEG = 1

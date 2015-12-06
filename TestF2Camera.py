@@ -14,6 +14,7 @@ def main():
     f2Camera.setPicSize( f2Camera.IMAGE_SMALL )
     for i in range(10):
         image = f2Camera.getImage( f2Camera.IMAGE_GRAYJPEG_FAST )
+        print( "Image:" + str( image ) )
         img = cv2.imdecode( np.fromstring( str(image.image), np.uint8 ), cv2.CV_LOAD_IMAGE_COLOR )
         cv2.imshow( 'Frames', img )
         k = cv2.waitKey(5)

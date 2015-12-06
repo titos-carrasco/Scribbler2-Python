@@ -22,6 +22,7 @@ from F2Camera import F2Camera
 from F2Inner import F2Inner
 from F2IRSensors import F2IRSensors
 from F2LEDs import F2LEDs
+from F2Servos import F2Servos
 
 class Scribbler2:
     DATA_LENGTH = 8
@@ -45,6 +46,7 @@ class Scribbler2:
         self.f2Inner = F2Inner( self )
         self.f2IRSensors = F2IRSensors( self )
         self.f2LEDs = F2LEDs( self )
+        self.f2Servos = F2Servos( self )
 
     def close( self ):
         try:
@@ -93,6 +95,9 @@ class Scribbler2:
 
     def getF2LEDs( self ):
         return self.f2LEDs
+
+    def getF2Servos( self ):
+        return self.f2Servos
 
     ## protected
 
