@@ -1,12 +1,27 @@
 # -*- coding: utf-8 -*-
 
+""" Acceso a puerta serial
+
+"""
+
 import serial
 import threading
 import time
-import Utils
+from . import Utils
 
 class Serial:
     def __init__( self, port, bauds, timeout ):
+        """ Conecta a la puerta serial
+
+        Args:
+            port (str): puerta serial
+            baudrate (int): velocidad
+            bytesize(opcional[int]): número de bits (8)
+            parity (opcional[char]): paridad ('N')
+            stopbits (opcional[int]): número de bits de parada (1)
+            timeout(opcional[int]): timeout en milisegundos (0)
+
+        """
         self.maxTries = timeout
         self.mylock = threading.Lock()
         try:
@@ -19,6 +34,9 @@ class Serial:
             raise
 
     def close( self ):
+        """ Finaliza la conexión con la puerta serial
+
+        """
         try:
             self.lock()
             self.serial.close()
@@ -28,10 +46,16 @@ class Serial:
         finally:
             self.unlock()
 
-    def write( self, bytes ):
+    def write( self, dataBytes ):
+        """ Envía bytes por la puerta serial
+
+        Args:
+            dataBytes (bytes, bytearray o compatibles): bytes a enviar
+
+        """
         try:
             self.lock()
-            self.serial.write( bytes )
+            self.serial.write( dataBytes )
             self.serial.flush()
         except Exception as e:
             raise
@@ -39,43 +63,78 @@ class Serial:
             self.unlock()
 
     def read( self, nbytes ):
+        """ Lee bytes desde la puerta serial
+
+        Args:
+            nbytes (int): número de bytes a leer
+
+        Returns:
+            bytearray: los bytes leidos
+
+        Raises:
+            SerialTimeoutException: si no se pudieron leer los bytes
+                solicitados en el tiempo señalado
+
+        """
         try:
             self.lock()
-            bytes = bytearray( nbytes )
+            dataBytes = bytearray( nbytes )
             pos = 0
             tries = 0
             while( pos < nbytes and tries < self.maxTries ):
                 b = self.serial.read(1)
-                if( b == '' ):
+                if( len(b)==0 ):
                     Utils.pause(1)
                     tries = tries + 1
                     continue
-                bytes[ pos ] = b
+                if( type(b) is str ):
+                    dataBytes[pos] = ord(b)
+                else:
+                    dataBytes[pos] = b[0]
                 pos = pos + 1
                 tries = 0
             if( pos < nbytes ):
                 raise serial.SerialTimeoutException
-            return bytes
+            return dataBytes
         except Exception as e:
             raise
         finally:
             self.unlock()
 
     def readLine( self, maxChars ):
+        """ Lee una línea ascii finalizada en '\n' o de tamaño específico
+            desde la puerta serial
+
+        Args:
+            maxChars (int): máximo de caracteres ascii a leer
+
+        Raises:
+            SerialTimeoutException: si no se pudieron leer la línea solicitada
+            en el tiempo señalado
+
+        Returns:
+            str: la línea de texto leida sin incluir el '\n'
+
+        """
         try:
             self.lock()
-            bytes = ''
+            linea = ''
             pos = 0
             tries = 0
             while( pos < maxChars + 1 and tries < self.maxTries ):
                 b = self.serial.read(1)
-                if( b == '' ):
+                if( len(b)==0 ):
                     Utils.pause(1)
                     tries = tries + 1
                     continue
-                if( b == "\n" ):
-                    return bytes
-                bytes = bytes + b
+                if( type(b) is str ):
+                    if( b == '\n'):
+                        return linea
+                    linea = linea + b
+                else:
+                    if( b[0]==10 ):
+                        return linea
+                    linea =linea + chr(b[0])
                 tries = 0
             raise serial.SerialTimeoutException
         except Exception as e:
@@ -84,13 +143,19 @@ class Serial:
             self.unlock()
 
     def flushRead( self, timex ):
+        """ Descarta datos presentes para lectura en la puerta serial
+
+        Args:
+            timex (int): tiempo en milisegundos que se leerean bytes y serán
+                descartados
+        """
         try:
             self.lock()
             t = time.time()
             end = t + timex / 1000.0
             while( t < timex ):
                 try:
-                    if(self.serial.read(1)==''):
+                    if( len(self.serial.read(1))==0 ):
                         Utils.pause(1);
                 except:
                     pass
@@ -101,16 +166,34 @@ class Serial:
             self.unlock()
 
     def readUInt8( self ):
+        """ Lee un entero sin signo de 8 bits
+
+        Returns:
+            int: el entero sin signo de 8 bits
+
+        """
         b = self.read(1)
         return b[0] & 0xFF
 
     def readUInt16( self ):
+        """ Lee un entero sin signo de 16 bits
+
+        Returns:
+            int: el entero sin signo de 16 bits
+
+        """
         b = self.read(2)
         n = b[0] & 0x000000FF
         n = ( n<<8 ) | ( b[1] & 0xFF )
         return n
 
     def readUInt32( self ):
+        """ Lee un entero sin signo de 32 bits
+
+        Returns:
+            int: el entero sin signo de 32 bits
+
+        """
         b = self.read(4)
         n = b[0] & 0x000000FF
         n = ( n << 8 ) | ( b[1] & 0xFF )
@@ -122,15 +205,25 @@ class Serial:
             return n
 
     def readInt32(self):
+        """ Lee un entero con signo de 32 bits
+
+        Returns:
+            int: el entero con signo de 32 bits
+
+        """
         n = self.readUInt32()
         return int( n )
 
     #### Privadas
 
     def lock( self ):
-        """Obtiene acceso exclusivo."""
+        """ Obtiene acceso exclusivo
+
+        """
         self.mylock.acquire()
 
     def unlock( self ):
-        """Libera el acceso exclusivo."""
+        """ Libera el acceso exclusivo
+
+        """
         self.mylock.release()

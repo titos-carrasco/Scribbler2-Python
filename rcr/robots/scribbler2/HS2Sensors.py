@@ -1,9 +1,28 @@
 # -*- coding: utf-8 -*-
 
+""" Clase de ayuda (helper) para entregar información del estado de varios
+sensores del S2
+
+Es creada por el S2 y solo es útil de lectura en la aplicación
+
+"""
 class HS2Sensors:
     def __init__( self, irLeft, irRight,
                         lightLeft, lightCenter, lightRight,
                         lineLeft, lineRight, stall ):
+        """ Inicializa los elementos de lectura para la aplicación
+
+        Args;
+            irLeft (int); valor del sensor IR iquierdo
+            irRight (int): valor del sensor IR derecho
+            lightLeft (nt): valor del sensor de luz iquierdo
+            lightCenter (int): valor del sensor de luz central
+            lightRight (int): valor del sensor de luz derecho
+            lineLeft (int): valor del sensor de línea izquierdo
+            lineRight (int): valor del sensor de línea derecho
+            stall (int): valor indicador si las ruedas están atrapadas
+
+        """
         self.irLeft = irLeft
         self.irRight = irRight
         self.lightLeft = lightLeft

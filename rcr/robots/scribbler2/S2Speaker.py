@@ -1,10 +1,19 @@
 # -*- coding: utf-8 -*-
 
+""" Acceso al parlante del S2
+
+"""
 class S2Speaker:
     def __init__( self, s2 ):
         self.s2 = s2
 
     def setQuiet( self ):
+        """ Apaga el parlante del S2
+
+        Returns:
+            HS2Sensors: objeto con el valor de los principales sensores del S2
+
+        """
         try:
             self.s2.lock()
             packet = self.s2.makeS2Packet( 112 )
@@ -16,6 +25,12 @@ class S2Speaker:
             self.s2.unlock()
 
     def setLoud( self ):
+        """ Activa el parlante del S2
+
+        Returns:
+            HS2Sensors: objeto con el valor de los principales sensores del S2
+
+        """
         try:
             self.s2.lock()
             packet = self.s2.makeS2Packet( 111 )
@@ -27,6 +42,15 @@ class S2Speaker:
             self.s2.unlock()
 
     def setVolume( self, volume ):
+        """ Establece porcentaje del nivel de volumen del parlante del S2
+
+        Args:
+            volume (int): porcentaje de volumen (0 a 100) del parlante
+
+        Returns:
+            HS2Sensors: objeto con el valor de los principales sensores del S2
+
+        """
         try:
             self.s2.lock()
             volume = volume & 0xFF
@@ -42,6 +66,17 @@ class S2Speaker:
             self.s2.unlock()
 
     def setSpeaker( self, duration, freq1, freq2):
+        """ Emite sonido a través del parlante del S2
+
+        Args:
+            duration (int): duranción del sonido en ms (no superior a 2500)
+            freq1 (int): frecuencia principal en Hz
+            freq2 (int): frecuencia secundaria en Hz
+
+        Returns:
+            HS2Sensors: objeto con el valor de los principales sensores del S2
+
+        """
         try:
             self.s2.lock()
             duration = duration & 0xFFFF

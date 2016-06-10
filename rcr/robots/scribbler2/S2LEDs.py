@@ -1,10 +1,22 @@
 # -*- coding: utf-8 -*-
 
+""" Acceso a los LEDs del S2
+
+"""
 class S2LEDs:
     def __init__( self, s2 ):
         self.s2 = s2
 
     def setLeftLed( self, encender ):
+        """ Enciende o apaga el LED izquierdo
+
+        Args:
+            encender (bool): orden de apagar o encender el LED
+
+        Returns:
+            HS2Sensors: objeto con el valor de los principales sensores del S2
+
+        """
         try:
             self.s2.lock()
             cmd = 100
@@ -19,6 +31,15 @@ class S2LEDs:
             self.s2.unlock()
 
     def setCenterLed( self, encender ):
+        """ Enciende o apaga el LED central
+
+        Args:
+            encender (bool): orden de apagar o encender el LED
+
+        Returns:
+            HS2Sensors: objeto con el valor de los principales sensores del S2
+
+        """
         try:
             self.s2.lock()
             cmd = 102
@@ -33,6 +54,15 @@ class S2LEDs:
             self.s2.unlock()
 
     def setRightLed( self, encender ):
+        """ Enciende o apaga el LED derecho
+
+        Args:
+            encender (bool): orden de apagar o encender el LED
+
+        Returns:
+            HS2Sensors: objeto con el valor de los principales sensores del S2
+
+        """
         try:
             self.s2.lock()
             cmd = 104
@@ -47,6 +77,17 @@ class S2LEDs:
             self.s2.unlock()
 
     def setAllLed( self, left, center, right ):
+        """ Enciende o apaga los LEDs del S2
+
+        Args:
+            left (bool): orden de apagar o encender el LED izquierdo
+            center (bool): orden de apagar o encender el LED central
+            right (bool): orden de apagar o encender el LED derecho
+
+        Returns:
+            HS2Sensors: objeto con el valor de los principales sensores del S2
+
+        """
         try:
             self.s2.lock()
             packet = self.s2.makeS2Packet( 107 )

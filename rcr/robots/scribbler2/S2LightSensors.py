@@ -1,12 +1,21 @@
 # -*- coding: utf-8 -*-
 
-from HS2Lights import HS2Lights
+""" Acceso a los sensores de luz del S2
+
+"""
+from .HS2Lights import HS2Lights
 
 class S2LightSensors:
     def __init__( self, s2 ):
         self.s2 = s2
 
     def getLeftLight( self ):
+        """ Obtiene el valor del sensor de luz izquierdo
+
+        Returns:
+            int: valor del sensor de luz izquierdo
+
+        """
         try:
             self.s2.lock()
             packet = self.s2.makeS2Packet( 67 )
@@ -18,6 +27,12 @@ class S2LightSensors:
             self.s2.unlock()
 
     def getCenterLight( self ):
+        """ Obtiene el valor del sensor de luz central
+
+        Returns:
+            int: valor del sensor de luz central
+
+        """
         try:
             self.s2.lock()
             packet = self.s2.makeS2Packet( 68 )
@@ -29,6 +44,12 @@ class S2LightSensors:
             self.s2.unlock()
 
     def getRightLed( self ):
+        """ Obtiene el valor del sensor de luz derecho
+
+        Returns:
+            int: valor del sensor de luz derecho
+
+        """
         try:
             self.s2.lock()
             packet = self.s2.makeS2Packet( 69 )
@@ -40,6 +61,12 @@ class S2LightSensors:
             self.s2.unlock()
 
     def getAllLights( self ):
+        """ Obtiene el valor de los sensores de luz
+
+        Returns:
+            HS2Lights: valor de los sensores de luz del S2
+
+        """
         try:
             self.s2.lock()
             packet = self.s2.makeS2Packet( 70 )

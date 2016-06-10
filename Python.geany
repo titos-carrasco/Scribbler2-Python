@@ -32,10 +32,18 @@ EX_00_WD=
 PythonFT_00_LB=_Compile
 PythonFT_00_CM=python -m py_compile "%f"
 PythonFT_00_WD=
-PythonFT_01_LB=
-PythonFT_01_CM=
+PythonFT_01_LB=Compile w/Python3
+PythonFT_01_CM=python3 -m py_compile "%f"
 PythonFT_01_WD=
 PythonFT_02_LB=
 PythonFT_02_CM=
 PythonFT_02_WD=
 filetypes=Python;
+EX_01_LB=Execute w/Python3
+EX_01_CM=python3 "%f"
+EX_01_WD=
+
+[editor]
+line_wrapping=false
+line_break_column=78
+auto_continue_multiline=false

@@ -166,7 +166,7 @@ class TestJoystick:
                 self.Stall.set_label( str( self.sensors.stall ) )
                 time.sleep(1)
             except Exception as e:
-                print e
+                print( e )
                 break
 
     def _Joystick(self, *args):
