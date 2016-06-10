@@ -21,6 +21,7 @@ Todo el desarrollo se realiza utilizando Geany en Linux Debian, configurando un 
 
 ***
 ##Historia
+* Jun 09, 2016: Compatibliza código con Python 2.7 y 3.5. Agrega documentación en línea
 * Dic 05, 2015: Implementa funciones de control de los servo
 * Abr 22, 2015: Se mueve todo el código Python hacia el proyecto Scribbler2-Python
 * Abr 19, 2015: V2.0.1 con el código en Java y en Python más cercano a OO
