@@ -1,17 +1,23 @@
 # -*- coding: utf-8 -*-
 
-""" Acceso a los sensores IR del S2
-
-"""
+"""Acceso a los sensores IR del S2."""
 
 from .HS2Infrared import HS2Infrared
 
 class S2IRSensors:
+    """Clase de acceso a los sensores infrarojos del S2."""
+
     def __init__( self, s2 ):
+        """Constructor de la clase.
+
+        Args:
+            s2 (Scribber2): referencia al S2
+
+        """
         self.s2 = s2
 
     def getIRLeft( self ):
-        """ Obtiene valor del sensor IR izquierdo
+        """Obtiene valor del sensor IR izquierdo.
 
         Returns:
             int: valor del sensor IR izquierdo
@@ -28,7 +34,7 @@ class S2IRSensors:
             self.s2.unlock()
 
     def getIRRight( self ):
-        """ Obtiene valor del sensor IR derecho
+        """Obtiene valor del sensor IR derecho.
 
         Returns:
             int: valor del sensor IR derecho
@@ -45,7 +51,7 @@ class S2IRSensors:
             self.s2.unlock()
 
     def getAllIR( self ):
-        """ Obtiene el valor de todos los sensores IR del S2
+        """Obtiene el valor de todos los sensores IR del S2.
 
         Returns:
             HS2Infrared: el valor de los sensores IR del S2
@@ -62,7 +68,7 @@ class S2IRSensors:
             self.s2.unlock()
 
     def getIrEx( self, side, thres):
-        """ Obtiene el valor extendido de un sensor infrarojo del S2
+        """Obtiene el valor extendido de un sensor infrarojo del S2.
 
         Args:
             side (byte): el sensor a leer (0 o 1)
@@ -86,7 +92,7 @@ class S2IRSensors:
             self.s2.unlock()
 
     def getDistanceEx( self, side ):
-        """ Obtiene distacia medida por un sensor
+        """Obtiene distacia medida por un sensor.
 
         Args:
             side (int): sensor a utilizar (0 o 1)

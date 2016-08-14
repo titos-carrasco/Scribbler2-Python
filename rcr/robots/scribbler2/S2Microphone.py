@@ -1,17 +1,24 @@
 # -*- coding: utf-8 -*-
 
-""" acceso al micrófono del S2
+"""Acceso al microfono del S2."""
 
-"""
 class S2Microphone:
+    """Clase de acceso al microfono del S2."""
+
     def __init__( self, s2 ):
+        """Constructor de la clase.
+
+        Args:
+            s2 (Scribber2): referencia al S2
+
+        """
         self.s2 = s2
 
     def getMicEnv( self ):
-        """ Obtiene el valor del micrófono del S2
+        """Obtiene el valor del microfono del S2.
 
         Returns:
-            int: valor del micrófono del S2
+            int: valor del microfono del S2
 
         """
         try:

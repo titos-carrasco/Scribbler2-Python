@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 
-""" Clase de ayuda (helper) para entregar información del estado del S2
+"""Clase de ayuda (helper) para entregar informacion del estado del S2.
 
-Es creada por el S2 y solo es útil de lectura en la aplicación
+Es creada por el S2 y solo es util de lectura en la aplicacion
 
 """
 class HS2State:
+    """Clase helper para el S2 con estado interno."""
+
     def __init__( self, inPins, outPins ):
-        """ Inicializa los elementos de lectura para la aplicación
+        """Inicializa los elementos de lectura para la aplicacion.
 
         Args:
             inPins (int): valor de pines de entrada (bitwise)
@@ -18,4 +20,5 @@ class HS2State:
         self.outPins = outPins
 
     def __str__( self ):
+        """Representacion modo texto de la clase."""
         return "HS2State(%d, %d)" % ( self.inPins, self.outPins )

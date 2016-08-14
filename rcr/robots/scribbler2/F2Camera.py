@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
-""" Acceso a la camara del F2
+"""Acceso a la camara del F2."""
 
-"""
 from .HF2Image import HF2Image
 
 class F2Camera:
+    """Clase de acceso a la camara de la F2."""
+
     IMAGE_LARGE = 1
     IMAGE_SMALL = 2
     IMAGE_GRAYJPEG = 1
@@ -14,15 +15,21 @@ class F2Camera:
     IMAGE_JPEG_FAST = 4
 
     def __init__( self, s2 ):
+        """Constructor de la clase.
+
+        Args:
+            s2 (Scribber2): referencia al S2
+
+        """
         self.image_width  = 0
         self.image_height = 0
         self.s2 = s2
 
     def setPicSize( self, size ):
-        """ Establece tamaño de la imagen a capturar desde la F2
+        """Establece tamano de la imagen a capturar desde la F2.
 
         Args:
-            size (int): tamaño y formato de la imagen
+            size (int): tamano y formato de la imagen
                 F2Camera.IMAGE_LARGE: 1280x800
                 F2Camera.IMAGE_SMALL: 427x266
 
@@ -49,7 +56,7 @@ class F2Camera:
             self.s2.unlock()
 
     def getImage( self, mode ):
-        """ Captura imagen desde la F2 especificando formato
+        """Captura imagen desde la F2 especificando formato.
 
         Args:
             mode (int): formato de la imagen:
@@ -109,9 +116,7 @@ class F2Camera:
             self.s2.unlock()
 
     def whiteBalanceOn( self ):
-        """ Activa balance de blancos
-
-        """
+        """Activa balance de blancos."""
         try:
             self.s2.lock()
             packet = bytearray( 1 )
@@ -123,9 +128,7 @@ class F2Camera:
             self.s2.unlock()
 
     def whiteBalanceOff( self ):
-        """ Desactiva balance de blancos
-
-        """
+        """Desactiva balance de blancos."""
         try:
             self.s2.lock()
             packet = bytearray( 1 )
@@ -137,7 +140,7 @@ class F2Camera:
             self.s2.unlock()
 
     def setCameraParam( self, addr, value ):
-        """ Establece parámetros específicos para la cámara del F2
+        """Establece parametros especificos para la camara del F2.
 
         Args:
             addr (byte): ¿?
@@ -157,7 +160,7 @@ class F2Camera:
             self.s2.unlock()
 
     def setWindow( self, window, xLow, yLow, xHigh, yHigh, xStep, yStep ):
-        """ Establece parámetros de la ventana de captura
+        """Establece parametros de la ventana de captura.
 
         Args:
             window (int): ¿?

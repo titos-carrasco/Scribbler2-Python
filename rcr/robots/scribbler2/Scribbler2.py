@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
-""" Acceso a todas las funcionalidades del Scribbler2 (S2) y de la Fluke 2 (F2)
-
-"""
+"""Acceso a todas las funcionalidades del Scribbler2 (S2) y de la Fluke 2 (F2)."""
 
 import threading
 import time
@@ -29,11 +27,13 @@ from .F2LEDs import F2LEDs
 from .F2Servos import F2Servos
 
 class Scribbler2:
+    """Clase central de interaccion con el S2."""
+
     DATA_LENGTH = 8
     PACKET_LENGTH = 9
 
     def __init__( self, port, timeout ):
-        """ Inicia la conexión
+        """Inicia la conexion.
 
         Args:
             port (str): la puerta a conectar
@@ -60,9 +60,7 @@ class Scribbler2:
         self.f2Servos = F2Servos( self )
 
     def close( self ):
-        """ Cierra la conexión al S2
-
-        """
+        """Cierra la conexion al S2."""
         try:
             self.lock()
             self.serial.close()
@@ -72,15 +70,16 @@ class Scribbler2:
             self.unlock()
 
     def getS2Inner( self ):
-        """ Obtiene acceso a los estados internos del S2
+        """Obtiene acceso a los estados internos del S2.
 
         Returns:
             S2Inner: objeto con acceso a los datos internos del S2
+
         """
         return self.s2Inner
 
     def getS2IRSensors( self ):
-        """ Obtiene acceso a los sensores IR del S2
+        """Obtiene acceso a los sensores IR del S2.
 
         Returns;
             S2IRSensor: objeto con acceso a los sensores IR
@@ -89,7 +88,7 @@ class Scribbler2:
         return self.s2IRSensors
 
     def getS2LEDs( self ):
-        """ Obtiene acceso a los LEDs del S2
+        """Obtiene acceso a los LEDs del S2.
 
         Returns:
             S2LEDs: objeto con acceso a los LEDs del S2
@@ -98,7 +97,7 @@ class Scribbler2:
         return self.s2LEDs
 
     def getS2LightSensors( self ):
-        """ Obtiene acceso a los sensores de luz del S2
+        """Obtiene acceso a los sensores de luz del S2.
 
         Returns:
             S2LightsSensors: objeto con acceso a los sensores de luz del S2
@@ -107,25 +106,25 @@ class Scribbler2:
         return self.s2LightSensors
 
     def getS2LineSensors( self ):
-        """ Obtiene acceso a los sensores de línea del S2
+        """Obtiene acceso a los sensores de linea del S2.
 
         Returns:
-            S2LightsSensors: objeto con acceso a los sensores de línea del S2
+            S2LightsSensors: objeto con acceso a los sensores de linea del S2
 
         """
         return self.s2LineSensors
 
     def getS2Microphone( self ):
-        """ Obtiene acceso al micrófono del S2
+        """Obtiene acceso al microfono del S2.
 
         Returns:
-            S2Microphone: objeto con acceso al micófono del del S2
+            S2Microphone: objeto con acceso al micofono del del S2
 
         """
         return self.s2Microphone
 
     def getS2Motors( self ):
-        """ Obtiene acceso a los motores del S2
+        """Obtiene acceso a los motores del S2.
 
         Returns:
             S2Motors: objeto con acceso a los motores del S2
@@ -134,7 +133,7 @@ class Scribbler2:
         return self.s2Motors
 
     def getS2Speaker( self ):
-        """ Obtiene acceso al parlante del S2
+        """Obtiene acceso al parlante del S2.
 
         Returns:
             S2Speaker: objeto con acceso al parlante del S2
@@ -143,25 +142,25 @@ class Scribbler2:
         return self.s2Speaker
 
     def getS2Path( self ):
-        """ Obtiene acceso al módulo de trazado del S2
+        """Obtiene acceso al modulo de trazado del S2.
 
         Returns:
-            S2Path: objeto con acceso al módulo de trazado del S2
+            S2Path: objeto con acceso al modulo de trazado del S2
 
         """
         return self.s2Path
 
     def getF2Camera( self ):
-        """ Obtiene acceso a la cámara del F2
+        """Obtiene acceso a la camara del F2.
 
         Returns:
-            F2Camera: objeto con acceso a la cámara del F2
+            F2Camera: objeto con acceso a la camara del F2
 
         """
         return self.f2Camera
 
     def getF2Inner( self ):
-        """ Obtiene acceso a los estados internos de la F2
+        """Obtiene acceso a los estados internos de la F2.
 
         Returns:
             F2Inner: objeto con acceso a los estados internos del F2
@@ -170,7 +169,7 @@ class Scribbler2:
         return self.f2Inner
 
     def getF2IRSensors( self ):
-        """ Obtiene acceso a los sensores IR de la F2
+        """Obtiene acceso a los sensores IR de la F2.
 
         Returns:
             F2Inner: objeto con acceso a los sensores IR de la F2
@@ -179,7 +178,7 @@ class Scribbler2:
         return self.f2IRSensors
 
     def getF2LEDs( self ):
-        """ Obtiene acceso a los LEDs de la F2
+        """Obtiene acceso a los LEDs de la F2.
 
         Returns:
             F2Inner: objeto con acceso a los LEDs de la F2
@@ -188,7 +187,7 @@ class Scribbler2:
         return self.f2LEDs
 
     def getF2Servos( self ):
-        """ Obtiene acceso al conector de servos de la F2
+        """Obtiene acceso al conector de servos de la F2.
 
         Returns:
             F2Servos: objeto con acceso al conector de servos de la F2
@@ -199,13 +198,13 @@ class Scribbler2:
     ## protected
 
     def makeS2Packet( self, cmd ):
-        """ Crea un paquete estándar utilizado como comando para el S2
+        """Crea un paquete estandar utilizado como comando para el S2.
 
         Args:
             cmd (byte): comando a enviar
 
         Returns;
-            bytearray: paquete a completar con los parámetros del comando (cmd)
+            bytearray: paquete a completar con los parametros del comando (cmd)
 
         """
         packet = bytearray( self.PACKET_LENGTH )
@@ -213,7 +212,7 @@ class Scribbler2:
         return packet
 
     def sendS2Command( self, packet, pause ):
-        """ Envía un comando al S2
+        """Envia un comando al S2.
 
         Args:
             packet (bytearray): comando a enviar
@@ -236,7 +235,7 @@ class Scribbler2:
         return True
 
     def sendS2PathCommand( self, packet ):
-        """ Envía comando de trazado (path) al S2
+        """Envia comando de trazado (path) al S2.
 
         Args:
             packet (bytearray): comando de trazado a enviar
@@ -271,7 +270,7 @@ class Scribbler2:
         self.sendS2Command( packet, 0 )
 
     def sendF2Command( self, packet, pause ):
-        """ Envía comando a la tarjeta F2
+        """Envia comando a la tarjeta F2.
 
         Args:
             packet (bytearray): comando a enviar a la F2
@@ -283,7 +282,7 @@ class Scribbler2:
             Utils.pause( pause )
 
     def getS2SensorsResponse( self ):
-        """ Obtiene estado de los principales sensores del S2
+        """Obtiene estado de los principales sensores del S2.
 
         Returns:
             HS2Sensors: objeto con el valor de los principales sensores del S2
@@ -295,15 +294,16 @@ class Scribbler2:
                            self.getUInt8Response() )
 
     def getLineResponse( self, maxChars ):
-        """ Obtiene una respuesta del S2 como un string ascii
+        """Obtiene una respuesta del S2 como un string ascii.
 
         Returns:
             str: la respuesta del S2 como un string ascii
+
         """
         return self.serial.readLine( maxChars )
 
     def getUInt8Response( self ):
-        """ Obtiene una respuesta del S2 como un entero de 8 bits sin signo
+        """Obtiene una respuesta del S2 como un entero de 8 bits sin signo.
 
         Returns:
             int: la respuesta del S2 como uint8
@@ -311,31 +311,34 @@ class Scribbler2:
         return self.serial.readUInt8()
 
     def getUInt16Response( self ):
-        """ Obtiene una respuesta del S2 como un entero de 16 bits sin signo
+        """Obtiene una respuesta del S2 como un entero de 16 bits sin signo.
 
         Returns:
             int: la respuesta del S2 como uint16
+
         """
         return self.serial.readUInt16()
 
     def getUInt32Response( self ):
-        """ Obtiene una respuesta del S2 como un entero de 32 bits sin signo
+        """Obtiene una respuesta del S2 como un entero de 32 bits sin signo.
 
         Returns:
             int: la respuesta del S2 como uint32
+
         """
         return self.serial.readUInt32()
 
     def getInt32Response( self ):
-        """ Obtiene una respuesta del S2 como un entero de 32 bits con signo
+        """Obtiene una respuesta del S2 como un entero de 32 bits con signo.
 
         Returns:
             int: la respuesta del S2 como int32
+
         """
         return self.serial.readInt32()
 
     def getBytesResponse( self, nbytes ):
-        """ Obtiene una respuesta del S2 como un conjunto de bytes
+        """Obtiene una respuesta del S2 como un conjunto de bytes.
 
         Args:
             nbytes (int): bytes a leer
@@ -347,13 +350,9 @@ class Scribbler2:
         return self.serial.read( nbytes )
 
     def lock( self ):
-        """ Obtiene acceso exclusivo
-
-        """
+        """Obtiene acceso exclusivo."""
         self.mylock.acquire()
 
     def unlock( self ):
-        """ Libera el acceso exclusivo
-
-        """
+        """Libera el acceso exclusivo."""
         self.mylock.release()

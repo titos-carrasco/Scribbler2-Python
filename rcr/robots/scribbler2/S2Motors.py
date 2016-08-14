@@ -1,17 +1,24 @@
 # -*- coding: utf-8 -*-
 
-""" Acceso a los motores del S2
+"""Acceso a los motores del S2."""
 
-"""
 from .HS2MotorStats import HS2MotorStats
 from .HS2Encoders import HS2Encoders
 
 class S2Motors:
+    """Clase de acceso a los motores del S2."""
+
     def __init__( self, s2 ):
+        """Constructor de la clase.
+
+        Args:
+            s2 (Scribber2): referencia al S2
+
+        """
         self.s2 = s2
 
     def getMotorStats( self ):
-        """ Obtiene el estado de los motores del S2
+        """Obtiene el estado de los motores del S2.
 
         Returns:
             HS2MotorStats: estado de los motores del S2
@@ -28,7 +35,7 @@ class S2Motors:
             self.s2.unlock()
 
     def getEncoders( self, preserve ):
-        """ Obtiene estado de los encoders del S2
+        """Obtiene estado de los encoders del S2.
 
         Args:
             preserve (byte): conserva (1) o borra (0) el valor de los encoder al leer
@@ -49,10 +56,10 @@ class S2Motors:
             self.s2.unlock()
 
     def getStall( self ):
-        """ Obtiene estado de las ruedas (atrapadas)
+        """Obtiene estado de las ruedas (atrapadas).
 
         Returns:
-            int: indicador si las ruedas están atrapadas
+            int: indicador si las ruedas estan atrapadas
 
         """
         try:
@@ -66,7 +73,7 @@ class S2Motors:
             self.s2.unlock()
 
     def setMotorsOff( self ):
-        """ Apaga los motores del S2
+        """Apaga los motores del S2.
 
         Returns:
             HS2Sensors: objeto con el valor de los principales sensores del S2
@@ -83,7 +90,7 @@ class S2Motors:
             self.s2.unlock()
 
     def setMotors( self, left, right):
-        """ Enciende los motores del S2
+        """Enciende los motores del S2.
 
         Args:
             left (int): porcentaje de potencia al motor izquierdo (-100 a 100)

@@ -1,16 +1,22 @@
 # -*- coding: utf-8 -*-
 
-""" Acceso al módulo de movimiento por rutas (path - plano cartesiano)
-
-"""
+"""Acceso al modulo de movimiento por rutas (path - plano cartesiano)."""
 from .HS2Coordinates import HS2Coordinates
 
 class S2Path:
+    """Clase de acceso a las operaciones de PATH del S2."""
+
     def __init__( self, s2 ):
+        """Constructor de la clase.
+
+        Args:
+            s2 (Scribber2): referencia al S2
+
+        """
         self.s2 = s2
 
     def beginPath( self, speed ):
-        """ Ingresa al modo de sistema cartesiano (path)
+        """Ingresa al modo de sistema cartesiano (path).
 
         Args:
             speed (int): velocidad de desplazamiento (0 a 15)
@@ -33,7 +39,7 @@ class S2Path:
             self.s2.unlock()
 
     def endPath( self ):
-        """ Finaliza el modo path
+        """Finaliza el modo path.
 
         Returns:
             HS2Sensors: objeto con el valor de los principales sensores del S2
@@ -51,10 +57,10 @@ class S2Path:
             self.s2.unlock()
 
     def getPosn( self ):
-        """ Obtiene ubicación (x, y) del S2 en el plano cartesiano
+        """Obtiene ubicacion (x, y) del S2 en el plano cartesiano.
 
         Returns:
-            HS2Coordinates: coordenadas de la ubización del S2
+            HS2Coordinates: coordenadas de la ubizacion del S2
 
         """
         try:
@@ -68,10 +74,10 @@ class S2Path:
             self.s2.unlock()
 
     def getAngle( self ):
-        """ Obtiene ángulo en el que se encuentra orientado el S2
+        """Obtiene angulo en el que se encuentra orientado el S2.
 
         Returns:
-            int: ángulo de orientación del S2
+            int: angulo de orientacion del S2
 
         """
         try:
@@ -85,11 +91,11 @@ class S2Path:
             self.s2.unlock()
 
     def setPosn( self, x, y ):
-        """ Establece posición (x, y) del S2 en el plano (no lo desplaza)
+        """Establece posicion (x, y) del S2 en el plano (no lo desplaza).
 
         Args:
-            x (int): coordenada X de la posición
-            y (int): coordenada Y de la posición
+            x (int): coordenada X de la posicion
+            y (int): coordenada Y de la posicion
 
         Returns:
             HS2Sensors: objeto con el valor de los principales sensores del S2
@@ -114,10 +120,10 @@ class S2Path:
             self.s2.unlock()
 
     def setAngle( self, angle ):
-        """ Establece ángulo de orientación del S2 (no lo desplaza)
+        """Establece angulo de orientacion del S2 (no lo desplaza).
 
         Args:
-            angle (int): ángulo de orientación a fijar
+            angle (int): angulo de orientacion a fijar
 
         Returns:
             HS2Sensors: objeto con el valor de los principales sensores del S2
@@ -138,7 +144,7 @@ class S2Path:
             self.s2.unlock()
 
     def moveTo( self, x, y ):
-        """ Desplaza el S2 a la posición (x, y)
+        """Desplaza el S2 a la posicion (x, y).
 
         Args:
             x (int): coordenada X hacia donde desplazar
@@ -164,7 +170,7 @@ class S2Path:
             self.s2.unlock()
 
     def moveBy( self, x, y ):
-        """ Desplaza de manera relativa el S2 una distancia (x, y)
+        """Desplaza de manera relativa el S2 una distancia (x, y).
 
         Args:
             x (int): distancia e X a desplazar al S2
@@ -190,10 +196,10 @@ class S2Path:
             self.s2.unlock()
 
     def turnTo( self, angle ):
-        """ Mueve al S2 orientándolo a un ángulo dado
+        """Mueve al S2 orientandolo a un angulo dado.
 
         Args:
-            angle (int): ángulo hacia el cual mover el S2
+            angle (int): angulo hacia el cual mover el S2
 
         Returns:
             HS2Sensors: objeto con el valor de los principales sensores del S2
@@ -213,10 +219,10 @@ class S2Path:
             self.s2.unlock()
 
     def turnBy( self, angle ):
-        """ Gira de manera relativa el S2 un número dado de grados
+        """Gira de manera relativa el S2 un numero dado de grados.
 
         Args:
-            angle (int): grados a girar el S2 según prientación actual
+            angle (int): grados a girar el S2 segun prientacion actual
 
         Returns:
             HS2Sensors: objeto con el valor de los principales sensores del S2
@@ -236,7 +242,7 @@ class S2Path:
             self.s2.unlock()
 
     def arcTo( self, x, y, radius):
-        """ Traza un arco hasta la posicón (x, y) de radio dado
+        """Traza un arco hasta la posicon (x, y) de radio dado.
 
         Args:
             x (int): coordenada X hacia la cual desplazar
@@ -265,11 +271,11 @@ class S2Path:
             self.s2.unlock()
 
     def arcBy( self, x, y, radius):
-        """ Traza un arco de manera relativa y de radio dado
+        """Traza un arco de manera relativa y de radio dado.
 
         Args:
-            x (int): pasos en X a desplazar según posición actual
-            y (int): pasos en Y a desplazar según posición actual
+            x (int): pasos en X a desplazar segun posicion actual
+            y (int): pasos en Y a desplazar segun posicion actual
             radio (int): radio de arco a trazar
 
         Returns:

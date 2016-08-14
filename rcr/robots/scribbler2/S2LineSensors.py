@@ -1,19 +1,26 @@
 # -*- coding: utf-8 -*-
 
-""" Acceso a los sensores de línea del S2
+"""Acceso a los sensores de linea del S2."""
 
-"""
 from .HS2LineSensors import HS2LineSensors
 
 class S2LineSensors:
+    """Clase de acceso a los sensores de linea del S2."""
+
     def __init__( self, s2 ):
+        """Constructor de la clase.
+
+        Args:
+            s2 (Scribber2): referencia al S2
+
+        """
         self.s2 = s2
 
     def getLeftLine( self ):
-        """ Obtiene el valor del sensor de línea izquierdo
+        """Obtiene el valor del sensor de linea izquierdo.
 
         Returns:
-            int: valor del sensor de línea izquierdo
+            int: valor del sensor de linea izquierdo
 
         """
         try:
@@ -27,10 +34,10 @@ class S2LineSensors:
             self.s2.unlock()
 
     def getRightLine( self ):
-        """ Obtiene el valor del sensor de línea derecho
+        """Obtiene el valor del sensor de linea derecho.
 
         Returns:
-            int: valor del sensor de línea derecho
+            int: valor del sensor de linea derecho
 
         """
         try:
@@ -44,10 +51,10 @@ class S2LineSensors:
             self.s2.unlock()
 
     def getAllLines( self ):
-        """ Obtiene el valor de los sensores de línea del S2
+        """Obtiene el valor de los sensores de linea del S2.
 
         Returns:
-            HS2LineSensor: el valor de los sensores de línea del S2
+            HS2LineSensor: el valor de los sensores de linea del S2
 
         """
         try:
@@ -61,14 +68,14 @@ class S2LineSensors:
             self.s2.unlock()
 
     def getLineEx( self, side, thres):
-        """ Obtiene el valor extendido de un sensor de línea
+        """Obtiene el valor extendido de un sensor de linea.
 
         Args:
-            side (int): el sensor de línea (0 o 1)
+            side (int): el sensor de linea (0 o 1)
             thres (byte): umbral para la lectura del valor del sensor
 
         Returns:
-            int: valor extendido del sensor de línea
+            int: valor extendido del sensor de linea
 
         """
         try:

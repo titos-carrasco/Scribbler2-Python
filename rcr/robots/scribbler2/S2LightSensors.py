@@ -1,16 +1,23 @@
 # -*- coding: utf-8 -*-
 
-""" Acceso a los sensores de luz del S2
+"""Acceso a los sensores de luz del S2."""
 
-"""
 from .HS2Lights import HS2Lights
 
 class S2LightSensors:
+    """Clase de acceso a los sensores de luz del S2."""
+
     def __init__( self, s2 ):
+        """Constructor de la clase.
+
+        Args:
+            s2 (Scribber2): referencia al S2
+
+        """
         self.s2 = s2
 
     def getLeftLight( self ):
-        """ Obtiene el valor del sensor de luz izquierdo
+        """Obtiene el valor del sensor de luz izquierdo.
 
         Returns:
             int: valor del sensor de luz izquierdo
@@ -27,7 +34,7 @@ class S2LightSensors:
             self.s2.unlock()
 
     def getCenterLight( self ):
-        """ Obtiene el valor del sensor de luz central
+        """Obtiene el valor del sensor de luz central.
 
         Returns:
             int: valor del sensor de luz central
@@ -44,7 +51,7 @@ class S2LightSensors:
             self.s2.unlock()
 
     def getRightLed( self ):
-        """ Obtiene el valor del sensor de luz derecho
+        """Obtiene el valor del sensor de luz derecho.
 
         Returns:
             int: valor del sensor de luz derecho
@@ -61,7 +68,7 @@ class S2LightSensors:
             self.s2.unlock()
 
     def getAllLights( self ):
-        """ Obtiene el valor de los sensores de luz
+        """Obtiene el valor de los sensores de luz.
 
         Returns:
             HS2Lights: valor de los sensores de luz del S2

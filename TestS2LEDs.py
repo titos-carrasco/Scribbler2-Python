@@ -1,10 +1,24 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test de los LEDs del S2."""
+
 from rcr.robots.scribbler2.Scribbler2 import Scribbler2
 from rcr.utils import Utils
 
 def main():
+    """Realiza las pruebas del los LEDs del S2.
+
+    Las pruebas consideran:
+        robot = Scribbler2( "/dev/rfcomm2", 500 )
+        s2LEDs = robot.getS2LEDs()
+
+        s2LEDs.setLeftLed()
+        s2LEDs.setCenterLed()
+        s2LEDs.setRightLed()
+        s2LEDs.setAllLed()
+
+    """
     robot = Scribbler2( "/dev/rfcomm2", 500 )
     s2LEDs = robot.getS2LEDs()
 
@@ -26,5 +40,6 @@ def main():
     Utils.pause( 2000 )
     robot.close()
 
-###
-main()
+
+if( __name__ == "__main__" ):
+    main()

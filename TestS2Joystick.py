@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Demo de control del S2 via josystick e interfaz grafica."""
+
 import gi
 gi.require_version( 'Gtk', '3.0' )
 from gi.repository import Gtk
@@ -11,8 +13,10 @@ import time
 from rcr.robots.scribbler2.Scribbler2 import Scribbler2
 
 class TestJoystick:
+    """Aplicacion para controlar el S2 via interfaz grafica y joystick."""
+
     def __init__(self):
-        """Construye la GUI desde el archivo glade"""
+        """Construye la GUI desde el archivo glade."""
         self.builder = Gtk.Builder()
         self.builder.add_from_file("Resources/Scribbler2.glade")
         self.builder.connect_signals(self)
@@ -210,9 +214,9 @@ class TestJoystick:
 
 
 def main():
-    """main() para la aplicación."""
+    """Demo de control del S2 con interfaz GUI."""
     app = TestJoystick()
     Gtk.main()
 
-if __name__ == "__main__":
+if( __name__ == "__main__" ):
     main()

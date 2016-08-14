@@ -1,22 +1,29 @@
 # -*- coding: utf-8 -*-
 
-""" Acceso a los datos internos de la F2
+"""Acceso a los datos internos de la F2."""
 
-"""
 from rcr.utils import Utils
 
 class F2Inner:
+    """Clase de acceso a datos internos de la F2."""
+
     FLUKE_FORWARD = 1
     SCRIBBLER_FORWARD = 2
 
     def __init__( self, s2 ):
+        """Constructor de la clase.
+
+        Args:
+            s2 (Scribber2): referencia al S2
+
+        """
         self.s2 = s2
 
     def getVersion( self ):
-        """ Obtiene versión de la F2
+        """Obtiene version de la F2.
 
         Returns:
-            str: versión de la F2
+            str: version de la F2
         """
         try:
             self.s2.lock()
@@ -30,10 +37,10 @@ class F2Inner:
             self.s2.unlock()
 
     def identifyRobot( self ):
-        """ Obtiene infromación que identifica al S2
+        """Obtiene infromacion que identifica al S2.
 
         Returns:
-            str: identifiación del S2
+            str: identifiacion del S2
 
         """
         try:
@@ -50,10 +57,10 @@ class F2Inner:
             self.s2.unlock()
 
     def getBattery( self ):
-        """ Obtiene voltaje de la batería
+        """Obtiene voltaje de la bateria.
 
         Returns:
-            float: voltaje de la batería
+            float: voltaje de la bateria
 
         """
         try:
@@ -68,7 +75,7 @@ class F2Inner:
             self.s2.unlock()
 
     def setForwardness( self, forwardness ):
-        """ Establece cual es el frente del S2 para ciertos comandos
+        """Establece cual es el frente del S2 para ciertos comandos.
 
         Args:
             forwardness (byte): frente del S2:
@@ -92,10 +99,10 @@ class F2Inner:
             self.s2.unlock()
 
     def getErrors( self ):
-        """ Obtiene el log de errores almacenados en la F2
+        """Obtiene el log de errores almacenados en la F2.
 
         Returns:
-            str: líneas del texto del log de errores
+            str: lineas del texto del log de errores
 
         """
         try:
@@ -112,9 +119,7 @@ class F2Inner:
             self.s2.unlock()
 
     def resetScribbler( self ):
-        """ Resetea el S2
-
-        """
+        """Resetea el S2."""
         try:
             self.s2.lock()
             packet = bytearray( 1 )

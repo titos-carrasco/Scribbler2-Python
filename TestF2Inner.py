@@ -1,9 +1,25 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test de los elementos internos de la tarjeta F2."""
+
 from rcr.robots.scribbler2.Scribbler2 import Scribbler2
 
 def main():
+    """Realiza las pruebas de los elementos internos de la tarjeta F2.
+
+    Las pruebas consideran:
+        robot = Scribbler2( "/dev/rfcomm2", 500 )
+        f2Inner = robot.getF2Inner()
+
+        f2Inner.getVersion()
+        f2Inner.identifyRobot()
+        f2Inner.getBattery()
+        f2Inner.setForwardness()
+        f2Inner.getErrors()
+        f2Inner.resetScribbler()
+
+    """
     robot = Scribbler2( "/dev/rfcomm2", 500 )
     f2Inner = robot.getF2Inner()
 
@@ -21,5 +37,6 @@ def main():
     f2Inner.resetScribbler()
     robot.close()
 
-###
-main()
+
+if( __name__ == "__main__" ):
+    main()

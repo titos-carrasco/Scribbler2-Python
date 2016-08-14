@@ -1,14 +1,21 @@
 # -*- coding: utf-8 -*-
 
-""" Acceso al parlante del S2
+"""Acceso al parlante del S2."""
 
-"""
 class S2Speaker:
+    """Clase de acceso al parlante del S2."""
+
     def __init__( self, s2 ):
+        """Constructor de la clase.
+
+        Args:
+            s2 (Scribber2): referencia al S2
+
+        """
         self.s2 = s2
 
     def setQuiet( self ):
-        """ Apaga el parlante del S2
+        """Apaga el parlante del S2.
 
         Returns:
             HS2Sensors: objeto con el valor de los principales sensores del S2
@@ -25,7 +32,7 @@ class S2Speaker:
             self.s2.unlock()
 
     def setLoud( self ):
-        """ Activa el parlante del S2
+        """Activa el parlante del S2.
 
         Returns:
             HS2Sensors: objeto con el valor de los principales sensores del S2
@@ -42,7 +49,7 @@ class S2Speaker:
             self.s2.unlock()
 
     def setVolume( self, volume ):
-        """ Establece porcentaje del nivel de volumen del parlante del S2
+        """Establece porcentaje del nivel de volumen del parlante del S2.
 
         Args:
             volume (int): porcentaje de volumen (0 a 100) del parlante
@@ -66,10 +73,10 @@ class S2Speaker:
             self.s2.unlock()
 
     def setSpeaker( self, duration, freq1, freq2):
-        """ Emite sonido a través del parlante del S2
+        """Emite sonido a traves del parlante del S2.
 
         Args:
-            duration (int): duranción del sonido en ms (no superior a 2500)
+            duration (int): durancion del sonido en ms (no superior a 2500)
             freq1 (int): frecuencia principal en Hz
             freq2 (int): frecuencia secundaria en Hz
 

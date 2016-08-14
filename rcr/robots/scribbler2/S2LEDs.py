@@ -1,14 +1,21 @@
 # -*- coding: utf-8 -*-
 
-""" Acceso a los LEDs del S2
+"""Acceso a los LEDs del S2."""
 
-"""
 class S2LEDs:
+    """Clase de acceso a los LEDs del S2."""
+
     def __init__( self, s2 ):
+        """Constructor de la clase.
+
+        Args:
+            s2 (Scribber2): referencia al S2
+
+        """
         self.s2 = s2
 
     def setLeftLed( self, encender ):
-        """ Enciende o apaga el LED izquierdo
+        """Enciende o apaga el LED izquierdo.
 
         Args:
             encender (bool): orden de apagar o encender el LED
@@ -31,7 +38,7 @@ class S2LEDs:
             self.s2.unlock()
 
     def setCenterLed( self, encender ):
-        """ Enciende o apaga el LED central
+        """Enciende o apaga el LED central.
 
         Args:
             encender (bool): orden de apagar o encender el LED
@@ -54,7 +61,7 @@ class S2LEDs:
             self.s2.unlock()
 
     def setRightLed( self, encender ):
-        """ Enciende o apaga el LED derecho
+        """Enciende o apaga el LED derecho.
 
         Args:
             encender (bool): orden de apagar o encender el LED
@@ -77,7 +84,7 @@ class S2LEDs:
             self.s2.unlock()
 
     def setAllLed( self, left, center, right ):
-        """ Enciende o apaga los LEDs del S2
+        """Enciende o apaga los LEDs del S2.
 
         Args:
             left (bool): orden de apagar o encender el LED izquierdo

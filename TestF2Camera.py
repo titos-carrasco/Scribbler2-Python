@@ -1,12 +1,24 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test de la camara de la tarjeta F2."""
+
 import numpy as np
 import cv2
 
 from rcr.robots.scribbler2.Scribbler2 import Scribbler2
 
 def main():
+    """Realiza las pruebas de la camara de la tarjeta de la F2.
+
+    Las pruebas utilizan las librerias numpy y cv2, y consideran:
+        robot = Scribbler2( "/dev/rfcomm2", 500 )
+        f2Camera = robot.getF2Camera()
+
+        f2Camera.setPicSize)
+        f2Camera.getImage()
+
+    """
     robot = Scribbler2( "/dev/rfcomm2", 500 )
     f2Camera = robot.getF2Camera()
 
@@ -21,6 +33,6 @@ def main():
     cv2.destroyAllWindows()
     robot.close()
 
-###
-main()
 
+if( __name__ == "__main__" ):
+    main()

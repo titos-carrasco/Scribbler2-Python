@@ -1,16 +1,23 @@
 # -*- coding: utf-8 -*-
 
-""" Acceso al conector de servos de la F2
+"""Acceso al conector de servos de la F2."""
 
-"""
 from rcr.utils import Utils
 
 class F2Servos:
+    """Clase de acceso a los motores servos de la F2."""
+
     def __init__( self, s2 ):
+        """Constructor de la clase.
+
+        Args:
+            s2 (Scribber2): referencia al S2
+
+        """
         self.s2 = s2
 
     def setServo( self, id, value ):
-        """ Establece valor al servo conectado a la F2
+        """Establece valor al servo conectado a la F2.
 
         Args:
             id (byte): servo a utilizar (0 a 3)

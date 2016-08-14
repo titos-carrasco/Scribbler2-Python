@@ -1,16 +1,23 @@
 # -*- coding: utf-8 -*-
 
-""" Acceso al estado interno del S2
+"""Acceso al estado interno del S2."""
 
-"""
 from .HS2State import HS2State
 
 class S2Inner:
+    """Clase de acceso al estado interno del S2."""
+
     def __init__( self, s2 ):
+        """Constructor de la clase.
+
+        Args:
+            s2 (Scribber2): referencia al S2
+
+        """
         self.s2 = s2
 
     def getInfo( self ):
-        """ Obtiene datos informativos del S2
+        """Obtiene datos informativos del S2.
 
         Returns:
             str: datos informativos del S2
@@ -27,7 +34,7 @@ class S2Inner:
             self.s2.unlock()
 
     def getAllSensors( self ):
-        """ Obtiene el estado de los principales sensores del S2
+        """Obtiene el estado de los principales sensores del S2.
 
         Returns:
             HS2Sensors: objeto con el valor de los principales sensores del S2
@@ -44,7 +51,7 @@ class S2Inner:
             self.s2.unlock()
 
     def getPass( self ):
-        """ Obtiene la clave actualmente almacenada en el S2
+        """Obtiene la clave actualmente almacenada en el S2.
 
         Returns:
             str: la clave actual almacenada
@@ -64,7 +71,7 @@ class S2Inner:
             self.s2.unlock()
 
     def getName( self ):
-        """ Obtiene el nombre del S2
+        """Obtiene el nombre del S2.
 
         Returns:
             str: el nombre del S2
@@ -85,7 +92,7 @@ class S2Inner:
             self.s2.unlock()
 
     def getState( self ):
-        """ Obtiene estado del S2
+        """Obtiene estado del S2.
 
         Returns:
             HS2State: estado del S2
@@ -102,7 +109,7 @@ class S2Inner:
             self.s2.unlock()
 
     def getData( self ):
-        """ Obtiene data almacenada en el S2
+        """Obtiene data almacenada en el S2.
 
         Returns:
             bytearray[8]: data almacenada en el S2
@@ -119,7 +126,7 @@ class S2Inner:
             self.s2.unlock()
 
     def setPass( self, passw ):
-        """ Establece la clave a almacenar en el S2
+        """Establece la clave a almacenar en el S2.
 
         Args:
             passwd (str[8]): clave a almacenar
@@ -159,10 +166,10 @@ class S2Inner:
             self.s2.unlock()
 
     def setSingleData( self, pos, data):
-        """ Almacena un dato en la zona de almacenamiento inerno del S2
+        """Almacena un dato en la zona de almacenamiento inerno del S2.
 
         Args:
-            pos (byte): posición en donde almacenar (0 a 7)
+            pos (byte): posicion en donde almacenar (0 a 7)
             data (byte): dato a almacenar (0 a 255)
 
         Returns:
@@ -182,7 +189,7 @@ class S2Inner:
             self.s2.unlock()
 
     def setData( self, data):
-        """ Almacena un grupo de datos en la ona interna del S2
+        """Almacena un grupo de datos en la ona interna del S2.
 
         Args:
             data (bytearray[8]): los datos a almacenar
@@ -206,7 +213,7 @@ class S2Inner:
             self.s2.unlock()
 
     def setName( self,  name ):
-        """ Establece el nombre del S2
+        """Establece el nombre del S2.
 
         Args:
             name (str): nombre a asignar (16 caracteres) al S2

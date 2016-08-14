@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 
-""" Clase de ayuda (helper) para entregar información de los encoders del S2
+"""Clase de ayuda (helper) para entregar informacion de los encoders del S2.
 
-Es creada por el S2 y solo es útil de lectura en la aplicación
+Es creada por el S2 y solo es util de lectura en la aplicacion
 
 """
 class HS2Encoders:
+    """Clase helper con datos de los encoders del S2."""
+
     def __init__( self, left, right ):
-        """ Inicializa los elementos de lectura para la aplicación
+        """Inicializa los elementos de lectura para la aplicacion.
 
         Args:
             left (int): valor del encoder izquierdo
@@ -18,4 +20,5 @@ class HS2Encoders:
         self.right = right
 
     def __str__( self ):
+        """Representacion modo texto de la clase."""
         return "HS2Encoders(%d, %d)" % ( self.left, self.right )

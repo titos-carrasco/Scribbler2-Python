@@ -1,9 +1,31 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test de las operaciones en plano cartesiano del S2."""
+
 from rcr.robots.scribbler2.Scribbler2 import Scribbler2
 
 def main():
+    """Realiza las pruebas de movimiento en plano cartesiano del S2.
+
+    Las pruebas consideran:
+        robot = Scribbler2( "/dev/rfcomm2", 500 )
+        s2Path = robot.getS2Path()
+
+        s2Path.beginPath()
+        s2Path.setPosn()
+        s2Path.getPosn()
+        s2Path.setAngle()
+        s2Path.getAngle()
+        s2Path.moveTo()
+        s2Path.moveBy()
+        s2Path.turnTo()
+        s2Path.turnBy()
+        s2Path.arcTo()
+        s2Path.arcBy()
+        s2Path.endPath()
+
+    """
     robot = Scribbler2( "/dev/rfcomm2", 500 )
     s2Path = robot.getS2Path()
 
@@ -44,5 +66,6 @@ def main():
 
     robot.close()
 
-###
-main()
+
+if( __name__ == "__main__" ):
+    main()
