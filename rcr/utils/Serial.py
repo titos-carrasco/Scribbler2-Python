@@ -141,14 +141,14 @@ class Serial:
         """Descarta datos presentes para lectura en la puerta serial.
 
         Args:
-            timex (int): tiempo en milisegundos que se leerean bytes y seran descartados
+            timex (int): tiempo en milisegundos que se leeran bytes y seran descartados
 
         """
         try:
             self.lock()
             t = time.time()
             end = t + timex / 1000.0
-            while( t < timex ):
+            while( t < end ):
                 try:
                     if( len(self.serial.read(1))==0 ):
                         Utils.pause(1);
