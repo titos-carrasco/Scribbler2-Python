@@ -8,10 +8,9 @@ con la tarjeta Fluke2 (F2), ver detalles en www.betterbots.com / www.parallax.co
 * Implementa la mayoría de las funciones de la tarjeta F2
 
 El problema mayor lo genera la Fluke2 dado que al interactuar con el Scribbler2 maneja un timeout
-de 3000ms. Si el Scribbler2 tarda más de ese tiempo los siguientes comandos quedarán
+de 3000ms. Si el Scribbler2 tarda más de ese tiempo algunos comandos quedarán
 fuera de sincronismo.
 
-La documentación se encuentra en el proyecto Scribbler2-Java en JavaDoc
 
 ##Ambiente de desarrollo
 Todo el desarrollo se realiza utilizando Geany en Linux Debian, configurando un proyecto y asociando comandos en Set Build Commands:
@@ -19,8 +18,13 @@ Todo el desarrollo se realiza utilizando Geany en Linux Debian, configurando un 
 * Para compilar en Python: python -m py_compile "%f"
 * Para ejecutar Python: python "%f"
 
+##Importante:
+* Revisar el estilo del codigo con `$ pydocstyle`
+* Generar la documentación con `$ epydoc -v --html  -o doc/ *.py rcr/`
+
 ***
 ##Historia
+* Ene 22, 2017: agrega parámetro de velocidad en constructor Scribbler2()
 * Ago 14, 2016: Procesa documentación con pydocstyle y epydoc. Agrega demo con controlador MIDI
 * Jun 09, 2016: Compatibliza código con Python 2.7 y 3.5. Agrega documentación en línea
 * Dic 05, 2015: Implementa funciones de control de los servo

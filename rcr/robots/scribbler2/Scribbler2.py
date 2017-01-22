@@ -37,6 +37,7 @@ class Scribbler2:
 
         Args:
             port (str): la puerta a conectar
+            speed( (int): velocidad de la conexion
             timeout (int): timeout para cada comando
 
         """

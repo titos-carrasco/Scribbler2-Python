@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>TestS2Path</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Module&nbsp;TestS2Path
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="TestS2Path-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="TestS2Path-module.html">Module TestS2Path</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># -*- coding: utf-8 -*-</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-docstring">"""Test de las operaciones en plano cartesiano del S2."""</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package rcr=rcr-module.html"><a title="rcr" class="py-name" href="#" onclick="return doclink('link-0', 'rcr', 'link-0');">rcr</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package rcr.robots=rcr.robots-module.html"><a title="rcr.robots" class="py-name" href="#" onclick="return doclink('link-1', 'robots', 'link-1');">robots</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package rcr.robots.scribbler2=rcr.robots.scribbler2-module.html"><a title="rcr.robots.scribbler2" class="py-name" href="#" onclick="return doclink('link-2', 'scribbler2', 'link-2');">scribbler2</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Module rcr.robots.scribbler2.Scribbler2=rcr.robots.scribbler2.Scribbler2-module.html,Class rcr.robots.scribbler2.Scribbler2.Scribbler2=rcr.robots.scribbler2.Scribbler2.Scribbler2-class.html"><a title="rcr.robots.scribbler2.Scribbler2
+rcr.robots.scribbler2.Scribbler2.Scribbler2" class="py-name" href="#" onclick="return doclink('link-3', 'Scribbler2', 'link-3');">Scribbler2</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name"><a title="rcr.robots.scribbler2.Scribbler2
+rcr.robots.scribbler2.Scribbler2.Scribbler2" class="py-name" href="#" onclick="return doclink('link-4', 'Scribbler2', 'link-3');">Scribbler2</a></tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"> </tt>
+<a name="main"></a><div id="main-def"><a name="L8"></a><tt class="py-lineno"> 8</tt> <a class="py-toggle" href="#" id="main-toggle" onclick="return toggle('main');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="TestS2Path-module.html#main">main</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="main-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="main-expanded"><a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">    <tt class="py-docstring">"""Realiza las pruebas de movimiento en plano cartesiano del S2.</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring">    Las pruebas consideran:</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring">        robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-docstring">        s2Path = robot.getS2Path()</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-docstring">        s2Path.beginPath()</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring">        s2Path.setPosn()</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">        s2Path.getPosn()</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">        s2Path.setAngle()</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">        s2Path.getAngle()</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-docstring">        s2Path.moveTo()</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring">        s2Path.moveBy()</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-docstring">        s2Path.turnTo()</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-docstring">        s2Path.turnBy()</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-docstring">        s2Path.arcTo()</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-docstring">        s2Path.arcBy()</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt class="py-docstring">        s2Path.endPath()</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">    <tt class="py-name">robot</tt> <tt class="py-op">=</tt> <tt id="link-5" class="py-name"><a title="rcr.robots.scribbler2.Scribbler2
+rcr.robots.scribbler2.Scribbler2.Scribbler2" class="py-name" href="#" onclick="return doclink('link-5', 'Scribbler2', 'link-3');">Scribbler2</a></tt><tt class="py-op">(</tt> <tt class="py-string">"/dev/rfcomm2"</tt><tt class="py-op">,</tt> <tt class="py-number">9600</tt><tt class="py-op">,</tt> <tt class="py-number">500</tt> <tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">    <tt class="py-name">s2Path</tt> <tt class="py-op">=</tt> <tt class="py-name">robot</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method rcr.robots.scribbler2.Scribbler2.Scribbler2.getS2Path()=rcr.robots.scribbler2.Scribbler2.Scribbler2-class.html#getS2Path"><a title="rcr.robots.scribbler2.Scribbler2.Scribbler2.getS2Path" class="py-name" href="#" onclick="return doclink('link-6', 'getS2Path', 'link-6');">getS2Path</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"beginPath: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method rcr.robots.scribbler2.S2Path.S2Path.beginPath()=rcr.robots.scribbler2.S2Path.S2Path-class.html#beginPath"><a title="rcr.robots.scribbler2.S2Path.S2Path.beginPath" class="py-name" href="#" onclick="return doclink('link-7', 'beginPath', 'link-7');">beginPath</a></tt><tt class="py-op">(</tt> <tt class="py-number">15</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"setPosn -100, -200: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method rcr.robots.scribbler2.S2Path.S2Path.setPosn()=rcr.robots.scribbler2.S2Path.S2Path-class.html#setPosn"><a title="rcr.robots.scribbler2.S2Path.S2Path.setPosn" class="py-name" href="#" onclick="return doclink('link-8', 'setPosn', 'link-8');">setPosn</a></tt><tt class="py-op">(</tt> <tt class="py-op">-</tt><tt class="py-number">100</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-number">200</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"getPosn: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method rcr.robots.scribbler2.S2Path.S2Path.getPosn()=rcr.robots.scribbler2.S2Path.S2Path-class.html#getPosn"><a title="rcr.robots.scribbler2.S2Path.S2Path.getPosn" class="py-name" href="#" onclick="return doclink('link-9', 'getPosn', 'link-9');">getPosn</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"setPosn 0, 0: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="rcr.robots.scribbler2.S2Path.S2Path.setPosn" class="py-name" href="#" onclick="return doclink('link-10', 'setPosn', 'link-8');">setPosn</a></tt><tt class="py-op">(</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"getPosn: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="rcr.robots.scribbler2.S2Path.S2Path.getPosn" class="py-name" href="#" onclick="return doclink('link-11', 'getPosn', 'link-9');">getPosn</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"setAngle -90: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method rcr.robots.scribbler2.S2Path.S2Path.setAngle()=rcr.robots.scribbler2.S2Path.S2Path-class.html#setAngle"><a title="rcr.robots.scribbler2.S2Path.S2Path.setAngle" class="py-name" href="#" onclick="return doclink('link-12', 'setAngle', 'link-12');">setAngle</a></tt><tt class="py-op">(</tt> <tt class="py-op">-</tt><tt class="py-number">90</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"getAngle: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Method rcr.robots.scribbler2.S2Path.S2Path.getAngle()=rcr.robots.scribbler2.S2Path.S2Path-class.html#getAngle"><a title="rcr.robots.scribbler2.S2Path.S2Path.getAngle" class="py-name" href="#" onclick="return doclink('link-13', 'getAngle', 'link-13');">getAngle</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"setAngle 90: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="rcr.robots.scribbler2.S2Path.S2Path.setAngle" class="py-name" href="#" onclick="return doclink('link-14', 'setAngle', 'link-12');">setAngle</a></tt><tt class="py-op">(</tt> <tt class="py-number">90</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"getAngle: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="rcr.robots.scribbler2.S2Path.S2Path.getAngle" class="py-name" href="#" onclick="return doclink('link-15', 'getAngle', 'link-13');">getAngle</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"moveTo 0, 100: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method rcr.robots.scribbler2.S2Path.S2Path.moveTo()=rcr.robots.scribbler2.S2Path.S2Path-class.html#moveTo"><a title="rcr.robots.scribbler2.S2Path.S2Path.moveTo" class="py-name" href="#" onclick="return doclink('link-16', 'moveTo', 'link-16');">moveTo</a></tt><tt class="py-op">(</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">100</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"moveTo 0, -1000: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="rcr.robots.scribbler2.S2Path.S2Path.moveTo" class="py-name" href="#" onclick="return doclink('link-17', 'moveTo', 'link-16');">moveTo</a></tt><tt class="py-op">(</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-number">1000</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"moveTo 0, 1000: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="rcr.robots.scribbler2.S2Path.S2Path.moveTo" class="py-name" href="#" onclick="return doclink('link-18', 'moveTo', 'link-16');">moveTo</a></tt><tt class="py-op">(</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">1000</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"moveTo 0, 2000: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="rcr.robots.scribbler2.S2Path.S2Path.moveTo" class="py-name" href="#" onclick="return doclink('link-19', 'moveTo', 'link-16');">moveTo</a></tt><tt class="py-op">(</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">2000</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"getPosn: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="rcr.robots.scribbler2.S2Path.S2Path.getPosn" class="py-name" href="#" onclick="return doclink('link-20', 'getPosn', 'link-9');">getPosn</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"getAngle: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="rcr.robots.scribbler2.S2Path.S2Path.getAngle" class="py-name" href="#" onclick="return doclink('link-21', 'getAngle', 'link-13');">getAngle</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"moveBy 0, 50: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Method rcr.robots.scribbler2.S2Path.S2Path.moveBy()=rcr.robots.scribbler2.S2Path.S2Path-class.html#moveBy"><a title="rcr.robots.scribbler2.S2Path.S2Path.moveBy" class="py-name" href="#" onclick="return doclink('link-22', 'moveBy', 'link-22');">moveBy</a></tt><tt class="py-op">(</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">50</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"getPosn: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="rcr.robots.scribbler2.S2Path.S2Path.getPosn" class="py-name" href="#" onclick="return doclink('link-23', 'getPosn', 'link-9');">getPosn</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"getAngle: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="rcr.robots.scribbler2.S2Path.S2Path.getAngle" class="py-name" href="#" onclick="return doclink('link-24', 'getAngle', 'link-13');">getAngle</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"turnTo 45: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Method rcr.robots.scribbler2.S2Path.S2Path.turnTo()=rcr.robots.scribbler2.S2Path.S2Path-class.html#turnTo"><a title="rcr.robots.scribbler2.S2Path.S2Path.turnTo" class="py-name" href="#" onclick="return doclink('link-25', 'turnTo', 'link-25');">turnTo</a></tt><tt class="py-op">(</tt> <tt class="py-number">45</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"getPosn: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="rcr.robots.scribbler2.S2Path.S2Path.getPosn" class="py-name" href="#" onclick="return doclink('link-26', 'getPosn', 'link-9');">getPosn</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"getAngle: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="rcr.robots.scribbler2.S2Path.S2Path.getAngle" class="py-name" href="#" onclick="return doclink('link-27', 'getAngle', 'link-13');">getAngle</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"turnBy 45: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name" targets="Method rcr.robots.scribbler2.S2Path.S2Path.turnBy()=rcr.robots.scribbler2.S2Path.S2Path-class.html#turnBy"><a title="rcr.robots.scribbler2.S2Path.S2Path.turnBy" class="py-name" href="#" onclick="return doclink('link-28', 'turnBy', 'link-28');">turnBy</a></tt><tt class="py-op">(</tt> <tt class="py-number">45</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"getPosn: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="rcr.robots.scribbler2.S2Path.S2Path.getPosn" class="py-name" href="#" onclick="return doclink('link-29', 'getPosn', 'link-9');">getPosn</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"getAngle: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name"><a title="rcr.robots.scribbler2.S2Path.S2Path.getAngle" class="py-name" href="#" onclick="return doclink('link-30', 'getAngle', 'link-13');">getAngle</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"arcTo 100, 100, 45: "</tt><tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name" targets="Method rcr.robots.scribbler2.S2Path.S2Path.arcTo()=rcr.robots.scribbler2.S2Path.S2Path-class.html#arcTo"><a title="rcr.robots.scribbler2.S2Path.S2Path.arcTo" class="py-name" href="#" onclick="return doclink('link-31', 'arcTo', 'link-31');">arcTo</a></tt><tt class="py-op">(</tt> <tt class="py-number">100</tt><tt class="py-op">,</tt> <tt class="py-number">100</tt><tt class="py-op">,</tt> <tt class="py-number">45</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"getPosn: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="rcr.robots.scribbler2.S2Path.S2Path.getPosn" class="py-name" href="#" onclick="return doclink('link-32', 'getPosn', 'link-9');">getPosn</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"getAngle: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="rcr.robots.scribbler2.S2Path.S2Path.getAngle" class="py-name" href="#" onclick="return doclink('link-33', 'getAngle', 'link-13');">getAngle</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"arcBy 100 : "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name" targets="Method rcr.robots.scribbler2.S2Path.S2Path.arcBy()=rcr.robots.scribbler2.S2Path.S2Path-class.html#arcBy"><a title="rcr.robots.scribbler2.S2Path.S2Path.arcBy" class="py-name" href="#" onclick="return doclink('link-34', 'arcBy', 'link-34');">arcBy</a></tt><tt class="py-op">(</tt> <tt class="py-number">100</tt><tt class="py-op">,</tt> <tt class="py-number">100</tt><tt class="py-op">,</tt> <tt class="py-number">45</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"getPosn: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="rcr.robots.scribbler2.S2Path.S2Path.getPosn" class="py-name" href="#" onclick="return doclink('link-35', 'getPosn', 'link-9');">getPosn</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"getAngle: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="rcr.robots.scribbler2.S2Path.S2Path.getAngle" class="py-name" href="#" onclick="return doclink('link-36', 'getAngle', 'link-13');">getAngle</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line"> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-string">"endPath: "</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt> <tt class="py-name">s2Path</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name" targets="Method rcr.robots.scribbler2.S2Path.S2Path.endPath()=rcr.robots.scribbler2.S2Path.S2Path-class.html#endPath"><a title="rcr.robots.scribbler2.S2Path.S2Path.endPath" class="py-name" href="#" onclick="return doclink('link-37', 'endPath', 'link-37');">endPath</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line"> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">    <tt class="py-name">robot</tt><tt class="py-op">.</tt><tt id="link-38" class="py-name" targets="Method rcr.robots.scribbler2.Scribbler2.Scribbler2.close()=rcr.robots.scribbler2.Scribbler2.Scribbler2-class.html#close,Method rcr.utils.Serial.Serial.close()=rcr.utils.Serial.Serial-class.html#close"><a title="rcr.robots.scribbler2.Scribbler2.Scribbler2.close
+rcr.utils.Serial.Serial.close" class="py-name" href="#" onclick="return doclink('link-38', 'close', 'link-38');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line"> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line"> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line"><tt class="py-keyword">if</tt><tt class="py-op">(</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">"__main__"</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">    <tt id="link-39" class="py-name" targets="Function TestF2Camera.main()=TestF2Camera-module.html#main,Function TestF2IRSensors.main()=TestF2IRSensors-module.html#main,Function TestF2Inner.main()=TestF2Inner-module.html#main,Function TestF2LEDs.main()=TestF2LEDs-module.html#main,Function TestF2Servos.main()=TestF2Servos-module.html#main,Function TestS2IRSensors.main()=TestS2IRSensors-module.html#main,Function TestS2Inner.main()=TestS2Inner-module.html#main,Function TestS2Joystick.main()=TestS2Joystick-module.html#main,Function TestS2LEDs.main()=TestS2LEDs-module.html#main,Function TestS2LightSensors.main()=TestS2LightSensors-module.html#main,Function TestS2LineSensors.main()=TestS2LineSensors-module.html#main,Function TestS2Microphone.main()=TestS2Microphone-module.html#main,Function TestS2MidiController.main()=TestS2MidiController-module.html#main,Function TestS2Motors.main()=TestS2Motors-module.html#main,Function TestS2Path.main()=TestS2Path-module.html#main,Function TestS2Speaker.main()=TestS2Speaker-module.html#main"><a title="TestF2Camera.main
+TestF2IRSensors.main
+TestF2Inner.main
+TestF2LEDs.main
+TestF2Servos.main
+TestS2IRSensors.main
+TestS2Inner.main
+TestS2Joystick.main
+TestS2LEDs.main
+TestS2LightSensors.main
+TestS2LineSensors.main
+TestS2Microphone.main
+TestS2MidiController.main
+TestS2Motors.main
+TestS2Path.main
+TestS2Speaker.main" class="py-name" href="#" onclick="return doclink('link-39', 'main', 'link-39');">main</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Sun Jan 22 13:36:25 2017
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
