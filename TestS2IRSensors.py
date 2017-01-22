@@ -9,7 +9,7 @@ def main():
     """Realiza las pruebas de los sensores infrarojos del S2.
 
     Las pruebas consideran:
-        robot = Scribbler2(  "/dev/rfcomm2", 500 )
+        robot = Scribbler2(  "/dev/rfcomm2", 9600, 500 )
         s2IRSensors = robot.getS2IRSensors()
 
         s2IRSensors.getIRLeft()
@@ -18,7 +18,7 @@ def main():
         s2IRSensors.getIrEx()
 
     """
-    robot = Scribbler2(  "/dev/rfcomm2", 500 )
+    robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
     s2IRSensors = robot.getS2IRSensors()
 
     for i in range( 10 ):

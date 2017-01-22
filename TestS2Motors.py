@@ -10,7 +10,7 @@ def main():
     """Realiza las pruebas de los motores del S2.
 
     Las pruebas consideran:
-        robot = Scribbler2( "/dev/rfcomm2", 500 )
+        robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
         s2Motors = robot.getS2Motors()
 
         s2Motors.getMotorStats()
@@ -20,7 +20,7 @@ def main():
         s2Motors.setMotorsOff()
 
     """
-    robot = Scribbler2( "/dev/rfcomm2", 500 )
+    robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
     s2Motors = robot.getS2Motors()
 
     print( "getMotorStats: " + str( s2Motors.getMotorStats() ) )

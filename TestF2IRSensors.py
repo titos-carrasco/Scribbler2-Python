@@ -9,14 +9,14 @@ def main():
     """Realiza las pruebas de los sensores infrarojos de la tarjeta F2.
 
     Las pruebas consideran:
-    robot = Scribbler2( "/dev/rfcomm2", 500 )
+    robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
     f2IRSensors = robot.getF2IRSensors()
 
     f2IRSensors.setIRPower()
     f2IRSensors.getIR()
 
     """
-    robot = Scribbler2( "/dev/rfcomm2", 500 )
+    robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
     f2IRSensors = robot.getF2IRSensors()
 
     print( "setIRPower: " )

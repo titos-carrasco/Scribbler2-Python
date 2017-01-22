@@ -20,7 +20,7 @@ def main():
     midiIn = mido.open_input( 'Scribbler2', virtual = True, autoreset = True  )
 
     print( "Conectando con el Scribbler2" )
-    robot = Scribbler2( "/dev/rfcomm2", 500 )
+    robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
     s2Motors = robot.getS2Motors()
 
     print( "Conecte la puerta del Controlador Midi a RTMidiInCient" )

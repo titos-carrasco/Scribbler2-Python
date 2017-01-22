@@ -10,7 +10,7 @@ def main():
     """Realiza las pruebas del los LEDs del S2.
 
     Las pruebas consideran:
-        robot = Scribbler2( "/dev/rfcomm2", 500 )
+        robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
         s2LEDs = robot.getS2LEDs()
 
         s2LEDs.setLeftLed()
@@ -19,7 +19,7 @@ def main():
         s2LEDs.setAllLed()
 
     """
-    robot = Scribbler2( "/dev/rfcomm2", 500 )
+    robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
     s2LEDs = robot.getS2LEDs()
 
     print( "setLeftLed: " + str( s2LEDs.setLeftLed( True ) ) )

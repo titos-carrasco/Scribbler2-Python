@@ -9,7 +9,7 @@ def main():
     """Realiza las pruebas de los sensores de linea del S2.
 
     Las pruebas consideran:
-        robot = Scribbler2( "/dev/rfcomm2", 500 )
+        robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
         s2LineSensors = robot.getS2LineSensors()
 
         s2LineSensors.getLineEx()
@@ -18,7 +18,7 @@ def main():
         s2LineSensors.getRightLine()
 
     """
-    robot = Scribbler2( "/dev/rfcomm2", 500 )
+    robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
     s2LineSensors = robot.getS2LineSensors()
 
     for i in range( 10 ):

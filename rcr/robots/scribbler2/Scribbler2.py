@@ -32,7 +32,7 @@ class Scribbler2:
     DATA_LENGTH = 8
     PACKET_LENGTH = 9
 
-    def __init__( self, port, timeout ):
+    def __init__( self, port, speed, timeout ):
         """Inicia la conexion.
 
         Args:
@@ -41,7 +41,7 @@ class Scribbler2:
 
         """
         self.mylock = threading.Lock()
-        self.serial = Serial( port, 9600, timeout )
+        self.serial = Serial( port, speed, timeout )
         Utils.pause( 1000 )
         self.serial.flushRead( 1000 )
         self.s2Inner = S2Inner( self )

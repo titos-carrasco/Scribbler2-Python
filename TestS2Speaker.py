@@ -9,7 +9,7 @@ def main():
     """Realiza pruebas de sonido soportados por el S2.
 
     Las pruebas consideran:
-        robot = Scribbler2( "/dev/rfcomm2", 500 )
+        robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
         s2Speaker = robot.getS2Speaker()
 
         s2Speaker.setQuiet()
@@ -19,7 +19,7 @@ def main():
         s2Speaker.setSpeaker()
 
     """
-    robot = Scribbler2( "/dev/rfcomm2", 500 )
+    robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
     s2Speaker = robot.getS2Speaker()
 
     print( "setQuiet: " + str( s2Speaker.setQuiet() ) )

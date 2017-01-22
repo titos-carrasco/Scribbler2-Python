@@ -9,7 +9,7 @@ def main():
     """Realiza las pruebas de los elementos internos de la tarjeta F2.
 
     Las pruebas consideran:
-        robot = Scribbler2( "/dev/rfcomm2", 500 )
+        robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
         f2Inner = robot.getF2Inner()
 
         f2Inner.getVersion()
@@ -20,7 +20,7 @@ def main():
         f2Inner.resetScribbler()
 
     """
-    robot = Scribbler2( "/dev/rfcomm2", 500 )
+    robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
     f2Inner = robot.getF2Inner()
 
     print( "getVersion: " + str( f2Inner.getVersion() ) )

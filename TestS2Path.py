@@ -9,7 +9,7 @@ def main():
     """Realiza las pruebas de movimiento en plano cartesiano del S2.
 
     Las pruebas consideran:
-        robot = Scribbler2( "/dev/rfcomm2", 500 )
+        robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
         s2Path = robot.getS2Path()
 
         s2Path.beginPath()
@@ -26,7 +26,7 @@ def main():
         s2Path.endPath()
 
     """
-    robot = Scribbler2( "/dev/rfcomm2", 500 )
+    robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
     s2Path = robot.getS2Path()
 
     print( "beginPath: " + str( s2Path.beginPath( 15 ) ) )

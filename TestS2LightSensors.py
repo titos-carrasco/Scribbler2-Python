@@ -10,7 +10,7 @@ def main():
     """Realiza las pruebas de los sensores de luz del S2.
 
     Las pruebas consideran:
-        robot = Scribbler2( "/dev/rfcomm2", 500 )
+        robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
         s2LightSensors = robot.getS2LightSensors()
 
         s2LightSensors.getLeftLight()
@@ -19,7 +19,7 @@ def main():
         s2LightSensors.getAllLights()
 
     """
-    robot = Scribbler2( "/dev/rfcomm2", 500 )
+    robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
     s2LightSensors = robot.getS2LightSensors()
 
     for i in range( 10 ):

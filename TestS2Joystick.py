@@ -57,7 +57,7 @@ class TestJoystick:
         if(self.Connect.get_active()):
             self._SbSetMessage("Conectando...")
             try:
-                self.rob = Scribbler2(self.Port.get_text(), 500)
+                self.rob = Scribbler2(self.Port.get_text(), 9600, 500)
             except Exception as e:
                 self.Connect.set_active(False)
                 self._SbSetMessage("Error al conectar con el Scribbler2")

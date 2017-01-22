@@ -9,12 +9,12 @@ def main():
     """Realiza las pruebas del microfono del S2.
 
     Las pruebas consideran:
-        robot = Scribbler2( "/dev/rfcomm2", 500 )
+        robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
         s2Microphone = robot.getS2Microphone()
 
         s2Microphone.getMicEnv()
     """
-    robot = Scribbler2( "/dev/rfcomm2", 500 )
+    robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
     s2Microphone = robot.getS2Microphone()
 
     for i in range( 50 ):

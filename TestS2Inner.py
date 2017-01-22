@@ -10,7 +10,7 @@ def main():
     """Realiza las pruebas de los elementos internos del S2.
 
     Las pruebas consideran:
-        robot = Scribbler2(  "/dev/rfcomm2", 500 )
+        robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
         s2Inner = robot.getS2Inner()
 
         s2Inner.getInfo()
@@ -24,7 +24,7 @@ def main():
         s2Inner.setSingleData()
 
     """
-    robot = Scribbler2(  "/dev/rfcomm2", 500 )
+    robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
     s2Inner = robot.getS2Inner()
 
     print( "getInfo: " + str( s2Inner.getInfo() ) )

@@ -12,14 +12,14 @@ def main():
     """Realiza las pruebas de la camara de la tarjeta de la F2.
 
     Las pruebas utilizan las librerias numpy y cv2, y consideran:
-        robot = Scribbler2( "/dev/rfcomm2", 500 )
+        robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
         f2Camera = robot.getF2Camera()
 
         f2Camera.setPicSize)
         f2Camera.getImage()
 
     """
-    robot = Scribbler2( "/dev/rfcomm2", 500 )
+    robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
     f2Camera = robot.getF2Camera()
 
     cv2.namedWindow( 'Frames', cv2.CV_WINDOW_AUTOSIZE )
