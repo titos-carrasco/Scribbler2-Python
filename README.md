@@ -43,18 +43,17 @@ En Linux si `/usr/sbin/ModemManager`está en ejecución bloqueará el acceso al 
   * `mosquitto_pub -h test.mosquitto.org -t rcr/S2 -m "left 5"`
   * Se puede utilizar la app [VoiceAndMQTT](https://github.com/titos-carrasco/VoiceAndMQTT) para enviar órdenes verbales
 
-##Ambiente de desarrollo
+## Ambiente de desarrollo
 Todo el desarrollo se realiza utilizando Geany en Linux Debian, configurando un proyecto y asociando comandos en Set Build Commands:
 
 * Para compilar en Python: python -m py_compile "%f"
 * Para ejecutar Python: python "%f"
 
-##Importante:
+## Importante:
 * Revisar el estilo del codigo con `$ pydocstyle`
 * Generar la documentación con `$ epydoc -v --html  -o doc/ *.py rcr/`
 
-***
-##Historia
+## Historia
 * Ene 22, 2017: agrega parámetro de velocidad en constructor Scribbler2()
 * Ago 14, 2016: Procesa documentación con pydocstyle y epydoc. Agrega demo con controlador MIDI
 * Jun 09, 2016: Compatibliza código con Python 2.7 y 3.5. Agrega documentación en línea
