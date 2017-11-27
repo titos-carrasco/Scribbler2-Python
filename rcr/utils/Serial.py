@@ -151,7 +151,7 @@ class Serial:
             while( t < end ):
                 try:
                     if( len(self.serial.read(1))==0 ):
-                        Utils.pause(1);
+                        Utils.pause(1)
                 except:
                     pass
                 t = time.time()
