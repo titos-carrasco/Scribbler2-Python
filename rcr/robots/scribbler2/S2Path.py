@@ -7,23 +7,22 @@ class S2Path:
     """Clase de acceso a las operaciones de PATH del S2."""
 
     def __init__( self, s2 ):
-        """Constructor de la clase.
+        """
+        Corresponde al constructor de la clase.
 
-        Args:
-            s2 (Scribber2): referencia al S2
-
+        @type s2: L{Scribbler2}
+        @param s2: referencia al S2 que lo contiene
         """
         self.s2 = s2
 
     def beginPath( self, speed ):
-        """Ingresa al modo de sistema cartesiano (path).
+        """
+        Ingresa al modo de sistema cartesiano (path).
 
-        Args:
-            speed (int): velocidad de desplazamiento (0 a 15)
-
-        Returns:
-            HS2Sensors: objeto con el valor de los principales sensores del S2
-
+        @type speed: integer
+        @param speed: velocidad de desplazamiento (0 a 15)
+        @rtype: L{HS2Sensors}
+        @return: objeto con el valor de los principales sensores del S2
         """
         try:
             self.s2.lock()
@@ -39,11 +38,11 @@ class S2Path:
             self.s2.unlock()
 
     def endPath( self ):
-        """Finaliza el modo path.
+        """
+        Finaliza el modo path.
 
-        Returns:
-            HS2Sensors: objeto con el valor de los principales sensores del S2
-
+        @rtype: L{HS2Sensors}
+        @return: objeto con el valor de los principales sensores del S2
         """
         try:
             self.s2.lock()
@@ -57,11 +56,11 @@ class S2Path:
             self.s2.unlock()
 
     def getPosn( self ):
-        """Obtiene ubicacion (x, y) del S2 en el plano cartesiano.
+        """
+        Obtiene ubicacion (x, y) del S2 en el plano cartesiano.
 
-        Returns:
-            HS2Coordinates: coordenadas de la ubizacion del S2
-
+        @rtype: L{HS2Coordinates}
+        @return: coordenadas de la ubizacion del S2
         """
         try:
             self.s2.lock()
@@ -74,11 +73,11 @@ class S2Path:
             self.s2.unlock()
 
     def getAngle( self ):
-        """Obtiene angulo en el que se encuentra orientado el S2.
+        """
+        Obtiene angulo en el que se encuentra orientado el S2.
 
-        Returns:
-            int: angulo de orientacion del S2
-
+        @rtype: integer
+        @return: angulo de orientacion del S2
         """
         try:
             self.s2.lock()
@@ -91,15 +90,15 @@ class S2Path:
             self.s2.unlock()
 
     def setPosn( self, x, y ):
-        """Establece posicion (x, y) del S2 en el plano (no lo desplaza).
+        """
+        Establece posicion (x, y) del S2 en el plano (no lo desplaza).
 
-        Args:
-            x (int): coordenada X de la posicion
-            y (int): coordenada Y de la posicion
-
-        Returns:
-            HS2Sensors: objeto con el valor de los principales sensores del S2
-
+        @type x: integer
+        @param x: coordenada X de la posicion
+        @type y: integer
+        @param y: coordenada Y de la posicion
+        @rtype: L{HS2Sensors}
+        @return: objeto con el valor de los principales sensores del S2
         """
         try:
             self.s2.lock()
@@ -120,14 +119,13 @@ class S2Path:
             self.s2.unlock()
 
     def setAngle( self, angle ):
-        """Establece angulo de orientacion del S2 (no lo desplaza).
+        """
+        Establece angulo de orientacion del S2 (no lo desplaza).
 
-        Args:
-            angle (int): angulo de orientacion a fijar
-
-        Returns:
-            HS2Sensors: objeto con el valor de los principales sensores del S2
-
+        @type angle: integer
+        @param angle: angulo de orientacion a fijar
+        @rtype: L{HS2Sensors}
+        @return: objeto con el valor de los principales sensores del S2
         """
         try:
             self.s2.lock()
@@ -144,15 +142,15 @@ class S2Path:
             self.s2.unlock()
 
     def moveTo( self, x, y ):
-        """Desplaza el S2 a la posicion (x, y).
+        """
+        Desplaza el S2 a la posicion (x, y).
 
-        Args:
-            x (int): coordenada X hacia donde desplazar
-            y (int): coordenada Y hacia donde desplazar
-
-        Returns:
-            HS2Sensors: objeto con el valor de los principales sensores del S2
-
+        @type x: integer
+        @param x: coordenada X hacia donde desplazar
+        @type y: integer
+        @param y: coordenada Y hacia donde desplazar
+        @rtype: L{HS2Sensors}
+        @return: objeto con el valor de los principales sensores del S2
         """
         try:
             self.s2.lock()
@@ -170,15 +168,15 @@ class S2Path:
             self.s2.unlock()
 
     def moveBy( self, x, y ):
-        """Desplaza de manera relativa el S2 una distancia (x, y).
+        """
+        Desplaza de manera relativa el S2 una distancia (x, y).
 
-        Args:
-            x (int): distancia e X a desplazar al S2
-            y (int): distancia en Y a desplazar al S2
-
-        Returns:
-            HS2Sensors: objeto con el valor de los principales sensores del S2
-
+        @type x: integer
+        @param x: distancia e X a desplazar al S2
+        @type y: integer
+        @param y: distancia en Y a desplazar al S2
+        @rtype: L{HS2Sensors}
+        @return: objeto con el valor de los principales sensores del S2
         """
         try:
             self.s2.lock()
@@ -196,14 +194,13 @@ class S2Path:
             self.s2.unlock()
 
     def turnTo( self, angle ):
-        """Mueve al S2 orientandolo a un angulo dado.
+        """
+        Mueve al S2 orientandolo a un angulo dado.
 
-        Args:
-            angle (int): angulo hacia el cual mover el S2
-
-        Returns:
-            HS2Sensors: objeto con el valor de los principales sensores del S2
-
+        @type angle: integer
+        @param angle: angulo hacia el cual mover el S2
+        @rtype: L{HS2Sensors}
+        @return: objeto con el valor de los principales sensores del S2
         """
         try:
             self.s2.lock()
@@ -219,14 +216,13 @@ class S2Path:
             self.s2.unlock()
 
     def turnBy( self, angle ):
-        """Gira de manera relativa el S2 un numero dado de grados.
+        """
+        Gira de manera relativa el S2 un numero dado de grados.
 
-        Args:
-            angle (int): grados a girar el S2 segun prientacion actual
-
-        Returns:
-            HS2Sensors: objeto con el valor de los principales sensores del S2
-
+        @type angle: integer
+        @param angle: grados a girar el S2 segun prientacion actual
+        @rtype: L{HS2Sensors}
+        @return: objeto con el valor de los principales sensores del S2
         """
         try:
             self.s2.lock()
@@ -242,16 +238,17 @@ class S2Path:
             self.s2.unlock()
 
     def arcTo( self, x, y, radius):
-        """Traza un arco hasta la posicon (x, y) de radio dado.
+        """
+        Traza un arco hasta la posicon (x, y) de radio dado.
 
-        Args:
-            x (int): coordenada X hacia la cual desplazar
-            y (int): coordenada Y hacia la cual desplazar
-            radio (int): radio de arco a trazar
-
-        Returns:
-            HS2Sensors: objeto con el valor de los principales sensores del S2
-
+        @type x: integer
+        @param x: coordenada X hacia la cual desplazar
+        @type y: integer
+        @param y: coordenada Y hacia la cual desplazar
+        @type radius: integer
+        @param radius: radio de arco a trazar
+        @rtype: L{HS2Sensors}
+        @return: objeto con el valor de los principales sensores del S2
         """
         try:
             self.s2.lock()
@@ -271,16 +268,17 @@ class S2Path:
             self.s2.unlock()
 
     def arcBy( self, x, y, radius):
-        """Traza un arco de manera relativa y de radio dado.
+        """
+        Traza un arco de manera relativa y de radio dado.
 
-        Args:
-            x (int): pasos en X a desplazar segun posicion actual
-            y (int): pasos en Y a desplazar segun posicion actual
-            radio (int): radio de arco a trazar
-
-        Returns:
-            HS2Sensors: objeto con el valor de los principales sensores del S2
-
+        @type x: integer
+        @param x: pasos en X a desplazar segun posicion actual
+        @type y: integer
+        @param y: pasos en Y a desplazar segun posicion actual
+        @type radius: integer
+        @param radius: radio de arco a trazar
+        @rtype: L{HS2Sensors}
+        @return: objeto con el valor de los principales sensores del S2
         """
         try:
             self.s2.lock()

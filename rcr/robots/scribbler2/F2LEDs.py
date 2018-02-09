@@ -6,20 +6,20 @@ class F2LEDs:
     """Clase de acceso a los LEDs del F2."""
 
     def __init__( self, s2 ):
-        """Constructor de la clase.
+        """
+        Corresponde al constructor de la clase.
 
-        Args:
-            s2 (Scribber2): referencia al S2
-
+        @type s2: L{Scribbler2}
+        @param s2: referencia al S2 que lo contiene
         """
         self.s2 = s2
 
     def setBrightLed( self, pwm ):
-        """Establece potencia del Led de la F2.
+        """
+        Establece potencia del Led de la F2.
 
-        Args:
-            pwm (byte): potencia para el LED de la F2
-
+        @type pwm: byte
+        @param pwm: potencia para el LED de la F2
         """
         try:
             self.s2.lock()

@@ -33,13 +33,15 @@ class Scribbler2:
     PACKET_LENGTH = 9
 
     def __init__( self, port, speed, timeout ):
-        """Inicia la conexion.
+        """
+        Corresponde al constructor de la clase.
 
-        Args:
-            port (str): la puerta a conectar
-            speed( (int): velocidad de la conexion
-            timeout (int): timeout para cada comando
-
+        @type port: string
+        @param port: la puerta a conectar con el S2
+        @type speed: integer
+        @param speed: velocidad de la conexion
+        @type timeout: integer
+        @param timeout: timeout para cada comando
         """
         self.mylock = threading.Lock()
         self.serial = Serial( port, speed, timeout )
@@ -71,157 +73,156 @@ class Scribbler2:
             self.unlock()
 
     def getS2Inner( self ):
-        """Obtiene acceso a los estados internos del S2.
+        """
+        Obtiene acceso a los estados internos del S2.
 
-        Returns:
-            S2Inner: objeto con acceso a los datos internos del S2
-
+        @rtype: L{S2Inner}
+        @return: objeto con acceso a los datos internos del S2
         """
         return self.s2Inner
 
     def getS2IRSensors( self ):
-        """Obtiene acceso a los sensores IR del S2.
+        """
+        Obtiene acceso a los sensores IR del S2.
 
-        Returns;
-            S2IRSensor: objeto con acceso a los sensores IR
-
+        @rtype: L{S2IRSensors}
+        @return: objeto con acceso a los sensores IR
         """
         return self.s2IRSensors
 
     def getS2LEDs( self ):
-        """Obtiene acceso a los LEDs del S2.
+        """
+        Obtiene acceso a los LEDs del S2.
 
-        Returns:
-            S2LEDs: objeto con acceso a los LEDs del S2
-
+        @rtype: L{S2LEDs}
+        @return: objeto con acceso a los LEDs del S2
         """
         return self.s2LEDs
 
     def getS2LightSensors( self ):
-        """Obtiene acceso a los sensores de luz del S2.
+        """
+        Obtiene acceso a los sensores de luz del S2.
 
-        Returns:
-            S2LightsSensors: objeto con acceso a los sensores de luz del S2
-
+        @rtype: L{S2LightSensors}
+        @return: objeto con acceso a los sensores de luz del S2
         """
         return self.s2LightSensors
 
     def getS2LineSensors( self ):
-        """Obtiene acceso a los sensores de linea del S2.
+        """
+        Obtiene acceso a los sensores de linea del S2.
 
-        Returns:
-            S2LightsSensors: objeto con acceso a los sensores de linea del S2
-
+        @rtype: L{S2LineSensors}
+        @return: objeto con acceso a los sensores de linea del S2
         """
         return self.s2LineSensors
 
     def getS2Microphone( self ):
-        """Obtiene acceso al microfono del S2.
+        """
+        Obtiene acceso al microfono del S2.
 
-        Returns:
-            S2Microphone: objeto con acceso al micofono del del S2
-
+        @rtype: L{S2Microphone}
+        @return: objeto con acceso al micofono del del S2
         """
         return self.s2Microphone
 
     def getS2Motors( self ):
-        """Obtiene acceso a los motores del S2.
+        """
+        Obtiene acceso a los motores del S2.
 
-        Returns:
-            S2Motors: objeto con acceso a los motores del S2
-
+        @rtype: L{S2Motors}
+        @return: objeto con acceso a los motores del S2
         """
         return self.s2Motors
 
     def getS2Speaker( self ):
-        """Obtiene acceso al parlante del S2.
+        """
+        Obtiene acceso al parlante del S2.
 
-        Returns:
-            S2Speaker: objeto con acceso al parlante del S2
-
+        @rtype: L{S2Speaker}
+        @return: objeto con acceso al parlante del S2
         """
         return self.s2Speaker
 
     def getS2Path( self ):
-        """Obtiene acceso al modulo de trazado del S2.
+        """
+        Obtiene acceso al modulo de trazado del S2.
 
-        Returns:
-            S2Path: objeto con acceso al modulo de trazado del S2
-
+        @rtype: L{S2Path}
+        @return: objeto con acceso al modulo de trazado del S2
         """
         return self.s2Path
 
     def getF2Camera( self ):
-        """Obtiene acceso a la camara del F2.
+        """
+        Obtiene acceso a la camara del F2.
 
-        Returns:
-            F2Camera: objeto con acceso a la camara del F2
-
+        @rtype: L{F2Camera}
+        @return: objeto con acceso a la camara del F2
         """
         return self.f2Camera
 
     def getF2Inner( self ):
-        """Obtiene acceso a los estados internos de la F2.
+        """
+        Obtiene acceso a los estados internos de la F2.
 
-        Returns:
-            F2Inner: objeto con acceso a los estados internos del F2
-
+        @rtype: L{F2Inner}
+        @return: objeto con acceso a los estados internos del F2
         """
         return self.f2Inner
 
     def getF2IRSensors( self ):
-        """Obtiene acceso a los sensores IR de la F2.
+        """
+        Obtiene acceso a los sensores IR de la F2.
 
-        Returns:
-            F2Inner: objeto con acceso a los sensores IR de la F2
-
+        @rtype: L{F2IRSensors}
+        @return: objeto con acceso a los sensores IR de la F2
         """
         return self.f2IRSensors
 
     def getF2LEDs( self ):
-        """Obtiene acceso a los LEDs de la F2.
+        """
+        Obtiene acceso a los LEDs de la F2.
 
-        Returns:
-            F2Inner: objeto con acceso a los LEDs de la F2
-
+        @rtype: L{F2LEDs}
+        @return: objeto con acceso a los LEDs de la F2
         """
         return self.f2LEDs
 
     def getF2Servos( self ):
-        """Obtiene acceso al conector de servos de la F2.
+        """
+        Obtiene acceso al conector de servos de la F2.
 
-        Returns:
-            F2Servos: objeto con acceso al conector de servos de la F2
-
+        @rtype: L{F2Servos}
+        @return: objeto con acceso al conector de servos de la F2
         """
         return self.f2Servos
 
     ## protected
 
     def makeS2Packet( self, cmd ):
-        """Crea un paquete estandar utilizado como comando para el S2.
+        """
+        Crea un paquete estandar utilizado como comando para el S2.
 
-        Args:
-            cmd (byte): comando a enviar
-
-        Returns;
-            bytearray: paquete a completar con los parametros del comando (cmd)
-
+        @type cmd: byte
+        @param cmd: comando a enviar
+        @rtype: bytearray
+        @return: paquete a completar con los parametros del comando (cmd)
         """
         packet = bytearray( self.PACKET_LENGTH )
         packet[0] = cmd & 0xFF
         return packet
 
     def sendS2Command( self, packet, pause ):
-        """Envia un comando al S2.
+        """
+        Envia un comando al S2.
 
-        Args:
-            packet (bytearray): comando a enviar
-            pause (int): tiempo en ms a esperar luego de enviar el comando
-
-        Return:
-            bool: Verdadero si el ACK enviado por el S2 no corresponde
-
+        @type packet: bytearray
+        @param packet: comando a enviar
+        @type pause: integer
+        @param pause: tiempo en ms a esperar por la respuesta luego de enviar el comando
+        @rtype: bool
+        @return: Verdadero si el ACK enviado por el S2 corresponde al esperado
         """
         self.serial.write( packet )
         if( pause > 0 ):
@@ -236,11 +237,11 @@ class Scribbler2:
         return True
 
     def sendS2PathCommand( self, packet ):
-        """Envia comando de trazado (path) al S2.
+        """
+        Envia comando de trazado (path) al S2.
 
-        Args:
-            packet (bytearray): comando de trazado a enviar
-
+        @type packet: bytearray
+        @param packet: comando de trazado a enviar
         """
         self.serial.write( packet )
         t = time.time()
@@ -271,23 +272,24 @@ class Scribbler2:
         self.sendS2Command( packet, 0 )
 
     def sendF2Command( self, packet, pause ):
-        """Envia comando a la tarjeta F2.
+        """
+        Envia comando a la tarjeta F2.
 
-        Args:
-            packet (bytearray): comando a enviar a la F2
-            pause (int): pausa en ms a realizar una vez enviado el comando
-
+        @type packet: bytearray
+        @param packet: comando a enviar a la F2
+        @type pause: integer
+        @param pause: pausa en ms a realizar una vez enviado el comando
         """
         self.serial.write( packet )
         if( pause > 0 ):
             Utils.pause( pause )
 
     def getS2SensorsResponse( self ):
-        """Obtiene estado de los principales sensores del S2.
+        """
+        Obtiene estado de los principales sensores del S2.
 
-        Returns:
-            HS2Sensors: objeto con el valor de los principales sensores del S2
-
+        @rtype: L{HS2Sensors}
+        @return: objeto con el valor de los principales sensores del S2
         """
         return HS2Sensors( self.getUInt8Response() , self.getUInt8Response() ,
                            self.getUInt16Response(), self.getUInt16Response(), self.getUInt16Response(),
@@ -295,58 +297,58 @@ class Scribbler2:
                            self.getUInt8Response() )
 
     def getLineResponse( self, maxChars ):
-        """Obtiene una respuesta del S2 como un string ascii.
+        """
+        Obtiene una respuesta del S2 como un string ascii.
 
-        Returns:
-            str: la respuesta del S2 como un string ascii
-
+        @rtype: string
+        @return: la respuesta del S2 como un string ascii
         """
         return self.serial.readLine( maxChars )
 
     def getUInt8Response( self ):
-        """Obtiene una respuesta del S2 como un entero de 8 bits sin signo.
+        """
+        Obtiene una respuesta del S2 como un entero de 8 bits sin signo.
 
-        Returns:
-            int: la respuesta del S2 como uint8
+        @rtype: integer
+        @return: la respuesta del S2 como uint8
         """
         return self.serial.readUInt8()
 
     def getUInt16Response( self ):
-        """Obtiene una respuesta del S2 como un entero de 16 bits sin signo.
+        """
+        Obtiene una respuesta del S2 como un entero de 16 bits sin signo.
 
-        Returns:
-            int: la respuesta del S2 como uint16
-
+        @rtype: integer
+        @return: la respuesta del S2 como uint16
         """
         return self.serial.readUInt16()
 
     def getUInt32Response( self ):
-        """Obtiene una respuesta del S2 como un entero de 32 bits sin signo.
+        """
+        Obtiene una respuesta del S2 como un entero de 32 bits sin signo.
 
-        Returns:
-            int: la respuesta del S2 como uint32
-
+        @rtype: integer
+        @return: la respuesta del S2 como uint32
         """
         return self.serial.readUInt32()
 
     def getInt32Response( self ):
-        """Obtiene una respuesta del S2 como un entero de 32 bits con signo.
+        """
+        Obtiene una respuesta del S2 como un entero de 32 bits con signo.
 
-        Returns:
-            int: la respuesta del S2 como int32
-
+        @rtype: integer
+        @return: la respuesta del S2 como int32
         """
         return self.serial.readInt32()
 
     def getBytesResponse( self, nbytes ):
-        """Obtiene una respuesta del S2 como un conjunto de bytes.
+        """
+        Obtiene una respuesta del S2 como un conjunto de bytes.
 
-        Args:
-            nbytes (int): bytes a leer
-
-        Returns:
-            bytearray: la respuesta del S2
-
+        @type nbytes: integer
+        @param nbytes: numero de bytes a leer
+        @rtype: bytearray
+        @return: la respuesta del S2
         """
         return self.serial.read( nbytes )
 

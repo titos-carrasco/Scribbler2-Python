@@ -61,37 +61,36 @@
 <a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">time</tt> </tt>
 <a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
 <a name="pause"></a><div id="pause-def"><a name="L7"></a><tt class="py-lineno"> 7</tt> <a class="py-toggle" href="#" id="pause-toggle" onclick="return toggle('pause');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rcr.utils.Utils-module.html#pause">pause</a><tt class="py-op">(</tt> <tt class="py-param">ms</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="pause-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="pause-expanded"><a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">    <tt class="py-docstring">"""Pausa la ejecucion del programa por un tiempo especifico.</tt> </tt>
-<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring">    Args:</tt> </tt>
-<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring">        ms (int): milisegundos a pausar</tt> </tt>
-<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+</div><div id="pause-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="pause-expanded"><a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring">    Pausa la ejecucion del programa por un tiempo especifico.</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring">    @type ms: integer</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring">    @param ms: milisegundos de pausa</tt> </tt>
 <a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
 <a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">    <tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">sleep</tt><tt class="py-op">(</tt> <tt class="py-name">ms</tt><tt class="py-op">/</tt><tt class="py-number">1000.0</tt> <tt class="py-op">)</tt> </tt>
 </div><a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt>
 <a name="bytesToHex"></a><div id="bytesToHex-def"><a name="L16"></a><tt class="py-lineno">16</tt> <a class="py-toggle" href="#" id="bytesToHex-toggle" onclick="return toggle('bytesToHex');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rcr.utils.Utils-module.html#bytesToHex">bytesToHex</a><tt class="py-op">(</tt> <tt class="py-param">b</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="bytesToHex-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="bytesToHex-expanded"><a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">    <tt class="py-docstring">"""Convierte bytes a su representacion hexadecimal.</tt> </tt>
-<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">    Args:</tt> </tt>
-<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-docstring">        b (bytes, bytearray o compatibles): los bytes a convertir</tt> </tt>
-<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-docstring">    Returns:</tt> </tt>
-<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-docstring">        str: representacion hexadecimal de los bytes</tt> </tt>
-<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
-<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-string">''</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-string">'%02x'</tt> <tt class="py-op">%</tt> <tt class="py-name">d</tt> <tt class="py-keyword">for</tt> <tt class="py-name">d</tt> <tt class="py-keyword">in</tt> <tt class="py-name">b</tt><tt class="py-op">)</tt> </tt>
-</div><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt>
-<a name="debug"></a><div id="debug-def"><a name="L28"></a><tt class="py-lineno">28</tt> <a class="py-toggle" href="#" id="debug-toggle" onclick="return toggle('debug');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rcr.utils.Utils-module.html#debug">debug</a><tt class="py-op">(</tt> <tt class="py-param">msg</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="debug-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="debug-expanded"><a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">    <tt class="py-docstring">"""Despliega en consola un mensaje.</tt> </tt>
+</div><div id="bytesToHex-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="bytesToHex-expanded"><a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">    Convierte bytes a su representacion hexadecimal.</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-docstring">    @type b: byte, bytearray o compatible</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring">    @param b: los bytes a convertir a hexadecimal</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-docstring">    @rtype: string</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-docstring">    @return: representacion hexadecimal de los bytes</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-string">''</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-string">'%02x'</tt> <tt class="py-op">%</tt> <tt class="py-name">d</tt> <tt class="py-keyword">for</tt> <tt class="py-name">d</tt> <tt class="py-keyword">in</tt> <tt class="py-name">b</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"> </tt>
+<a name="debug"></a><div id="debug-def"><a name="L27"></a><tt class="py-lineno">27</tt> <a class="py-toggle" href="#" id="debug-toggle" onclick="return toggle('debug');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="rcr.utils.Utils-module.html#debug">debug</a><tt class="py-op">(</tt> <tt class="py-param">msg</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="debug-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="debug-expanded"><a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt class="py-docstring">    Despliega en consola un mensaje.</tt> </tt>
 <a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt class="py-docstring">    Args:</tt> </tt>
-<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt class="py-docstring">        msg (str): el mensaje a desplegar</tt> </tt>
-<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
-<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt><tt class="py-op">(</tt> <tt class="py-name">type</tt><tt class="py-op">(</tt> <tt class="py-name">msg</tt> <tt class="py-op">)</tt> <tt class="py-keyword">is</tt> <tt class="py-name">bytearray</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">        <tt class="py-name">msg</tt> <tt class="py-op">=</tt> <tt id="link-0" class="py-name" targets="Function rcr.utils.Utils.bytesToHex()=rcr.utils.Utils-module.html#bytesToHex"><a title="rcr.utils.Utils.bytesToHex" class="py-name" href="#" onclick="return doclink('link-0', 'bytesToHex', 'link-0');">bytesToHex</a></tt><tt class="py-op">(</tt> <tt class="py-name">msg</tt> <tt class="py-op">)</tt> </tt>
-<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-name">msg</tt> <tt class="py-op">)</tt> </tt>
-</div><a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt class="py-docstring">    @type msg: string</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt class="py-docstring">    @param msg: el mensaje a desplegar</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt><tt class="py-op">(</tt> <tt class="py-name">type</tt><tt class="py-op">(</tt> <tt class="py-name">msg</tt> <tt class="py-op">)</tt> <tt class="py-keyword">is</tt> <tt class="py-name">bytearray</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">        <tt class="py-name">msg</tt> <tt class="py-op">=</tt> <tt id="link-0" class="py-name" targets="Function rcr.utils.Utils.bytesToHex()=rcr.utils.Utils-module.html#bytesToHex"><a title="rcr.utils.Utils.bytesToHex" class="py-name" href="#" onclick="return doclink('link-0', 'bytesToHex', 'link-0');">bytesToHex</a></tt><tt class="py-op">(</tt> <tt class="py-name">msg</tt> <tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt> <tt class="py-name">msg</tt> <tt class="py-op">)</tt> </tt>
+</div><a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -122,7 +121,7 @@ expandto(location.href);
   <tr>
     <td align="left" class="footer">
     Generated by Epydoc 3.0.1
-    on Sun Jan 22 13:36:25 2017
+    on Fri Feb  9 18:34:42 2018
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

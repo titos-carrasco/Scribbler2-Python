@@ -11,10 +11,10 @@ class HS2LineSensors:
     def __init__( self, lineLeft, lineRight ):
         """Inicializa los elementos de lectura para la aplicacion.
 
-        Args:
-            lineLeft (int): valor del sensor de linea izquierdo
-            lineRight (int): valor del sensor de linea derecho
-
+        @type lineLeft: integer
+        @param lineLeft: valor del sensor de linea izquierdo
+        @type lineRight: integer
+        @param lineRight: valor del sensor de linea derecho
         """
         self.lineLeft = lineLeft
         self.lineRight = lineRight

@@ -9,12 +9,13 @@ class HS2Encoders:
     """Clase helper con datos de los encoders del S2."""
 
     def __init__( self, left, right ):
-        """Inicializa los elementos de lectura para la aplicacion.
+        """
+        Inicializa los elementos de lectura para la aplicacion.
 
-        Args:
-            left (int): valor del encoder izquierdo
-            right (int): valor del encoder derecho
-
+        @type left: integer
+        @param left: valor del encoder izquierdo
+        @type right: integer
+        @param right: valor del encoder derecho
         """
         self.left = left
         self.right = right

@@ -6,23 +6,22 @@ class S2LEDs:
     """Clase de acceso a los LEDs del S2."""
 
     def __init__( self, s2 ):
-        """Constructor de la clase.
+        """
+        Corresponde al constructor de la clase.
 
-        Args:
-            s2 (Scribber2): referencia al S2
-
+        @type s2: L{Scribbler2}
+        @param s2: referencia al S2 que lo contiene
         """
         self.s2 = s2
 
     def setLeftLed( self, encender ):
-        """Enciende o apaga el LED izquierdo.
+        """
+        Enciende o apaga el LED izquierdo.
 
-        Args:
-            encender (bool): orden de apagar o encender el LED
-
-        Returns:
-            HS2Sensors: objeto con el valor de los principales sensores del S2
-
+        @type encender: bool
+        @param encender: orden de apagar o encender el LED
+        @rtype: L{HS2Sensors}
+        @return: objeto con el valor de los principales sensores del S2
         """
         try:
             self.s2.lock()
@@ -38,14 +37,13 @@ class S2LEDs:
             self.s2.unlock()
 
     def setCenterLed( self, encender ):
-        """Enciende o apaga el LED central.
+        """
+        Enciende o apaga el LED central.
 
-        Args:
-            encender (bool): orden de apagar o encender el LED
-
-        Returns:
-            HS2Sensors: objeto con el valor de los principales sensores del S2
-
+        @type encender: bool
+        @param encender: orden de apagar o encender el LED
+        @rtype: L{HS2Sensors}
+        @return: objeto con el valor de los principales sensores del S2
         """
         try:
             self.s2.lock()
@@ -61,14 +59,13 @@ class S2LEDs:
             self.s2.unlock()
 
     def setRightLed( self, encender ):
-        """Enciende o apaga el LED derecho.
+        """
+        Enciende o apaga el LED derecho.
 
-        Args:
-            encender (bool): orden de apagar o encender el LED
-
-        Returns:
-            HS2Sensors: objeto con el valor de los principales sensores del S2
-
+        @type encender: bool
+        @param encender: orden de apagar o encender el LED
+        @rtype: L{HS2Sensors}
+        @return: objeto con el valor de los principales sensores del S2
         """
         try:
             self.s2.lock()
@@ -84,16 +81,17 @@ class S2LEDs:
             self.s2.unlock()
 
     def setAllLed( self, left, center, right ):
-        """Enciende o apaga los LEDs del S2.
+        """
+        Enciende o apaga los LEDs del S2.
 
-        Args:
-            left (bool): orden de apagar o encender el LED izquierdo
-            center (bool): orden de apagar o encender el LED central
-            right (bool): orden de apagar o encender el LED derecho
-
-        Returns:
-            HS2Sensors: objeto con el valor de los principales sensores del S2
-
+        @type left: bool
+        @param left: orden de apagar o encender el LED izquierdo
+        @type center: bool
+        @param center: orden de apagar o encender el LED central
+        @type right: bool
+        @param right: orden de apagar o encender el LED derecho
+        @rtype: L{HS2Sensors}
+        @return: objeto con el valor de los principales sensores del S2
         """
         try:
             self.s2.lock()

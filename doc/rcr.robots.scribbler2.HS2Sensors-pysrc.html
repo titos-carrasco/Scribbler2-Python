@@ -68,36 +68,43 @@
 <a name="HS2Sensors.__init__"></a><div id="HS2Sensors.__init__-def"><a name="L11"></a><tt class="py-lineno">11</tt> <a class="py-toggle" href="#" id="HS2Sensors.__init__-toggle" onclick="return toggle('HS2Sensors.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="rcr.robots.scribbler2.HS2Sensors.HS2Sensors-class.html#__init__">__init__</a><tt class="py-op">(</tt> <tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">irLeft</tt><tt class="py-op">,</tt> <tt class="py-param">irRight</tt><tt class="py-op">,</tt> </tt>
 <a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">                        <tt class="py-param">lightLeft</tt><tt class="py-op">,</tt> <tt class="py-param">lightCenter</tt><tt class="py-op">,</tt> <tt class="py-param">lightRight</tt><tt class="py-op">,</tt> </tt>
 <a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">                        <tt class="py-param">lineLeft</tt><tt class="py-op">,</tt> <tt class="py-param">lineRight</tt><tt class="py-op">,</tt> <tt class="py-param">stall</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="HS2Sensors.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="HS2Sensors.__init__-expanded"><a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">        <tt class="py-docstring">"""Inicializa los elementos de lectura para la aplicacion.</tt> </tt>
-<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring">        Args;</tt> </tt>
-<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">            irLeft (int); valor del sensor IR iquierdo</tt> </tt>
-<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">            irRight (int): valor del sensor IR derecho</tt> </tt>
-<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">            lightLeft (nt): valor del sensor de luz iquierdo</tt> </tt>
-<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-docstring">            lightCenter (int): valor del sensor de luz central</tt> </tt>
-<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring">            lightRight (int): valor del sensor de luz derecho</tt> </tt>
-<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-docstring">            lineLeft (int): valor del sensor de linea izquierdo</tt> </tt>
-<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-docstring">            lineRight (int): valor del sensor de linea derecho</tt> </tt>
-<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-docstring">            stall (int): valor indicador si las ruedas estan atrapadas</tt> </tt>
-<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
-<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">irLeft</tt> <tt class="py-op">=</tt> <tt class="py-name">irLeft</tt> </tt>
-<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">irRight</tt> <tt class="py-op">=</tt> <tt class="py-name">irRight</tt> </tt>
-<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lightLeft</tt> <tt class="py-op">=</tt> <tt class="py-name">lightLeft</tt> </tt>
-<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lightCenter</tt> <tt class="py-op">=</tt> <tt class="py-name">lightCenter</tt> </tt>
-<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lightRight</tt> <tt class="py-op">=</tt> <tt class="py-name">lightRight</tt> </tt>
-<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lineLeft</tt> <tt class="py-op">=</tt> <tt class="py-name">lineLeft</tt> </tt>
-<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lineRight</tt> <tt class="py-op">=</tt> <tt class="py-name">lineRight</tt> </tt>
-<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">stall</tt> <tt class="py-op">=</tt> <tt class="py-name">stall</tt> </tt>
-</div><a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt>
-<a name="HS2Sensors.__str__"></a><div id="HS2Sensors.__str__-def"><a name="L36"></a><tt class="py-lineno">36</tt> <a class="py-toggle" href="#" id="HS2Sensors.__str__-toggle" onclick="return toggle('HS2Sensors.__str__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="rcr.robots.scribbler2.HS2Sensors.HS2Sensors-class.html#__str__">__str__</a><tt class="py-op">(</tt> <tt class="py-param">self</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="HS2Sensors.__str__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="HS2Sensors.__str__-expanded"><a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">        <tt class="py-docstring">"""Representacion modo texto de la clase."""</tt> </tt>
-<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">"IR( %d, %d ), Light( %d, %d, %d ), Line( %d, %d ), Stall( %d )"</tt> <tt class="py-op">%</tt> \ </tt>
-<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">                <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">irLeft</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">irRight</tt><tt class="py-op">,</tt> </tt>
-<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">                 <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lightLeft</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lightCenter</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lightRight</tt><tt class="py-op">,</tt> </tt>
-<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">                 <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lineLeft</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lineRight</tt><tt class="py-op">,</tt> </tt>
-<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">                 <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">stall</tt><tt class="py-op">)</tt> </tt>
-</div></div><a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+</div><div id="HS2Sensors.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="HS2Sensors.__init__-expanded"><a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-docstring">        Inicializa los elementos de lectura para la aplicacion.</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">        @type irLeft: integer</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">        @param irLeft: valor del sensor IR iquierdo</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">        @type irRight: integer</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-docstring">        @param irRight: valor del sensor IR derecho</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring">        @type lightLeft: integer</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-docstring">        @param lightLeft: valor del sensor de luz iquierdo</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-docstring">        @type lightCenter: integer</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-docstring">        @param lightCenter: valor del sensor de luz central</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-docstring">        @type lightRight: integer</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt class="py-docstring">        @param lightRight: valor del sensor de luz derecho</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-docstring">        @type lineLeft: integer</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-docstring">        @param lineLeft: valor del sensor de linea izquierdo</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt class="py-docstring">        @type lineRight: integer</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt class="py-docstring">        @param lineRight: valor del sensor de linea derecho</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt class="py-docstring">        @type stall: integer</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt class="py-docstring">        @param stall: valor indicador si las ruedas estan atrapadas</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">irLeft</tt> <tt class="py-op">=</tt> <tt class="py-name">irLeft</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">irRight</tt> <tt class="py-op">=</tt> <tt class="py-name">irRight</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lightLeft</tt> <tt class="py-op">=</tt> <tt class="py-name">lightLeft</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lightCenter</tt> <tt class="py-op">=</tt> <tt class="py-name">lightCenter</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lightRight</tt> <tt class="py-op">=</tt> <tt class="py-name">lightRight</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lineLeft</tt> <tt class="py-op">=</tt> <tt class="py-name">lineLeft</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lineRight</tt> <tt class="py-op">=</tt> <tt class="py-name">lineRight</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">stall</tt> <tt class="py-op">=</tt> <tt class="py-name">stall</tt> </tt>
+</div><a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"> </tt>
+<a name="HS2Sensors.__str__"></a><div id="HS2Sensors.__str__-def"><a name="L43"></a><tt class="py-lineno">43</tt> <a class="py-toggle" href="#" id="HS2Sensors.__str__-toggle" onclick="return toggle('HS2Sensors.__str__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="rcr.robots.scribbler2.HS2Sensors.HS2Sensors-class.html#__str__">__str__</a><tt class="py-op">(</tt> <tt class="py-param">self</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="HS2Sensors.__str__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="HS2Sensors.__str__-expanded"><a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">        <tt class="py-docstring">"""Representacion modo texto de la clase."""</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">"IR( %d, %d ), Light( %d, %d, %d ), Line( %d, %d ), Stall( %d )"</tt> <tt class="py-op">%</tt> \ </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">                <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">irLeft</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">irRight</tt><tt class="py-op">,</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">                 <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lightLeft</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lightCenter</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lightRight</tt><tt class="py-op">,</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">                 <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lineLeft</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lineRight</tt><tt class="py-op">,</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">                 <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">stall</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -128,7 +135,7 @@ expandto(location.href);
   <tr>
     <td align="left" class="footer">
     Generated by Epydoc 3.0.1
-    on Sun Jan 22 13:36:25 2017
+    on Fri Feb  9 18:34:42 2018
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

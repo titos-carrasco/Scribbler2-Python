@@ -9,12 +9,13 @@ class HS2Infrared:
     """Clase helper con datos de los sensores infrarojos del S2."""
 
     def __init__( self, irLeft, irRight ):
-        """Inicializa los elementos de lectura para la aplicacion.
+        """
+        Inicializa los elementos de lectura para la aplicacion.
 
-        Args:
-            irLeft (int): valor del sensor infrarojo izquierdo
-            irRight (int): valor del sensor infrarojo derecho
-
+        @type irLeft: integer
+        @param irLeft: valor del sensor infrarojo izquierdo
+        @type irRight: integer
+        @param irRight: valor del sensor infrarojo derecho
         """
         self.irLeft = irLeft
         self.irRight = irRight

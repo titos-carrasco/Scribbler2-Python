@@ -83,7 +83,7 @@
         <tr>
           <td><span class="summary-sig"><a href="rcr.robots.scribbler2.F2Camera.F2Camera-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">s2</span>)</span><br />
-      Constructor de la clase.</td>
+      Corresponde al constructor de la clase.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="rcr.robots.scribbler2.F2Camera-pysrc.html#F2Camera.__init__">source&nbsp;code</a></span>
             
@@ -113,7 +113,7 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">bytearray</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -301,14 +301,12 @@
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-Constructor de la clase.
-
-Args:
-    s2 (Scribber2): referencia al S2
-
-</pre>
+  <p>Corresponde al constructor de la clase.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>s2</code></strong> (Scribbler2) - referencia al robot S2</li>
+    </ul></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -327,16 +325,20 @@ Args:
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-Establece tamano de la imagen a capturar desde la F2.
-
-Args:
-    size (int): tamano y formato de la imagen
-        F2Camera.IMAGE_LARGE: 1280x800
-        F2Camera.IMAGE_SMALL: 427x266
-
-</pre>
+  <p>Establece tamano de la imagen a capturar desde la F2.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>size</code></strong> (integer) - tamano y formato de la imagen
+          <ul>
+            <li>
+              F2Camera.IMAGE_LARGE: 1280x800
+            </li>
+            <li>
+              F2Camera.IMAGE_SMALL: 427x266
+            </li>
+          </ul></li>
+    </ul></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -355,21 +357,28 @@ Args:
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-Captura imagen desde la F2 especificando formato.
-
-Args:
-    mode (int): formato de la imagen:
-        F2Camera.IMAGE_GRAYJPEG: tonos de gris
-        F2Camera.IMAGE_GRAYJPEG_FAST: tonos de gris
-        F2Camera.IMAGE_JPEG: color
-        F2Camera.IMAGE_JPEG_FAST: color
-
-Returns:
-    bytearray: la imagen capturada
-
-</pre>
+  <p>Captura imagen desde la F2 especificando formato.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>mode</code></strong> (integer) - formato de la imagen:
+          <ul>
+            <li>
+              F2Camera.IMAGE_GRAYJPEG - tonos de gris
+            </li>
+            <li>
+              F2Camera.IMAGE_GRAYJPEG_FAST - tonos de gris
+            </li>
+            <li>
+              F2Camera.IMAGE_JPEG - color
+            </li>
+            <li>
+              F2Camera.IMAGE_JPEG_FAST - color
+            </li>
+          </ul></li>
+    </ul></dd>
+    <dt>Returns: bytearray</dt>
+        <dd>la imagen capturada</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -389,15 +398,13 @@ Returns:
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-Establece parametros especificos para la camara del F2.
-
-Args:
-    addr (byte): &#191;?
-    value (byte) : &#191;?
-
-</pre>
+  <p>Establece parametros especificos para la camara del F2.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>addr</code></strong> (byte) - &#191;?</li>
+        <li><strong class="pname"><code>value</code></strong> (byte) - &#191;?</li>
+    </ul></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -422,20 +429,18 @@ Args:
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-Establece parametros de la ventana de captura.
-
-Args:
-    window (int): &#191;?
-    xLow (int): &#191;?
-    yLow (int): &#191;?
-    xHigh (int): &#191;?
-    yHigh (int): &#191;?
-    xStep (int): &#191;?
-    yStep (int): &#191;?
-
-</pre>
+  <p>Establece parametros de la ventana de captura.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>window</code></strong> (integer) - &#191;?</li>
+        <li><strong class="pname"><code>xLow</code></strong> (integer) - &#191;?</li>
+        <li><strong class="pname"><code>yLow</code></strong> (integer) - &#191;?</li>
+        <li><strong class="pname"><code>xHigh</code></strong> (integer) - &#191;?</li>
+        <li><strong class="pname"><code>yHigh</code></strong> (integer) - &#191;?</li>
+        <li><strong class="pname"><code>xStep</code></strong> (integer) - &#191;?</li>
+        <li><strong class="pname"><code>yStep</code></strong> (integer) - &#191;?</li>
+    </ul></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -464,7 +469,7 @@ Args:
   <tr>
     <td align="left" class="footer">
     Generated by Epydoc 3.0.1
-    on Sun Jan 22 13:36:25 2017
+    on Fri Feb  9 18:34:42 2018
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

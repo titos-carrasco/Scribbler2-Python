@@ -9,12 +9,13 @@ class HS2MotorStats:
     """Clase helper con estado de los motores del S2."""
 
     def __init__( self, stat, moveReady ):
-        """Inicializ alos elementos de lectura para la aplicacion.
+        """
+        Inicializa los elementos de lectura para la aplicacion.
 
-        Args:
-            stat (int): estado de los motores (bitwise)
-            moveReady (int): indica si los motores estan listos
-
+        @type stat: integer
+        @param stat: estado de los motores (bitwise)
+        @type moveReady: integer
+        @param moveReady: indica si los motores estan listos
         """
         self.stat = stat
         self.moveReady = moveReady

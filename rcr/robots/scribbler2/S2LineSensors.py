@@ -8,20 +8,20 @@ class S2LineSensors:
     """Clase de acceso a los sensores de linea del S2."""
 
     def __init__( self, s2 ):
-        """Constructor de la clase.
+        """
+        Corresponde al constructor de la clase.
 
-        Args:
-            s2 (Scribber2): referencia al S2
-
+        @type s2: L{Scribbler2}
+        @param s2: referencia al S2 que lo contiene
         """
         self.s2 = s2
 
     def getLeftLine( self ):
-        """Obtiene el valor del sensor de linea izquierdo.
+        """
+        Obtiene el valor del sensor de linea izquierdo.
 
-        Returns:
-            int: valor del sensor de linea izquierdo
-
+        @rtype: integer
+        @return: valor del sensor de linea izquierdo
         """
         try:
             self.s2.lock()
@@ -34,11 +34,11 @@ class S2LineSensors:
             self.s2.unlock()
 
     def getRightLine( self ):
-        """Obtiene el valor del sensor de linea derecho.
+        """
+        Obtiene el valor del sensor de linea derecho.
 
-        Returns:
-            int: valor del sensor de linea derecho
-
+         @rtype: integer
+         @return: valor del sensor de linea derecho
         """
         try:
             self.s2.lock()
@@ -51,11 +51,11 @@ class S2LineSensors:
             self.s2.unlock()
 
     def getAllLines( self ):
-        """Obtiene el valor de los sensores de linea del S2.
+        """
+        Obtiene el valor de los sensores de linea del S2.
 
-        Returns:
-            HS2LineSensor: el valor de los sensores de linea del S2
-
+        @rtype: L{HS2LineSensors}
+        @return: el valor de los sensores de linea del S2
         """
         try:
             self.s2.lock()
@@ -68,15 +68,15 @@ class S2LineSensors:
             self.s2.unlock()
 
     def getLineEx( self, side, thres):
-        """Obtiene el valor extendido de un sensor de linea.
+        """
+        Obtiene el valor extendido de un sensor de linea.
 
-        Args:
-            side (int): el sensor de linea (0 o 1)
-            thres (byte): umbral para la lectura del valor del sensor
-
-        Returns:
-            int: valor extendido del sensor de linea
-
+        @type side: integer
+        @param side: el sensor de linea (0 o 1)
+        @type thres: byte
+        @param thres: umbral para la lectura del valor del sensor
+        @rtype: integer
+        @return: valor extendido del sensor de linea
         """
         try:
             self.s2.lock()

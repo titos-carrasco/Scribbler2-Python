@@ -9,12 +9,13 @@ class HS2State:
     """Clase helper para el S2 con estado interno."""
 
     def __init__( self, inPins, outPins ):
-        """Inicializa los elementos de lectura para la aplicacion.
+        """
+        Inicializa los elementos de lectura para la aplicacion.
 
-        Args:
-            inPins (int): valor de pines de entrada (bitwise)
-            outPins (int): valor de pines de salida (bitwise)
-
+        @type inPins: integer
+        @param inPins: valor de pines de entrada (bitwise)
+        @type outPins: integer
+        @param outPins: valor de pines de salida (bitwise)
         """
         self.inPins = inPins
         self.outPins = outPins

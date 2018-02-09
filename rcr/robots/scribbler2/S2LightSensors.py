@@ -8,20 +8,20 @@ class S2LightSensors:
     """Clase de acceso a los sensores de luz del S2."""
 
     def __init__( self, s2 ):
-        """Constructor de la clase.
+        """
+        Corresponde al constructor de la clase.
 
-        Args:
-            s2 (Scribber2): referencia al S2
-
+        @type s2: L{Scribbler2}
+        @param s2: referencia al S2 que lo contiene
         """
         self.s2 = s2
 
     def getLeftLight( self ):
-        """Obtiene el valor del sensor de luz izquierdo.
+        """
+        Obtiene el valor del sensor de luz izquierdo.
 
-        Returns:
-            int: valor del sensor de luz izquierdo
-
+        @rtype: integer
+        @return: valor del sensor de luz izquierdo
         """
         try:
             self.s2.lock()
@@ -34,11 +34,11 @@ class S2LightSensors:
             self.s2.unlock()
 
     def getCenterLight( self ):
-        """Obtiene el valor del sensor de luz central.
+        """
+        Obtiene el valor del sensor de luz central.
 
-        Returns:
-            int: valor del sensor de luz central
-
+        @rtype: integer
+        @return: valor del sensor de luz central
         """
         try:
             self.s2.lock()
@@ -51,11 +51,11 @@ class S2LightSensors:
             self.s2.unlock()
 
     def getRightLed( self ):
-        """Obtiene el valor del sensor de luz derecho.
+        """
+        Obtiene el valor del sensor de luz derecho.
 
-        Returns:
-            int: valor del sensor de luz derecho
-
+        @rtype: integer
+        @return: valor del sensor de luz derecho
         """
         try:
             self.s2.lock()
@@ -68,11 +68,11 @@ class S2LightSensors:
             self.s2.unlock()
 
     def getAllLights( self ):
-        """Obtiene el valor de los sensores de luz.
+        """
+        Obtiene el valor de los sensores de luz.
 
-        Returns:
-            HS2Lights: valor de los sensores de luz del S2
-
+        @rtype: L{HS2Lights}
+        @return: valor de los sensores de luz del S2
         """
         try:
             self.s2.lock()

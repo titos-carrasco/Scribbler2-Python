@@ -83,7 +83,7 @@
         <tr>
           <td><span class="summary-sig"><a href="rcr.robots.scribbler2.S2Motors.S2Motors-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">s2</span>)</span><br />
-      Constructor de la clase.</td>
+      Corresponde al constructor de la clase.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="rcr.robots.scribbler2.S2Motors-pysrc.html#S2Motors.__init__">source&nbsp;code</a></span>
             
@@ -95,7 +95,9 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type"><a 
+      href="rcr.robots.scribbler2.HS2MotorStats.HS2MotorStats-class.html" 
+      class="link">HS2MotorStats</a></span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -112,7 +114,8 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type"><a href="rcr.robots.scribbler2.HS2Encoders.HS2Encoders-class.html" 
+      class="link">HS2Encoders</a></span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -130,7 +133,7 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">integer</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -147,7 +150,8 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type"><a href="rcr.robots.scribbler2.HS2Sensors-module.html" 
+      class="link">HS2Sensors</a></span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -164,7 +168,8 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type"><a href="rcr.robots.scribbler2.HS2Sensors-module.html" 
+      class="link">HS2Sensors</a></span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -216,14 +221,13 @@
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-Constructor de la clase.
-
-Args:
-    s2 (Scribber2): referencia al S2
-
-</pre>
+  <p>Corresponde al constructor de la clase.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>s2</code></strong> (<a href="rcr.robots.scribbler2.Scribbler2-module.html" 
+          class="link">Scribbler2</a>) - referencia al S2 que lo contiene</li>
+    </ul></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -241,14 +245,12 @@ Args:
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-Obtiene el estado de los motores del S2.
-
-Returns:
-    HS2MotorStats: estado de los motores del S2
-
-</pre>
+  <p>Obtiene el estado de los motores del S2.</p>
   <dl class="fields">
+    <dt>Returns: <a 
+      href="rcr.robots.scribbler2.HS2MotorStats.HS2MotorStats-class.html" 
+      class="link">HS2MotorStats</a></dt>
+        <dd>estado de los motores del S2</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -267,17 +269,15 @@ Returns:
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-Obtiene estado de los encoders del S2.
-
-Args:
-    preserve (byte): conserva (1) o borra (0) el valor de los encoder al leer
-
-Returns:
-    HS2Encoders: estado de los encoders
-
-</pre>
+  <p>Obtiene estado de los encoders del S2.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>preserve</code></strong> (byte) - conserva (1) o borra (0) el valor de los encoder al leer</li>
+    </ul></dd>
+    <dt>Returns: <a href="rcr.robots.scribbler2.HS2Encoders.HS2Encoders-class.html" 
+      class="link">HS2Encoders</a></dt>
+        <dd>estado de los encoders</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -295,14 +295,10 @@ Returns:
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-Obtiene estado de las ruedas (atrapadas).
-
-Returns:
-    int: indicador si las ruedas estan atrapadas
-
-</pre>
+  <p>Obtiene estado de las ruedas (atrapadas).</p>
   <dl class="fields">
+    <dt>Returns: integer</dt>
+        <dd>indicador si las ruedas estan atrapadas</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -320,14 +316,11 @@ Returns:
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-Apaga los motores del S2.
-
-Returns:
-    HS2Sensors: objeto con el valor de los principales sensores del S2
-
-</pre>
+  <p>Apaga los motores del S2.</p>
   <dl class="fields">
+    <dt>Returns: <a href="rcr.robots.scribbler2.HS2Sensors-module.html" 
+      class="link">HS2Sensors</a></dt>
+        <dd>objeto con el valor de los principales sensores del S2</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -347,18 +340,16 @@ Returns:
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-Enciende los motores del S2.
-
-Args:
-    left (int): porcentaje de potencia al motor izquierdo (-100 a 100)
-    right (int): porcentaje de potencia al motor derecho (-100 a 100)
-
-Returns:
-    HS2Sensors: objeto con el valor de los principales sensores del S2
-
-</pre>
+  <p>Enciende los motores del S2.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>left</code></strong> (integer) - porcentaje de potencia al motor izquierdo (-100 a 100)</li>
+        <li><strong class="pname"><code>right</code></strong> (integer) - porcentaje de potencia al motor derecho (-100 a 100)</li>
+    </ul></dd>
+    <dt>Returns: <a href="rcr.robots.scribbler2.HS2Sensors-module.html" 
+      class="link">HS2Sensors</a></dt>
+        <dd>objeto con el valor de los principales sensores del S2</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -387,7 +378,7 @@ Returns:
   <tr>
     <td align="left" class="footer">
     Generated by Epydoc 3.0.1
-    on Sun Jan 22 13:36:25 2017
+    on Fri Feb  9 18:34:42 2018
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

@@ -8,20 +8,20 @@ class S2Inner:
     """Clase de acceso al estado interno del S2."""
 
     def __init__( self, s2 ):
-        """Constructor de la clase.
+        """
+        Corresponde al constructor de la clase.
 
-        Args:
-            s2 (Scribber2): referencia al S2
-
+        @type s2: L{Scribbler2}
+        @param s2: referencia al S2 que lo contiene
         """
         self.s2 = s2
 
     def getInfo( self ):
-        """Obtiene datos informativos del S2.
+        """
+        Obtiene datos informativos del S2.
 
-        Returns:
-            str: datos informativos del S2
-
+        @rtype: string
+        @return: datos informativos del S2
         """
         try:
             self.s2.lock()
@@ -34,11 +34,11 @@ class S2Inner:
             self.s2.unlock()
 
     def getAllSensors( self ):
-        """Obtiene el estado de los principales sensores del S2.
+        """
+        Obtiene el estado de los principales sensores del S2.
 
-        Returns:
-            HS2Sensors: objeto con el valor de los principales sensores del S2
-
+        @rtype: L{HS2Sensors}
+        @return: objeto con el valor de los principales sensores del S2
         """
         try:
             self.s2.lock()
@@ -51,10 +51,11 @@ class S2Inner:
             self.s2.unlock()
 
     def getPass( self ):
-        """Obtiene la clave actualmente almacenada en el S2.
+        """
+        Obtiene la clave actualmente almacenada en el S2.
 
-        Returns:
-            str: la clave actual almacenada
+        @rtype: string
+        @return: la clave actual almacenada
         """
         try:
             self.s2.lock()
@@ -71,11 +72,11 @@ class S2Inner:
             self.s2.unlock()
 
     def getName( self ):
-        """Obtiene el nombre del S2.
+        """
+        Obtiene el nombre del S2.
 
-        Returns:
-            str: el nombre del S2
-
+        @rtype: string
+        @return: el nombre del S2
         """
         try:
             self.s2.lock()
@@ -92,11 +93,11 @@ class S2Inner:
             self.s2.unlock()
 
     def getState( self ):
-        """Obtiene estado del S2.
+        """
+        Obtiene estado del S2.
 
-        Returns:
-            HS2State: estado del S2
-
+        @rtype: L{HS2State}
+        @return: estado del S2
         """
         try:
             self.s2.lock()
@@ -109,11 +110,11 @@ class S2Inner:
             self.s2.unlock()
 
     def getData( self ):
-        """Obtiene data almacenada en el S2.
+        """
+        Obtiene data almacenada en el S2.
 
-        Returns:
-            bytearray[8]: data almacenada en el S2
-
+        @rtype: bytearray[8]
+        @return: data almacenada en el S2
         """
         try:
             self.s2.lock()
@@ -126,14 +127,13 @@ class S2Inner:
             self.s2.unlock()
 
     def setPass( self, passw ):
-        """Establece la clave a almacenar en el S2.
+        """
+        Establece la clave a almacenar en el S2.
 
-        Args:
-            passwd (str[8]): clave a almacenar
-
-        Returns:
-            HS2Sensors: objeto con el valor de los principales sensores del S2
-
+        @type passw: string[8]
+        @param passw: clave a almacenar
+        @rtype: L{HS2Sensors}
+        @return: objeto con el valor de los principales sensores del S2
         """
         try:
             self.s2.lock()
@@ -166,15 +166,15 @@ class S2Inner:
             self.s2.unlock()
 
     def setSingleData( self, pos, data):
-        """Almacena un dato en la zona de almacenamiento inerno del S2.
+        """
+        Almacena un dato en la zona de almacenamiento inerno del S2.
 
-        Args:
-            pos (byte): posicion en donde almacenar (0 a 7)
-            data (byte): dato a almacenar (0 a 255)
-
-        Returns:
-            HS2Sensors: objeto con el valor de los principales sensores del S2
-
+        @type pos: byte
+        @param pos: posicion en donde almacenar (0 a 7)
+        @type data: byte
+        @param data: dato a almacenar (0 a 255)
+        @rtype: L{HS2Sensors}
+        @return: objeto con el valor de los principales sensores del S2
         """
         try:
             self.s2.lock()
@@ -189,14 +189,13 @@ class S2Inner:
             self.s2.unlock()
 
     def setData( self, data):
-        """Almacena un grupo de datos en la ona interna del S2.
+        """
+        Almacena un grupo de datos en la ona interna del S2.
 
-        Args:
-            data (bytearray[8]): los datos a almacenar
-
-        Returns:
-            HS2Sensors: objeto con el valor de los principales sensores del S2
-
+        @type data: btearray[8]
+        @param data: los datos a almacenar
+        @rtype: L{HS2Sensors}
+        @return: objeto con el valor de los principales sensores del S2
         """
         try:
             self.s2.lock()
@@ -213,14 +212,13 @@ class S2Inner:
             self.s2.unlock()
 
     def setName( self,  name ):
-        """Establece el nombre del S2.
+        """
+        Establece el nombre del S2.
 
-        Args:
-            name (str): nombre a asignar (16 caracteres) al S2
-
-        Returns:
-            HS2Sensors: objeto con el valor de los principales sensores del S2
-
+        @type name: sytring
+        @param name: nombre a asignar (16 caracteres) al S2
+        @rtype: L{HS2Sensors}
+        @return: objeto con el valor de los principales sensores del S2
         """
         try:
             self.s2.lock()

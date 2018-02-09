@@ -15,24 +15,24 @@ class F2Camera:
     IMAGE_JPEG_FAST = 4
 
     def __init__( self, s2 ):
-        """Constructor de la clase.
+        """
+        Corresponde al constructor de la clase.
 
-        Args:
-            s2 (Scribber2): referencia al S2
-
+        @type s2: Scribbler2
+        @param s2: referencia al robot S2
         """
         self.image_width  = 0
         self.image_height = 0
         self.s2 = s2
 
     def setPicSize( self, size ):
-        """Establece tamano de la imagen a capturar desde la F2.
+        """
+        Establece tamano de la imagen a capturar desde la F2.
 
-        Args:
-            size (int): tamano y formato de la imagen
-                F2Camera.IMAGE_LARGE: 1280x800
-                F2Camera.IMAGE_SMALL: 427x266
-
+        @type size: integer
+        @param size: tamano y formato de la imagen
+            - F2Camera.IMAGE_LARGE: 1280x800
+            - F2Camera.IMAGE_SMALL: 427x266
         """
         try:
             self.s2.lock()
@@ -56,18 +56,17 @@ class F2Camera:
             self.s2.unlock()
 
     def getImage( self, mode ):
-        """Captura imagen desde la F2 especificando formato.
+        """
+        Captura imagen desde la F2 especificando formato.
 
-        Args:
-            mode (int): formato de la imagen:
-                F2Camera.IMAGE_GRAYJPEG: tonos de gris
-                F2Camera.IMAGE_GRAYJPEG_FAST: tonos de gris
-                F2Camera.IMAGE_JPEG: color
-                F2Camera.IMAGE_JPEG_FAST: color
-
-        Returns:
-            bytearray: la imagen capturada
-
+        @type mode: integer
+        @param mode: formato de la imagen:
+                - F2Camera.IMAGE_GRAYJPEG - tonos de gris
+                - F2Camera.IMAGE_GRAYJPEG_FAST - tonos de gris
+                - F2Camera.IMAGE_JPEG - color
+                - F2Camera.IMAGE_JPEG_FAST - color
+        @rtype: bytearray
+        @return: la imagen capturada
         """
         try:
             self.s2.lock()
@@ -140,12 +139,13 @@ class F2Camera:
             self.s2.unlock()
 
     def setCameraParam( self, addr, value ):
-        """Establece parametros especificos para la camara del F2.
+        """
+        Establece parametros especificos para la camara del F2.
 
-        Args:
-            addr (byte): ¿?
-            value (byte) : ¿?
-
+        @type addr: byte
+        @param addr: ¿?
+        @type value: byte
+        @param value: ¿?
         """
         try:
             self.s2.lock()
@@ -160,17 +160,23 @@ class F2Camera:
             self.s2.unlock()
 
     def setWindow( self, window, xLow, yLow, xHigh, yHigh, xStep, yStep ):
-        """Establece parametros de la ventana de captura.
+        """
+        Establece parametros de la ventana de captura.
 
-        Args:
-            window (int): ¿?
-            xLow (int): ¿?
-            yLow (int): ¿?
-            xHigh (int): ¿?
-            yHigh (int): ¿?
-            xStep (int): ¿?
-            yStep (int): ¿?
-
+        @type window: integer
+        @param window: ¿?
+        @type xLow: integer
+        @param xLow: ¿?
+        @type yLow: integer
+        @param yLow: ¿?
+        @type xHigh: integer
+        @param xHigh: ¿?
+        @type yHigh: integer
+        @param yHigh: ¿?
+        @type xStep: integer
+        @param xStep: ¿?
+        @type yStep: integer
+        @param yStep: ¿?
         """
         try:
             self.s2.lock()

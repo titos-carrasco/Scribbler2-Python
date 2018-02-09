@@ -1,70 +1,57 @@
 Scribbler2-Python
 =================
 
-Código Python para controlar a través de bluetooth el robot Scribbler2 (S2)
-con la tarjeta Fluke2 (F2), ver detalles en www.betterbots.com / www.parallax.com.
+Librería Python para controlar a través de bluetooth el robot Scribbler2 (S2 - www.parallax.com) y la tarjeta Fluke2 (F2 - www.betterbots.com).
 
 * Implementa todas las funciones del S2 (Firmware IPRE)
 * Implementa la mayoría de las funciones de la tarjeta F2
 
-El problema mayor lo genera la Fluke2 dado que al interactuar con el Scribbler2 maneja un timeout
-de 3000ms. Si el Scribbler2 tarda más de ese tiempo algunos comandos quedarán
-fuera de sincronismo.
+Importante:
+* la tarjeta Fluke2 centraliza la recepción de todos los comando y maneja un timeout de 3000ms lo que puede generar problemas de sincronimos en operaciones que tarden más de ese tiempo.
+* En Linux si `/usr/sbin/ModemManager`está en ejecución bloqueará el acceso al robot por lo cual es necesario detener el proceso (`sudo systemctl stop ModemManager`)
 
 ## Instalación
-Requiere Python2.7 o Python3.x. Utilizar `pip`, en Windows `C:\Python27\Scripts\pip.exe`, para instalar los módulos requeridos:
-* `serial`
+La librería está para ser utilizada desde Python2.7 o Python3.x y requiere tener instalado el módulo `serial`
 
-Copiar el directorio `rcr/` a uno de los siguientes lugares:
-* Linux, directorio de usuario: `~/.local/lib/python2.7/site-packages/`
-* Linux, acceso global: `/usr/local/lib/python2.7/site-packages/`
-* Windows: `C:\Python27\Lib\site-packages`
+Su instalación se realiza en dos pasos
+1. Clonar o descargar el ZIP desde [GitHub](https://github.com/titos-carrasco/Scribbler2-Python)
+2. Desde el directorio raíz del software ejecutar `pip install .`
 
-En Linux si `/usr/sbin/ModemManager`está en ejecución bloqueará el acceso al robot (hacer un kill al proceso)
 
-## Demos
-* TestS2Speaker.py: generación de sonido
-* TestS2Path.py: movimiento en el plano cartesiano (tener presente el timeout)
-* TestS2Motors.py: prueba de los motores
-* TestS2Microphone.py: prueba del micrófono
-* TestS2LineSensors.py: prueba de los sensores de línea
-* TestS2LightSensors.py: prueba de los sensores de luz
-* TestS2LEDs.py: prueba de los LEDs
-* TestS2IRSensors.py:prueba de los sensores infrarojos
-* TestS2Inner.py: prueba de los elementos internos
-* TestF2Servos.py: prueba de los motores servo (Fluke)
-* TestF2LEDs.py: prueba de los LEDs (Fluke)
-* TestF2IRSensors.py: prueba de los sensores infrarojos (Fluke)
-* TestF2Inner.py: prueba de los elementos internos (Fluke)
-* TestF2Camera.py: prueba de la camara (Fluke). Requiere que se instale `numpy` y `cv2`
-* TestS2MidiController.py: prueba para comandar el robot utilizando un controlador MIDI. Requiere `mido`
-* TestS2Joystick.py: prueba para comandar el robot via joystick e interfaz gráfica
-* TestS2MQTT.py: permite controlar el robot a través de un broker MQTT. Por de:
+## Demos/
+* F2Inner.py: prueba de los elementos internos de la Fluke2
+* F2IRSensors.py: prueba de los sensores infrarojos de la Fluke2
+* F2LEDs.py: prueba de los LEDs de la Fluke2
+* F2Servos.py: prueba de los motores servo de la Fluke2
+* S2Inner.py: prueba de los elementos internos del Scribbler2
+* S2IRSensors.py:prueba de los sensores infrarojos del Scribbler2
+* S2LEDs.py: prueba de los LEDs del Scribbler2
+* S2LightSensors.py: prueba de los sensores de luz del Scribbler2
+* S2LineSensors.py: prueba de los sensores de línea del Scribbler2
+* S2Microphone.py: prueba del micrófono del Scribbler2
+* S2Motors.py: prueba de los motores del Scribbler2
+* S2Path.py: movimiento en el plano cartesiano (tener presente el timeout) del Scribbler2
+* S2Speaker.py: generación de sonido en el Scribbler2
+* XTRA_F2Camera.py: prueba de la camara de la Fluke2. Requiere que se instale `numpy` y `opencv`
+* XTRA_S2Joystick.py: prueba para comandar el robot via joystick e interfaz gráfica
+* XTRA_S2MidiController.py: prueba para comandar el robot utilizando un controlador MIDI. Requiere `pyrtmidi`
+* XTRA_S2MQTT.py: prueba para controlar el robot a través de un broker MQTT:
   * `mosquitto_pub -h test.mosquitto.org -t rcr/S2 -m "left 5"`
   * Se puede utilizar la app [VoiceAndMQTT](https://github.com/titos-carrasco/VoiceAndMQTT) para enviar órdenes verbales
+* XTRA_S2SnapExtension.py: Extensión para controlar el Scribbler 2 desde SNAP:
+  * Ejecutar este archivo, lo que habilitará un servidor en la puerta 1963
+  * Acceder desde un navegador a la dirección http://localhost:1963/ y hacer un clic en la opción `Download Snap! blocks` lo que descargará el archivo`snap_S2Robot.xml` que correponde a la definición requerida por SNAP
+  * Acceder a [SNAP](http://snap.berkeley.edu/snapsource/snap.html) utilizando  HTTP (la extensión no soporta HTTPS)
+  * Seleccionar la opción `import` del primer icono en la parte superior izquierda y seleccional el archivo XML anterior
 
-## Ambiente de desarrollo
+![](snap.png)
+
+## Desarrollo
 Todo el desarrollo se realiza utilizando Geany en Linux Debian, configurando un proyecto y asociando comandos en Set Build Commands:
 
 * Para compilar en Python: python -m py_compile "%f"
 * Para ejecutar Python: python "%f"
 
-## Importante:
-* Revisar el estilo del codigo con `$ pydocstyle`
-* Generar la documentación con `$ epydoc -v --html  -o doc/ *.py rcr/`
+El código es revisado con `pydocstyle` y la documentación generada con`$ epydoc -v --html  -o doc/ *.py rcr/`
 
-## Historia
-* Ene 22, 2017: agrega parámetro de velocidad en constructor Scribbler2()
-* Ago 14, 2016: Procesa documentación con pydocstyle y epydoc. Agrega demo con controlador MIDI
-* Jun 09, 2016: Compatibliza código con Python 2.7 y 3.5. Agrega documentación en línea
-* Dic 05, 2015: Implementa funciones de control de los servo
-* Abr 22, 2015: Se mueve todo el código Python hacia el proyecto Scribbler2-Python
-* Abr 19, 2015: V2.0.1 con el código en Java y en Python más cercano a OO
-* Abr 15, 2015: Preparando V2.0.0 en branch developer con código Java más cercano a OO. Queda pendiente el código Python y el Cpp
-* Abr 02, 2015: Se depuran las operaciones de PATH. Se reescribe el código python tomando
-como base el código en Java
-* Mar 29, 2015: Implementa versión en Java corrigiendo una serie de
-errores ocasionados por el timeout de 3000ms impuesto por la Fluke2 en
-su ciclo principal. El código es reescrito completamente
-* May 9, 2014: Primer commit
 

@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Test del S2 via MQTT"""
+"""Test del S2 via MQTT.
+
+Requiere de paho (pip install paho-mqtt)
+"""
 
 import paho.mqtt.client as paho
 from rcr.robots.scribbler2.Scribbler2 import Scribbler2
@@ -16,6 +19,7 @@ S2_TOPIC  = 'rcr/S2'
 messages = Queue.Queue( 1 )
 
 def mqtt_on_message( client, userdata, message ):
+    """Invocada al recibir mensaje MQTT en algun topico suscrito."""
     global messages, Queue
 
     # si no se ha procesado el ultimo mensaje lo eliminamos
@@ -31,13 +35,20 @@ def mqtt_on_message( client, userdata, message ):
             pass
 
 def mqtt_on_connect( client, arg1, arg2, arg3 ):
+    """Invcada al conectar a servidor MQTT. Suscribe a topico."""
     global S2_TOPIC, MQTT_SERVER
 
     client.subscribe( S2_TOPIC )
     print( "[S2] Esperando en %s - %s" % ( MQTT_SERVER, S2_TOPIC ) )
+    print( "Comandos: cmd tiempo_en_segundo. Por ejemplo" )
+    print( "  left 5" )
+    print( "  right 5" )
+    print( "  forward 5" )
+    print( "  backwward 5" )
+    print( "---" )
 
 def main():
-    """Realiza pruebas del S2 recibiendo comandos via MQTT"""
+    """Realiza pruebas del S2 recibiendo comandos via MQTT."""
     global mqtt_client, MQTT_SERVER, messages, Queue
 
     mqtt_client = paho.Client()

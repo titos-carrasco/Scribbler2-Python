@@ -9,13 +9,15 @@ class HF2Image:
     """Clase helper con la imagen capturada desde la F2."""
 
     def __init__( self, width, height, image ):
-        """Inicializa los elemenos de lectura para la aplicacion.
+        """
+        Inicializa los elemenos de lectura para la aplicacion.
 
-        Args:
-            width (int): tamano de la imagen
-            heignt (int): alto de la imagen
-            image (bytearray): la imagen capturada
-
+        @type width: integer
+        @param width: tamano de la imagen
+        @type height: integer
+        @param height: alto de la imagen
+        @type image: bytearray
+        @param image: la imagen capturada
         """
         self.width = width
         self.height = height

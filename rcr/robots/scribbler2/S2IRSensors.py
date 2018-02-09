@@ -8,20 +8,20 @@ class S2IRSensors:
     """Clase de acceso a los sensores infrarojos del S2."""
 
     def __init__( self, s2 ):
-        """Constructor de la clase.
+        """
+        Corresponde al constructor de la clase.
 
-        Args:
-            s2 (Scribber2): referencia al S2
-
+        @type s2: L{Scribbler2}
+        @param s2: referencia al S2 que lo contiene
         """
         self.s2 = s2
 
     def getIRLeft( self ):
-        """Obtiene valor del sensor IR izquierdo.
+        """
+        Obtiene valor del sensor IR izquierdo.
 
-        Returns:
-            int: valor del sensor IR izquierdo
-
+        @rtype: integer
+        @return: valor del sensor IR izquierdo
         """
         try:
             self.s2.lock()
@@ -34,11 +34,11 @@ class S2IRSensors:
             self.s2.unlock()
 
     def getIRRight( self ):
-        """Obtiene valor del sensor IR derecho.
+        """
+        Obtiene valor del sensor IR derecho.
 
-        Returns:
-            int: valor del sensor IR derecho
-
+        @rtype: integer
+        @return: valor del sensor IR derecho
         """
         try:
             self.s2.lock()
@@ -51,11 +51,11 @@ class S2IRSensors:
             self.s2.unlock()
 
     def getAllIR( self ):
-        """Obtiene el valor de todos los sensores IR del S2.
+        """
+        Obtiene el valor de todos los sensores IR del S2.
 
-        Returns:
-            HS2Infrared: el valor de los sensores IR del S2
-
+        @rtype: L{HS2Infrared}
+        @return: el valor de los sensores IR del S2
         """
         try:
             self.s2.lock()
@@ -68,15 +68,15 @@ class S2IRSensors:
             self.s2.unlock()
 
     def getIrEx( self, side, thres):
-        """Obtiene el valor extendido de un sensor infrarojo del S2.
+        """
+        Obtiene el valor extendido de un sensor infrarojo del S2.
 
-        Args:
-            side (byte): el sensor a leer (0 o 1)
-            thres (byte): el umbral a utilizar en la lectura
-
-        Returns:
-            int: valor del sensor leido
-
+        @type side: byte
+        @param side: el sensor a leer (0 o 1)
+        @type thres: byte
+        @param thres: el umbral a utilizar en la lectura
+        @rtype: integer
+        @return: valor del sensor leido
         """
         try:
             self.s2.lock()
@@ -92,14 +92,13 @@ class S2IRSensors:
             self.s2.unlock()
 
     def getDistanceEx( self, side ):
-        """Obtiene distacia medida por un sensor.
+        """
+        Obtiene distacia medida por un sensor.
 
-        Args:
-            side (int): sensor a utilizar (0 o 1)
-
-        Returns:
-            int: la distancia medida
-
+        @type side: integer
+        @param side: sensor a utilizar (0 o 1)
+        @rtype: integer
+        @return: la distancia medida
         """
         try:
             self.s2.lock()

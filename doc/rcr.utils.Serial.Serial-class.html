@@ -131,7 +131,7 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">bytearray</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -149,13 +149,14 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">string</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="rcr.utils.Serial.Serial-class.html#readLine" class="summary-sig-name">readLine</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">maxChars</span>)</span><br />
-      Lee una linea ascii finalizada en NL o de tamano especifico desde la puerta serial.</td>
+      Lee una linea de texto finalizada en NL o del tamano especificado 
+      desde la puerta serial.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="rcr.utils.Serial-pysrc.html#Serial.readLine">source&nbsp;code</a></span>
             
@@ -185,7 +186,7 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">integer</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -202,7 +203,7 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">integer</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -219,7 +220,7 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">integer</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -236,7 +237,7 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type">integer</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -258,7 +259,7 @@
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a name="lock"></a><span class="summary-sig-name">lock</span>(<span class="summary-sig-arg">self</span>)</span><br />
-      Obtiene acceso exclusivo.</td>
+      Obtiene acceso exclusivo a una zona.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="rcr.utils.Serial-pysrc.html#Serial.lock">source&nbsp;code</a></span>
             
@@ -275,7 +276,7 @@
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a name="unlock"></a><span class="summary-sig-name">unlock</span>(<span class="summary-sig-arg">self</span>)</span><br />
-      Libera el acceso exclusivo.</td>
+      Libera el acceso exclusivo a una zona.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="rcr.utils.Serial-pysrc.html#Serial.unlock">source&nbsp;code</a></span>
             
@@ -322,19 +323,14 @@
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-Conecta a la puerta serial.
-
-Args:
-    port (str): puerta serial
-    baudrate (int): velocidad
-    bytesize(opcional[int]): numero de bits (8)
-    parity (opcional[char]): paridad ('N')
-    stopbits (opcional[int]): numero de bits de parada (1)
-    timeout(opcional[int]): timeout en milisegundos (0)
-
-</pre>
+  <p>Conecta a la puerta serial.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>port</code></strong> (string) - puerta serial de conexion</li>
+        <li><strong class="pname"><code>bauds</code></strong> (integer) - velocidad de comunicacion</li>
+        <li><strong class="pname"><code>timeout</code></strong> (integer) - timeout en milisegundos</li>
+    </ul></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -353,14 +349,12 @@ Args:
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-Envia bytes por la puerta serial.
-
-Args:
-    dataBytes (bytes, bytearray o compatibles): bytes a enviar
-
-</pre>
+  <p>Envia bytes por la puerta serial.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>dataBytes</code></strong> (byte, bytearray o equivalente) - bytes a enviar por la puerta serial</li>
+    </ul></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -379,20 +373,18 @@ Args:
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-Lee bytes desde la puerta serial.
-
-Args:
-    nbytes (int): numero de bytes a leer
-
-Returns:
-    bytearray: los bytes leidos
-
-Raises:
-    SerialTimeoutException: si no se pudieron leer los bytes solicitados en el tiempo senalado
-
-</pre>
+  <p>Lee bytes desde la puerta serial.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>nbytes</code></strong> (integer) - numero de bytes a leer</li>
+    </ul></dd>
+    <dt>Returns: bytearray</dt>
+        <dd>los bytes leidos</dd>
+    <dt>Raises:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code><strong class='fraise'>SerialTimeoutException</strong></code> - si no se pudieron leer los bytes solicitados en el tiempo senalado</li>
+    </ul></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -411,20 +403,19 @@ Raises:
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-Lee una linea ascii finalizada en NL o de tamano especifico desde la puerta serial.
-
-Args:
-    maxChars (int): maximo de caracteres ascii a leer
-
-Raises:
-    SerialTimeoutException: si no se pudieron leer la linea solicitada en el tiempo senalado
-
-Returns:
-    str: la linea de texto leida sin incluir el NL
-
-</pre>
+  <p>Lee una linea de texto finalizada en NL o del tamano especificado 
+  desde la puerta serial.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>maxChars</code></strong> (integer) - maximo de caracteres ascii a leer</li>
+    </ul></dd>
+    <dt>Returns: string</dt>
+        <dd>la linea de texto leida sin incluir el NL</dd>
+    <dt>Raises:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code><strong class='fraise'>SerialTimeoutException</strong></code> - si no se pudieron leer la linea solicitada en el tiempo senalado</li>
+    </ul></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -443,14 +434,13 @@ Returns:
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-Descarta datos presentes para lectura en la puerta serial.
-
-Args:
-    timex (int): tiempo en milisegundos que se leeran bytes y seran descartados
-
-</pre>
+  <p>Descarta datos presentes para lectura en la puerta serial.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>timex</code></strong> (integer) - tiempo en milisegundos que se leeran bytes los que seran 
+          descartados</li>
+    </ul></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -468,14 +458,10 @@ Args:
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-Lee un entero sin signo de 8 bits.
-
-Returns:
-    int: el entero sin signo de 8 bits
-
-</pre>
+  <p>Lee un entero sin signo de 8 bits.</p>
   <dl class="fields">
+    <dt>Returns: integer</dt>
+        <dd>el entero sin signo de 8 bits</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -493,14 +479,10 @@ Returns:
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-Lee un entero sin signo de 16 bits.
-
-Returns:
-    int: el entero sin signo de 16 bits
-
-</pre>
+  <p>Lee un entero sin signo de 16 bits.</p>
   <dl class="fields">
+    <dt>Returns: integer</dt>
+        <dd>el entero sin signo de 16 bits</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -518,14 +500,10 @@ Returns:
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-Lee un entero sin signo de 32 bits.
-
-Returns:
-    int: el entero sin signo de 32 bits
-
-</pre>
+  <p>Lee un entero sin signo de 32 bits.</p>
   <dl class="fields">
+    <dt>Returns: integer</dt>
+        <dd>el entero sin signo de 32 bits</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -543,14 +521,10 @@ Returns:
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-Lee un entero con signo de 32 bits.
-
-Returns:
-    int: el entero con signo de 32 bits
-
-</pre>
+  <p>Lee un entero con signo de 32 bits.</p>
   <dl class="fields">
+    <dt>Returns: integer</dt>
+        <dd>el entero con signo de 32 bits</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -579,7 +553,7 @@ Returns:
   <tr>
     <td align="left" class="footer">
     Generated by Epydoc 3.0.1
-    on Sun Jan 22 13:36:25 2017
+    on Fri Feb  9 18:34:42 2018
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

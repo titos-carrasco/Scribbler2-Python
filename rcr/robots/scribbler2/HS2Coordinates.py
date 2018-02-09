@@ -9,11 +9,13 @@ class HS2Coordinates:
     """Clase helper con datos de coordenadas del S2."""
 
     def __init__( self, x, y ):
-        """Inicializa los elementos de lectura para la aplicacion.
+        """
+        Inicializa los elementos de lectura para la aplicacion.
 
-        Args:
-            x (int): coordenada x
-            y (int): coordenada y
+        @type x: integer
+        @param x: coordenada x
+        @type y: integer
+        @param y: coordenada y
         """
         self.x = x
         self.y = y

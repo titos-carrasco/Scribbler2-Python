@@ -6,20 +6,20 @@ class F2IRSensors:
     """Clase de acceso a los sensores infrarojos de la F2."""
 
     def __init__( self, s2 ):
-        """Constructor de la clase.
+        """
+        Corresponde al constructor de la clase.
 
-        Args:
-            s2 (Scribber2): referencia al S2
-
+        @type s2: L{Scribbler2}
+        @param s2: referencia al S2 que lo contiene
         """
         self.s2 = s2
 
     def setIRPower( self,  pwm ):
-        """Establece energia para el sensor IR.
+        """
+        Establece energia para el sensor IR.
 
-        Args:
-            pwm (byte): energia para el sensor IR de la F2
-
+        @type pwm: byte
+        @param pwm: energia para el sensor IR de la F2
         """
         try:
             self.s2.lock()
@@ -33,11 +33,11 @@ class F2IRSensors:
             self.s2.unlock()
 
     def getIR( self ):
-        """Obtiene valor del sensor IR de la F2.
+        """
+        Obtiene valor del sensor IR de la F2.
 
-        Returns:
-            int: valor del sensor IR de la F2
-
+        @rtype: integer
+        @return: valor del sensor IR de la F2
         """
         try:
             self.s2.lock()

@@ -11,16 +11,15 @@ class Serial:
     """Clase para interactuar con puerta serial."""
 
     def __init__( self, port, bauds, timeout ):
-        """Conecta a la puerta serial.
+        """
+        Conecta a la puerta serial.
 
-        Args:
-            port (str): puerta serial
-            baudrate (int): velocidad
-            bytesize(opcional[int]): numero de bits (8)
-            parity (opcional[char]): paridad ('N')
-            stopbits (opcional[int]): numero de bits de parada (1)
-            timeout(opcional[int]): timeout en milisegundos (0)
-
+        @type port: string
+        @param port: puerta serial de conexion
+        @type bauds: integer
+        @param bauds: velocidad de comunicacion
+        @type timeout: integer
+        @param timeout: timeout en milisegundos
         """
         self.maxTries = timeout
         self.mylock = threading.Lock()
@@ -45,11 +44,11 @@ class Serial:
             self.unlock()
 
     def write( self, dataBytes ):
-        """Envia bytes por la puerta serial.
+        """
+        Envia bytes por la puerta serial.
 
-        Args:
-            dataBytes (bytes, bytearray o compatibles): bytes a enviar
-
+        @type dataBytes: byte, bytearray o equivalente
+        @param dataBytes: bytes a enviar por la puerta serial
         """
         try:
             self.lock()
@@ -61,17 +60,14 @@ class Serial:
             self.unlock()
 
     def read( self, nbytes ):
-        """Lee bytes desde la puerta serial.
+        """
+        Lee bytes desde la puerta serial.
 
-        Args:
-            nbytes (int): numero de bytes a leer
-
-        Returns:
-            bytearray: los bytes leidos
-
-        Raises:
-            SerialTimeoutException: si no se pudieron leer los bytes solicitados en el tiempo senalado
-
+        @type nbytes: integer
+        @param nbytes: numero de bytes a leer
+        @rtype: bytearray
+        @return: los bytes leidos
+        @raise SerialTimeoutException: si no se pudieron leer los bytes solicitados en el tiempo senalado
         """
         try:
             self.lock()
@@ -99,17 +95,14 @@ class Serial:
             self.unlock()
 
     def readLine( self, maxChars ):
-        """Lee una linea ascii finalizada en NL o de tamano especifico desde la puerta serial.
+        """
+        Lee una linea de texto finalizada en NL o del tamano especificado desde la puerta serial.
 
-        Args:
-            maxChars (int): maximo de caracteres ascii a leer
-
-        Raises:
-            SerialTimeoutException: si no se pudieron leer la linea solicitada en el tiempo senalado
-
-        Returns:
-            str: la linea de texto leida sin incluir el NL
-
+        @type maxChars: integer
+        @param maxChars: maximo de caracteres ascii a leer
+        @rtype: string
+        @return: la linea de texto leida sin incluir el NL
+        @raise SerialTimeoutException: si no se pudieron leer la linea solicitada en el tiempo senalado
         """
         try:
             self.lock()
@@ -138,11 +131,11 @@ class Serial:
             self.unlock()
 
     def flushRead( self, timex ):
-        """Descarta datos presentes para lectura en la puerta serial.
+        """
+        Descarta datos presentes para lectura en la puerta serial.
 
-        Args:
-            timex (int): tiempo en milisegundos que se leeran bytes y seran descartados
-
+        @type timex: integer
+        @param timex: tiempo en milisegundos que se leeran bytes los que seran descartados
         """
         try:
             self.lock()
@@ -161,21 +154,21 @@ class Serial:
             self.unlock()
 
     def readUInt8( self ):
-        """Lee un entero sin signo de 8 bits.
+        """
+        Lee un entero sin signo de 8 bits.
 
-        Returns:
-            int: el entero sin signo de 8 bits
-
+        @rtype: integer
+        @return: el entero sin signo de 8 bits
         """
         b = self.read(1)
         return b[0] & 0xFF
 
     def readUInt16( self ):
-        """Lee un entero sin signo de 16 bits.
+        """
+        Lee un entero sin signo de 16 bits.
 
-        Returns:
-            int: el entero sin signo de 16 bits
-
+        @rtype: integer
+        @return: el entero sin signo de 16 bits
         """
         b = self.read(2)
         n = b[0] & 0x000000FF
@@ -183,11 +176,11 @@ class Serial:
         return n
 
     def readUInt32( self ):
-        """Lee un entero sin signo de 32 bits.
+        """
+        Lee un entero sin signo de 32 bits.
 
-        Returns:
-            int: el entero sin signo de 32 bits
-
+        @rtype: integer
+        @return: el entero sin signo de 32 bits
         """
         b = self.read(4)
         n = b[0] & 0x000000FF
@@ -200,11 +193,11 @@ class Serial:
             return n
 
     def readInt32(self):
-        """Lee un entero con signo de 32 bits.
+        """
+        Lee un entero con signo de 32 bits.
 
-        Returns:
-            int: el entero con signo de 32 bits
-
+        @rtype: integer
+        @return: el entero con signo de 32 bits
         """
         n = self.readUInt32()
         return int( n )
@@ -212,9 +205,9 @@ class Serial:
     #### Privadas
 
     def lock( self ):
-        """Obtiene acceso exclusivo."""
+        """Obtiene acceso exclusivo a una zona."""
         self.mylock.acquire()
 
     def unlock( self ):
-        """Libera el acceso exclusivo."""
+        """Libera el acceso exclusivo a una zona."""
         self.mylock.release()

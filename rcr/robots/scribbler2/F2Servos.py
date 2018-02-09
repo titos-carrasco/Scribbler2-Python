@@ -8,21 +8,22 @@ class F2Servos:
     """Clase de acceso a los motores servos de la F2."""
 
     def __init__( self, s2 ):
-        """Constructor de la clase.
+        """
+        Corresponde al constructor de la clase.
 
-        Args:
-            s2 (Scribber2): referencia al S2
-
+        @type s2: L{Scribbler2}
+        @param s2: referencia al S2 que lo contiene
         """
         self.s2 = s2
 
     def setServo( self, id, value ):
-        """Establece valor al servo conectado a la F2.
+        """
+        Establece valor al servo conectado a la F2.
 
-        Args:
-            id (byte): servo a utilizar (0 a 3)
-            value (byte): valor a enviar
-
+        @type id: byte
+        @param id: servo a utilizar (0 a 3)
+        @type value: byte
+        @param value: valor a enviar
         """
         try:
             self.s2.lock()

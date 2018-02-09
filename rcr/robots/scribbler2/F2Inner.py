@@ -11,19 +11,20 @@ class F2Inner:
     SCRIBBLER_FORWARD = 2
 
     def __init__( self, s2 ):
-        """Constructor de la clase.
+        """
+        Corresponde al constructor de la clase.
 
-        Args:
-            s2 (Scribber2): referencia al S2
-
+        @type s2: L{Scribbler2}
+        @param s2: referencia al S2 que lo contiene
         """
         self.s2 = s2
 
     def getVersion( self ):
-        """Obtiene version de la F2.
+        """
+        Obtiene version de la F2.
 
-        Returns:
-            str: version de la F2
+        @rtype: string
+        @return: version de la F2
         """
         try:
             self.s2.lock()
@@ -37,11 +38,11 @@ class F2Inner:
             self.s2.unlock()
 
     def identifyRobot( self ):
-        """Obtiene infromacion que identifica al S2.
+        """
+        Obtiene infromacion que identifica al S2.
 
-        Returns:
-            str: identifiacion del S2
-
+        @rtype: string
+        @return: identifiacion del S2
         """
         try:
             self.s2.lock()
@@ -57,11 +58,11 @@ class F2Inner:
             self.s2.unlock()
 
     def getBattery( self ):
-        """Obtiene voltaje de la bateria.
+        """
+        Obtiene voltaje de la bateria.
 
-        Returns:
-            float: voltaje de la bateria
-
+        @rtype: float
+        @return: voltaje de la bateria
         """
         try:
             self.s2.lock()
@@ -75,13 +76,13 @@ class F2Inner:
             self.s2.unlock()
 
     def setForwardness( self, forwardness ):
-        """Establece cual es el frente del S2 para ciertos comandos.
+        """
+        Establece cual es el frente del S2 para ciertos comandos.
 
-        Args:
-            forwardness (byte): frente del S2:
-                F2inner.FLUKE_FORWARD: la tarjeta F2 es el frente
-                F2inner.SCRIBBLER_FORWARD: los sensores de luz son el frente
-
+        @type forwardness: byte
+        @param forwardness: orientación del S2
+            - F2inner.FLUKE_FORWARD: la tarjeta F2 es el frente
+            - F2inner.SCRIBBLER_FORWARD: los sensores de luz son el frente
         """
         try:
             self.s2.lock()
@@ -99,11 +100,11 @@ class F2Inner:
             self.s2.unlock()
 
     def getErrors( self ):
-        """Obtiene el log de errores almacenados en la F2.
+        """
+        Obtiene el log de errores almacenados en la F2.
 
-        Returns:
-            str: lineas del texto del log de errores
-
+        @rtype: string
+        @return: lineas del texto del log de errores
         """
         try:
             self.s2.lock()

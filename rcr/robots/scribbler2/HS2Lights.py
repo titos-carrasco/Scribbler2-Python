@@ -9,13 +9,15 @@ class HS2Lights:
     """Clase helper con datos de los sensores de luz del S2."""
 
     def __init__( self, lightLeft, lightCenter , lightRight ):
-        """Inicializa los elementos de lectura para la aplicacion.
+        """
+        Inicializa los elementos de lectura para la aplicacion.
 
-        Args:
-            lightLeft (int): valor del sensor de luz izquierdo
-            lightCenter (int): valor del sensor de luz central
-            lightRight (int): valor del sensor de luz derecho
-
+        @type lightLeft: integer
+        @param lightLeft: valor del sensor de luz izquierdo
+        @type lightCenter: integer
+        @param lightCenter: valor del sensor de luz central
+        @type lightRight: integer
+        @param lightRight: valor del sensor de luz derecho
         """
         self.lightLeft = lightLeft
         self.lightCenter = lightCenter

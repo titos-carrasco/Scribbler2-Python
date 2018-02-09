@@ -11,18 +11,25 @@ class HS2Sensors:
     def __init__( self, irLeft, irRight,
                         lightLeft, lightCenter, lightRight,
                         lineLeft, lineRight, stall ):
-        """Inicializa los elementos de lectura para la aplicacion.
+        """
+        Inicializa los elementos de lectura para la aplicacion.
 
-        Args;
-            irLeft (int); valor del sensor IR iquierdo
-            irRight (int): valor del sensor IR derecho
-            lightLeft (nt): valor del sensor de luz iquierdo
-            lightCenter (int): valor del sensor de luz central
-            lightRight (int): valor del sensor de luz derecho
-            lineLeft (int): valor del sensor de linea izquierdo
-            lineRight (int): valor del sensor de linea derecho
-            stall (int): valor indicador si las ruedas estan atrapadas
-
+        @type irLeft: integer
+        @param irLeft: valor del sensor IR iquierdo
+        @type irRight: integer
+        @param irRight: valor del sensor IR derecho
+        @type lightLeft: integer
+        @param lightLeft: valor del sensor de luz iquierdo
+        @type lightCenter: integer
+        @param lightCenter: valor del sensor de luz central
+        @type lightRight: integer
+        @param lightRight: valor del sensor de luz derecho
+        @type lineLeft: integer
+        @param lineLeft: valor del sensor de linea izquierdo
+        @type lineRight: integer
+        @param lineRight: valor del sensor de linea derecho
+        @type stall: integer
+        @param stall: valor indicador si las ruedas estan atrapadas
         """
         self.irLeft = irLeft
         self.irRight = irRight
