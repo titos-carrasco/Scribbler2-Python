@@ -151,10 +151,10 @@ rcr.robots.scribbler2.S2LEDs.S2LEDs.setAllLed	rcr.robots.scribbler2.S2LEDs.S2LED
 rcr.robots.scribbler2.S2LEDs.S2LEDs.setCenterLed	rcr.robots.scribbler2.S2LEDs.S2LEDs-class.html#setCenterLed
 rcr.robots.scribbler2.S2LightSensors.S2LightSensors	rcr.robots.scribbler2.S2LightSensors.S2LightSensors-class.html
 rcr.robots.scribbler2.S2LightSensors.S2LightSensors.getLeftLight	rcr.robots.scribbler2.S2LightSensors.S2LightSensors-class.html#getLeftLight
-rcr.robots.scribbler2.S2LightSensors.S2LightSensors.getCenterLight	rcr.robots.scribbler2.S2LightSensors.S2LightSensors-class.html#getCenterLight
-rcr.robots.scribbler2.S2LightSensors.S2LightSensors.getRightLed	rcr.robots.scribbler2.S2LightSensors.S2LightSensors-class.html#getRightLed
+rcr.robots.scribbler2.S2LightSensors.S2LightSensors.getRightLight	rcr.robots.scribbler2.S2LightSensors.S2LightSensors-class.html#getRightLight
 rcr.robots.scribbler2.S2LightSensors.S2LightSensors.__init__	rcr.robots.scribbler2.S2LightSensors.S2LightSensors-class.html#__init__
 rcr.robots.scribbler2.S2LightSensors.S2LightSensors.getAllLights	rcr.robots.scribbler2.S2LightSensors.S2LightSensors-class.html#getAllLights
+rcr.robots.scribbler2.S2LightSensors.S2LightSensors.getCenterLight	rcr.robots.scribbler2.S2LightSensors.S2LightSensors-class.html#getCenterLight
 rcr.robots.scribbler2.S2LineSensors.S2LineSensors	rcr.robots.scribbler2.S2LineSensors.S2LineSensors-class.html
 rcr.robots.scribbler2.S2LineSensors.S2LineSensors.getRightLine	rcr.robots.scribbler2.S2LineSensors.S2LineSensors-class.html#getRightLine
 rcr.robots.scribbler2.S2LineSensors.S2LineSensors.getLineEx	rcr.robots.scribbler2.S2LineSensors.S2LineSensors-class.html#getLineEx

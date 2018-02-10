@@ -63,15 +63,18 @@ def getInfo():
 
 @reporter( 'S2 sensors' )
 def getAllSensors():
-    """Obtiene el valor de varios sensores del S2 como una lista.
-        [0] sensor IR izquierdo
-        [1] sensor IR derecho
-        [2] sensor de luz izquierdo
-        [3] sensor de luz central
-        [4] sensor de luz derecho
-        [5] sensor de linea izquierdo
-        [6] sensor de linea derecho
-        [7] sensor de atasco de motores
+    """
+    Obtiene el valor de varios sensores del S2 como una lista.
+
+        - [0] sensor IR izquierdo
+        - [1] sensor IR derecho
+        - [2] sensor de luz izquierdo
+        - [3] sensor de luz central
+        - [4] sensor de luz derecho
+        - [5] sensor de linea izquierdo
+        - [6] sensor de linea derecho
+        - [7] sensor de atasco de motores
+
     """
     global s2
     try:
@@ -140,9 +143,12 @@ def setLEDs( left='on', center='on', right='on' ):
 
 @command( 'S2 setMotors left: %n right: %n', blocking=True )
 def setMotors( left=50, right=50 ):
-    """Control de los motores del S2.
-        left (int): valor de poder motor izquierdo (-100 a 100, 0 lo detiene)
-        right (int): valor de poder motor derecho (-100 a 100, 0 lo detiene)
+    """
+    Control de los motores del S2.
+
+        - left (int): valor de poder motor izquierdo (-100 a 100, 0 lo detiene)
+        - right (int): valor de poder motor derecho (-100 a 100, 0 lo detiene)
+
     """
     global s2
     try:
@@ -170,10 +176,13 @@ def getMic():
 
 @command( 'S2 makeSound freq: %n duration: %n volume: %n', blocking=True )
 def setSpeaker( freq=440, duration=500, volume=50 ):
-    """Genera un sonido en el S2.
-        freq (int): la frecuencia del sonido a reproducir
-        duration (int): duracion del sonido en milisegundos
-        volume (int): volumen del sonido (0 a 100)
+    """
+    Genera un sonido en el S2.
+
+        - freq (int): la frecuencia del sonido a reproducir
+        - duration (int): duracion del sonido en milisegundos
+        - volume (int): volumen del sonido (0 a 100)
+
     """
     global s2
     try:

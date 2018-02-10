@@ -25,7 +25,7 @@ def main():
     for i in range( 10 ):
         print( "getLeftLight: " + str( s2LightSensors.getLeftLight() ) )
         print( "getCenterLight: " + str( s2LightSensors.getCenterLight() ) )
-        print( "getRightLed: " + str( s2LightSensors.getRightLed() ) )
+        print( "getRightLight: " + str( s2LightSensors.getRightLight() ) )
         print( "getAllLights: " + str( s2LightSensors.getAllLights() ) )
     robot.close()
 

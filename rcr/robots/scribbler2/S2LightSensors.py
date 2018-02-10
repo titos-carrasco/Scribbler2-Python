@@ -50,7 +50,7 @@ class S2LightSensors:
         finally:
             self.s2.unlock()
 
-    def getRightLed( self ):
+    def getRightLight( self ):
         """
         Obtiene el valor del sensor de luz derecho.
 
