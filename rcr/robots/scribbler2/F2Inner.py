@@ -87,9 +87,9 @@ class F2Inner:
         try:
             self.s2.lock()
             if( forwardness == self.FLUKE_FORWARD):
-                f = 0
-            else: # if( forwardness == self.SCRIBBLER_FORWARD )
                 f = 1
+            else: # if( forwardness == self.SCRIBBLER_FORWARD )
+                f = 0
             packet = bytearray( 2 )
             packet[0] = 128
             packet[1] = f

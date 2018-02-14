@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""Acceso al modulo de movimiento por rutas (path - plano cartesiano)."""
-from .HS2Coordinates import HS2Coordinates
-
 class S2Path:
     """Clase de acceso a las operaciones de PATH del S2."""
 
@@ -59,14 +56,14 @@ class S2Path:
         """
         Obtiene ubicacion (x, y) del S2 en el plano cartesiano.
 
-        @rtype: L{HS2Coordinates}
-        @return: coordenadas de la ubizacion del S2
+        @rtype: ( integer, integer )
+        @return: coordenadas (x, y) de la ubicacion del S2
         """
         try:
             self.s2.lock()
             packet = self.s2.makeS2Packet( 165 )
             self.s2.sendS2Command( packet, 0 )
-            return HS2Coordinates( self.s2.getInt32Response(), self.s2.getInt32Response() )
+            return ( self.s2.getInt32Response(), self.s2.getInt32Response() )
         except Exception as e:
             raise
         finally:
