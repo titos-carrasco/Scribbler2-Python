@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+"""Acceso a las operaciones de PATH del S2."""
+
 class S2Path:
     """Clase de acceso a las operaciones de PATH del S2."""
 

@@ -41,5 +41,5 @@ if __name__ == "__main__":
             'Programming Language :: Python :: 3.6',
         ],
         keywords='robot education programming',
-        packages=['rcr.utils','rcr.robots.scribbler2'],
+        packages=['rcr','rcr.robots', 'rcr.robots.scribbler2', 'rcr.utils'],
     )

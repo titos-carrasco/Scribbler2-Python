@@ -14,8 +14,8 @@ Importante:
 La librería está para ser utilizada desde Python2.7 o Python3.x y requiere tener instalado el módulo `serial`
 
 Su instalación se realiza en dos pasos
-1. Clonar o descargar el ZIP desde [GitHub](https://github.com/titos-carrasco/Scribbler2-Python)
-2. Desde el directorio raíz del software ejecutar `pip install .`
+1. Descargar el ZIP desde [GitHub](https://github.com/titos-carrasco/Scribbler2-Python)
+2. Ejecutar `pip install Scribbler2-Python-master.zip`
 
 
 ## Demos/
@@ -52,6 +52,6 @@ Todo el desarrollo se realiza utilizando Geany en Linux Debian, configurando un 
 * Para compilar en Python: python -m py_compile "%f"
 * Para ejecutar Python: python "%f"
 
-El código es revisado con `pydocstyle` y la documentación generada con`$ epydoc -v --html  -o doc/ *.py rcr/`
+El código es revisado con `pydocstyle` y la documentación generada con`$ epydoc -v --html -o doc/ *.py rcr/`
 
 

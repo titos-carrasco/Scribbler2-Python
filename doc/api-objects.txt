@@ -14,8 +14,6 @@ rcr.robots.scribbler2.F2Servos	rcr.robots.scribbler2.F2Servos-module.html
 rcr.robots.scribbler2.F2Servos.__package__	rcr.robots.scribbler2.F2Servos-module.html#__package__
 rcr.robots.scribbler2.HF2Image	rcr.robots.scribbler2.HF2Image-module.html
 rcr.robots.scribbler2.HF2Image.__package__	rcr.robots.scribbler2.HF2Image-module.html#__package__
-rcr.robots.scribbler2.HS2Coordinates	rcr.robots.scribbler2.HS2Coordinates-module.html
-rcr.robots.scribbler2.HS2Coordinates.__package__	rcr.robots.scribbler2.HS2Coordinates-module.html#__package__
 rcr.robots.scribbler2.HS2Encoders	rcr.robots.scribbler2.HS2Encoders-module.html
 rcr.robots.scribbler2.HS2Encoders.__package__	rcr.robots.scribbler2.HS2Encoders-module.html#__package__
 rcr.robots.scribbler2.HS2Infrared	rcr.robots.scribbler2.HS2Infrared-module.html
@@ -100,9 +98,6 @@ rcr.robots.scribbler2.F2Servos.F2Servos.__init__	rcr.robots.scribbler2.F2Servos.
 rcr.robots.scribbler2.HF2Image.HF2Image	rcr.robots.scribbler2.HF2Image.HF2Image-class.html
 rcr.robots.scribbler2.HF2Image.HF2Image.__str__	rcr.robots.scribbler2.HF2Image.HF2Image-class.html#__str__
 rcr.robots.scribbler2.HF2Image.HF2Image.__init__	rcr.robots.scribbler2.HF2Image.HF2Image-class.html#__init__
-rcr.robots.scribbler2.HS2Coordinates.HS2Coordinates	rcr.robots.scribbler2.HS2Coordinates.HS2Coordinates-class.html
-rcr.robots.scribbler2.HS2Coordinates.HS2Coordinates.__str__	rcr.robots.scribbler2.HS2Coordinates.HS2Coordinates-class.html#__str__
-rcr.robots.scribbler2.HS2Coordinates.HS2Coordinates.__init__	rcr.robots.scribbler2.HS2Coordinates.HS2Coordinates-class.html#__init__
 rcr.robots.scribbler2.HS2Encoders.HS2Encoders	rcr.robots.scribbler2.HS2Encoders.HS2Encoders-class.html
 rcr.robots.scribbler2.HS2Encoders.HS2Encoders.__str__	rcr.robots.scribbler2.HS2Encoders.HS2Encoders-class.html#__str__
 rcr.robots.scribbler2.HS2Encoders.HS2Encoders.__init__	rcr.robots.scribbler2.HS2Encoders.HS2Encoders-class.html#__init__
