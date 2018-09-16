@@ -3,20 +3,22 @@
 
 """Test de los LEDs de la tarjeta F2."""
 
-from rcr.robots.scribbler2.Scribbler2 import Scribbler2
+from __future__ import print_function
+
+from rcr.robots.fluke2.Fluke2 import Fluke2
 from rcr.utils import Utils
 
 def main():
     """Realiza las pruebas de los LEDs de la tarjeta F2.
 
     Las pruebas consideran:
-        robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
+        robot = Fluke2( port="/dev/rfcomm2", bauds=9600, timeout=500 )
         f2LEDs = robot.getF2LEDs()
 
         f2LEDs.setBrightLed()
 
     """
-    robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
+    robot = Fluke2( port="/dev/rfcomm2", bauds=9600, timeout=500 )
     f2LEDs = robot.getF2LEDs()
 
     print( "setBrightLed: " )

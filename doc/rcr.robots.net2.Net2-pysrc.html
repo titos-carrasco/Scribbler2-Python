@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>rcr.robots.net2.Net2</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="rcr-module.html">Package&nbsp;rcr</a> ::
+        <a href="rcr.robots-module.html">Package&nbsp;robots</a> ::
+        <a href="rcr.robots.net2-module.html">Package&nbsp;net2</a> ::
+        Module&nbsp;Net2
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="rcr.robots.net2.Net2-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="rcr.robots.net2.Net2-module.html">Module rcr.robots.net2.Net2</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment"># -*- coding: utf-8 -*-</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring">"""Acceso a todas las funcionalidades del Scribbler2 (S2) y de la Fluke 2 (F2)."""</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package rcr=rcr-module.html"><a title="rcr" class="py-name" href="#" onclick="return doclink('link-0', 'rcr', 'link-0');">rcr</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package rcr.utils=rcr.utils-module.html"><a title="rcr.utils" class="py-name" href="#" onclick="return doclink('link-1', 'utils', 'link-1');">utils</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module rcr.utils.SerialNet=rcr.utils.SerialNet-module.html,Class rcr.utils.SerialNet.SerialNet=rcr.utils.SerialNet.SerialNet-class.html"><a title="rcr.utils.SerialNet
+rcr.utils.SerialNet.SerialNet" class="py-name" href="#" onclick="return doclink('link-2', 'SerialNet', 'link-2');">SerialNet</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name"><a title="rcr.utils.SerialNet
+rcr.utils.SerialNet.SerialNet" class="py-name" href="#" onclick="return doclink('link-3', 'SerialNet', 'link-2');">SerialNet</a></tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-4" class="py-name"><a title="rcr" class="py-name" href="#" onclick="return doclink('link-4', 'rcr', 'link-0');">rcr</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="rcr.utils" class="py-name" href="#" onclick="return doclink('link-5', 'utils', 'link-1');">utils</a></tt> <tt class="py-keyword">import</tt> <tt id="link-6" class="py-name" targets="Module rcr.utils.Utils=rcr.utils.Utils-module.html"><a title="rcr.utils.Utils" class="py-name" href="#" onclick="return doclink('link-6', 'Utils', 'link-6');">Utils</a></tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-7" class="py-name"><a title="rcr" class="py-name" href="#" onclick="return doclink('link-7', 'rcr', 'link-0');">rcr</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Package rcr.robots=rcr.robots-module.html"><a title="rcr.robots" class="py-name" href="#" onclick="return doclink('link-8', 'robots', 'link-8');">robots</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Package rcr.robots.scribbler2=rcr.robots.scribbler2-module.html"><a title="rcr.robots.scribbler2" class="py-name" href="#" onclick="return doclink('link-9', 'scribbler2', 'link-9');">scribbler2</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Module rcr.robots.scribbler2.Scribbler2=rcr.robots.scribbler2.Scribbler2-module.html,Class rcr.robots.scribbler2.Scribbler2.Scribbler2=rcr.robots.scribbler2.Scribbler2.Scribbler2-class.html"><a title="rcr.robots.scribbler2.Scribbler2
+rcr.robots.scribbler2.Scribbler2.Scribbler2" class="py-name" href="#" onclick="return doclink('link-10', 'Scribbler2', 'link-10');">Scribbler2</a></tt> <tt class="py-keyword">import</tt> <tt id="link-11" class="py-name"><a title="rcr.robots.scribbler2.Scribbler2
+rcr.robots.scribbler2.Scribbler2.Scribbler2" class="py-name" href="#" onclick="return doclink('link-11', 'Scribbler2', 'link-10');">Scribbler2</a></tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"> </tt>
+<a name="Net2"></a><div id="Net2-def"><a name="L11"></a><tt class="py-lineno">11</tt> <a class="py-toggle" href="#" id="Net2-toggle" onclick="return toggle('Net2');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="rcr.robots.net2.Net2.Net2-class.html">Net2</a><tt class="py-op">(</tt> <tt class="py-base-class">Scribbler2</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Net2-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Net2-expanded"><a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">    <tt class="py-docstring">"""Clase central de interaccion ccon el modulo de red para el S2."""</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"> </tt>
+<a name="Net2.__init__"></a><div id="Net2.__init__-def"><a name="L14"></a><tt class="py-lineno">14</tt> <a class="py-toggle" href="#" id="Net2.__init__-toggle" onclick="return toggle('Net2.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="rcr.robots.net2.Net2.Net2-class.html#__init__">__init__</a><tt class="py-op">(</tt> <tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">host</tt><tt class="py-op">,</tt> <tt class="py-param">port</tt><tt class="py-op">,</tt> <tt class="py-param">timeout</tt><tt class="py-op">=</tt><tt class="py-number">500</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Net2.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Net2.__init__-expanded"><a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring">        Corresponde al constructor de la clase.</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">        @type host: string</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">        @param host: host a conectar</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-docstring">        @type port: integer</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring">        @param port: port a conectar en el host</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-docstring">        @type timeout: integer</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-docstring">        @param timeout: timeout para cada comando</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt class="py-name">super</tt><tt class="py-op">(</tt> <tt id="link-12" class="py-name" targets="Module rcr.robots.net2.Net2=rcr.robots.net2.Net2-module.html,Class rcr.robots.net2.Net2.Net2=rcr.robots.net2.Net2.Net2-class.html"><a title="rcr.robots.net2.Net2
+rcr.robots.net2.Net2.Net2" class="py-name" href="#" onclick="return doclink('link-12', 'Net2', 'link-12');">Net2</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt> <tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Method rcr.robots.fluke2.F2Camera.F2Camera.__init__()=rcr.robots.fluke2.F2Camera.F2Camera-class.html#__init__,Method rcr.robots.fluke2.F2IRSensors.F2IRSensors.__init__()=rcr.robots.fluke2.F2IRSensors.F2IRSensors-class.html#__init__,Method rcr.robots.fluke2.F2Inner.F2Inner.__init__()=rcr.robots.fluke2.F2Inner.F2Inner-class.html#__init__,Method rcr.robots.fluke2.F2LEDs.F2LEDs.__init__()=rcr.robots.fluke2.F2LEDs.F2LEDs-class.html#__init__,Method rcr.robots.fluke2.F2Servos.F2Servos.__init__()=rcr.robots.fluke2.F2Servos.F2Servos-class.html#__init__,Method rcr.robots.fluke2.Fluke2.Fluke2.__init__()=rcr.robots.fluke2.Fluke2.Fluke2-class.html#__init__,Method rcr.robots.fluke2.HF2Image.HF2Image.__init__()=rcr.robots.fluke2.HF2Image.HF2Image-class.html#__init__,Method rcr.robots.net2.Net2.Net2.__init__()=rcr.robots.net2.Net2.Net2-class.html#__init__,Method rcr.robots.scribbler2.HS2Encoders.HS2Encoders.__init__()=rcr.robots.scribbler2.HS2Encoders.HS2Encoders-class.html#__init__,Method rcr.robots.scribbler2.HS2Infrared.HS2Infrared.__init__()=rcr.robots.scribbler2.HS2Infrared.HS2Infrared-class.html#__init__,Method rcr.robots.scribbler2.HS2Lights.HS2Lights.__init__()=rcr.robots.scribbler2.HS2Lights.HS2Lights-class.html#__init__,Method rcr.robots.scribbler2.HS2LineSensors.HS2LineSensors.__init__()=rcr.robots.scribbler2.HS2LineSensors.HS2LineSensors-class.html#__init__,Method rcr.robots.scribbler2.HS2MotorStats.HS2MotorStats.__init__()=rcr.robots.scribbler2.HS2MotorStats.HS2MotorStats-class.html#__init__,Method rcr.robots.scribbler2.HS2Sensors.HS2Sensors.__init__()=rcr.robots.scribbler2.HS2Sensors.HS2Sensors-class.html#__init__,Method rcr.robots.scribbler2.HS2State.HS2State.__init__()=rcr.robots.scribbler2.HS2State.HS2State-class.html#__init__,Method rcr.robots.scribbler2.S2IRSensors.S2IRSensors.__init__()=rcr.robots.scribbler2.S2IRSensors.S2IRSensors-class.html#__init__,Method rcr.robots.scribbler2.S2Inner.S2Inner.__init__()=rcr.robots.scribbler2.S2Inner.S2Inner-class.html#__init__,Method rcr.robots.scribbler2.S2LEDs.S2LEDs.__init__()=rcr.robots.scribbler2.S2LEDs.S2LEDs-class.html#__init__,Method rcr.robots.scribbler2.S2LightSensors.S2LightSensors.__init__()=rcr.robots.scribbler2.S2LightSensors.S2LightSensors-class.html#__init__,Method rcr.robots.scribbler2.S2LineSensors.S2LineSensors.__init__()=rcr.robots.scribbler2.S2LineSensors.S2LineSensors-class.html#__init__,Method rcr.robots.scribbler2.S2Microphone.S2Microphone.__init__()=rcr.robots.scribbler2.S2Microphone.S2Microphone-class.html#__init__,Method rcr.robots.scribbler2.S2Motors.S2Motors.__init__()=rcr.robots.scribbler2.S2Motors.S2Motors-class.html#__init__,Method rcr.robots.scribbler2.S2Path.S2Path.__init__()=rcr.robots.scribbler2.S2Path.S2Path-class.html#__init__,Method rcr.robots.scribbler2.S2Speaker.S2Speaker.__init__()=rcr.robots.scribbler2.S2Speaker.S2Speaker-class.html#__init__,Method rcr.robots.scribbler2.Scribbler2.Scribbler2.__init__()=rcr.robots.scribbler2.Scribbler2.Scribbler2-class.html#__init__,Method rcr.utils.Serial.Serial.__init__()=rcr.utils.Serial.Serial-class.html#__init__,Method rcr.utils.SerialInterface.SerialInterface.__init__()=rcr.utils.SerialInterface.SerialInterface-class.html#__init__,Method rcr.utils.SerialNet.SerialNet.__init__()=rcr.utils.SerialNet.SerialNet-class.html#__init__"><a title="rcr.robots.fluke2.F2Camera.F2Camera.__init__
+rcr.robots.fluke2.F2IRSensors.F2IRSensors.__init__
+rcr.robots.fluke2.F2Inner.F2Inner.__init__
+rcr.robots.fluke2.F2LEDs.F2LEDs.__init__
+rcr.robots.fluke2.F2Servos.F2Servos.__init__
+rcr.robots.fluke2.Fluke2.Fluke2.__init__
+rcr.robots.fluke2.HF2Image.HF2Image.__init__
+rcr.robots.net2.Net2.Net2.__init__
+rcr.robots.scribbler2.HS2Encoders.HS2Encoders.__init__
+rcr.robots.scribbler2.HS2Infrared.HS2Infrared.__init__
+rcr.robots.scribbler2.HS2Lights.HS2Lights.__init__
+rcr.robots.scribbler2.HS2LineSensors.HS2LineSensors.__init__
+rcr.robots.scribbler2.HS2MotorStats.HS2MotorStats.__init__
+rcr.robots.scribbler2.HS2Sensors.HS2Sensors.__init__
+rcr.robots.scribbler2.HS2State.HS2State.__init__
+rcr.robots.scribbler2.S2IRSensors.S2IRSensors.__init__
+rcr.robots.scribbler2.S2Inner.S2Inner.__init__
+rcr.robots.scribbler2.S2LEDs.S2LEDs.__init__
+rcr.robots.scribbler2.S2LightSensors.S2LightSensors.__init__
+rcr.robots.scribbler2.S2LineSensors.S2LineSensors.__init__
+rcr.robots.scribbler2.S2Microphone.S2Microphone.__init__
+rcr.robots.scribbler2.S2Motors.S2Motors.__init__
+rcr.robots.scribbler2.S2Path.S2Path.__init__
+rcr.robots.scribbler2.S2Speaker.S2Speaker.__init__
+rcr.robots.scribbler2.Scribbler2.Scribbler2.__init__
+rcr.utils.Serial.Serial.__init__
+rcr.utils.SerialInterface.SerialInterface.__init__
+rcr.utils.SerialNet.SerialNet.__init__" class="py-name" href="#" onclick="return doclink('link-13', '__init__', 'link-13');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">conn</tt> <tt class="py-op">=</tt> <tt id="link-14" class="py-name"><a title="rcr.utils.SerialNet
+rcr.utils.SerialNet.SerialNet" class="py-name" href="#" onclick="return doclink('link-14', 'SerialNet', 'link-2');">SerialNet</a></tt><tt class="py-op">(</tt> <tt class="py-name">host</tt><tt class="py-op">=</tt><tt class="py-name">host</tt><tt class="py-op">,</tt> <tt class="py-name">port</tt><tt class="py-op">=</tt><tt class="py-name">port</tt><tt class="py-op">,</tt> <tt class="py-name">timeout</tt><tt class="py-op">=</tt><tt class="py-name">timeout</tt> <tt class="py-op">)</tt> </tt>
+</div></div><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Sun Sep 16 22:53:18 2018
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

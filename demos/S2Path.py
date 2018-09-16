@@ -3,13 +3,21 @@
 
 """Test de las operaciones en plano cartesiano del S2."""
 
-from rcr.robots.scribbler2.Scribbler2 import Scribbler2
+from __future__ import print_function
+
+#from rcr.robots.scribbler2.Scribbler2 import Scribbler2
+#from rcr.robots.fluke2.Fluke2 import Fluke2
+from rcr.robots.net2.Net2 import Net2
 
 def main():
     """Realiza las pruebas de movimiento en plano cartesiano del S2.
 
+    Requiere de un timeout mayor
+
     Las pruebas consideran:
-        robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
+        #robot = Scribbler2( port="/dev/ttyUSB1", bauds=38400, timeout=20000, dtr=False )
+        #robot = Fluke2( port="/dev/rfcomm2", bauds=9600, timeout=20000 )
+        #robot = Net2( "192.168.145.1", 1500, 20000 )
         s2Path = robot.getS2Path()
 
         s2Path.beginPath()
@@ -26,7 +34,9 @@ def main():
         s2Path.endPath()
 
     """
-    robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
+    #robot = Scribbler2( port="/dev/ttyUSB1", bauds=38400, timeout=20000, dtr=False )
+    #robot = Fluke2( port="/dev/rfcomm2", bauds=9600, timeout=20000 )
+    robot = Net2( "192.168.145.1", 1500, 20000 )
     s2Path = robot.getS2Path()
 
     print( "beginPath: " + str( s2Path.beginPath( 15 ) ) )

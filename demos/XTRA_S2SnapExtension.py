@@ -1,148 +1,87 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Extensión para trabajar con el S2 en SNAP y SCRATCH."""
+"""Servidor para ejecutar acciones sobre el S2 desde Snap.
+
+(snapext presenta errores en python3)
+"""
+
 
 from __future__ import division, print_function
 
 import sys
-from blockext import *
+import snapext
 
-from rcr.robots.scribbler2.Scribbler2 import Scribbler2
+#from rcr.robots.scribbler2.Scribbler2 import Scribbler2
+from rcr.robots.fluke2.Fluke2 import Fluke2
 from rcr.utils import Utils
 
 s2 = None
+handler = snapext.SnapHandler
 
-@command( 'S2 connect to %s', blocking=True )
-def connect( port='rfcomm2' ):
+@handler.route( '/Connect' )
+def Connect( port='/dev/rfcomm2', bauds=9600, timeout=500, dtr=None ):
     """Conecta al S2 que se encuentra en la puerta especificada."""
     global s2
+
     if( s2 != None ):
         try:
-            print( 'S2 connect(): Cerrando conexion anterior' )
+            print( 'S2 Connect(): Cerrando conexion anterior ...' )
             s2.close()
+            print( 'OK' )
         except:
             pass
     try:
-        print( 'S2 connect(): Estableciendo conexion con el S2 ... ', end='' )
-        s2 = Scribbler2( '/dev/' + port, 9600, 500 )
+        if( dtr == True ):
+            dtr = True
+        elif( dtr == False ):
+            dtr = False
+        else:
+            dtr = None
+        print( 'S2 Connect(): Estableciendo conexion con el S2 ... ' )
+        #s2 = Scribbler2( port="/dev/ttyUSB1", bauds=38400, timeout=500, dtr=False )
+        s2 = Fluke2( port="/dev/rfcomm2", bauds=9600, timeout=500 )
+        #s2 = Net2( "192.168.145.1", 1500, 500 )
         print( 'OK' )
     except Exception as e:
-        print( 'Exception' )
+        print( 'S2 Connect(): Exception' )
         print( e )
     finally:
         sys.stdout.flush()
 
-@command( 'S2 close', blocking=True )
-def close():
+@handler.route( '/Close' )
+def Close():
     """Finaliza la conexion con el S2."""
     global s2
     try:
-        print( 'S2 close(): Cerrando conexion' )
+        print( 'S2 Close(): Cerrando conexion ...' )
         s2.close()
+        print( 'OK' )
     except Exception as e:
-        print( 'S2 close(): Exception' )
+        print( 'S2 Close(): Exception' )
         print( e )
     finally:
         sys.stdout.flush()
         s2 = None
 
-@reporter( 'S2 info' )
-def getInfo():
+@handler.route( '/GetInfo' )
+def GetInfo():
     """Obtiene informacion general del S2."""
     global s2
     try:
-        print( 'S2 getInfo(): Recuperando data' )
-        return s2.getS2Inner().getInfo()
+        print( 'S2 GetInfo(): Recuperando data ...' )
+        info = s2.getS2Inner().getInfo()
+        print( info )
+        print( 'OK' )
+        return info
     except Exception as e:
-        print( 'S2 getInfo(): Exception' )
-        print( e )
-        return ''
-    finally:
-        sys.stdout.flush()
-
-@reporter( 'S2 sensors' )
-def getAllSensors():
-    """
-    Obtiene el valor de varios sensores del S2 como una lista.
-
-        - [0] sensor IR izquierdo
-        - [1] sensor IR derecho
-        - [2] sensor de luz izquierdo
-        - [3] sensor de luz central
-        - [4] sensor de luz derecho
-        - [5] sensor de linea izquierdo
-        - [6] sensor de linea derecho
-        - [7] sensor de atasco de motores
-
-    """
-    global s2
-    try:
-        print( 'S2 getAllSensors(): Recuperando sensores' )
-        sensors = []
-        s2Sensors = s2.getS2Inner().getAllSensors()
-        sensors.append( s2Sensors.irLeft )
-        sensors.append( s2Sensors.irRight )
-        sensors.append( s2Sensors.lightLeft )
-        sensors.append( s2Sensors.lightCenter )
-        sensors.append( s2Sensors.lightRight )
-        sensors.append( s2Sensors.lineLeft )
-        sensors.append( s2Sensors.lineRight )
-        sensors.append( s2Sensors.stall )
-        return sensors
-    except Exception as e:
-        print( 'S2 getAllSensors(): Exception' )
-        print( e )
-        return []
-    finally:
-        sys.stdout.flush()
-
-@reporter( 'S2 name' )
-def getName():
-    """Obtiene el nombre de este S2."""
-    global s2
-    try:
-        print( 'S2 getName(): Recuperando nombre' )
-        return s2.getS2Inner().getName()
-    except Exception as e:
-        print( 'S2 getName(): Exception' )
-        print( e )
-        return ''
-    finally:
-        sys.stdout.flush()
-
-@command( 'S2 setName %s', blocking=True )
-def setName( name = 'myName' ):
-    """Establece un nombre para el S2."""
-    global s2
-    try:
-        print( 'S2 setName(): Estableciendo nombre "{name}"'.format( name=name ) )
-        s2.getS2Inner().setName( name )
-    except Exception as e:
-        print( 'S2 setName(): Exception' )
+        print( 'S2 GetInfo(): Exception' )
         print( e )
     finally:
         sys.stdout.flush()
 
-menu( 'OnOff', [ 'on', 'off' ] )
-@command( 'S2 setLEDs left: %m.OnOff center: %m.OnOff and right: %m.OnOff', blocking=True )
-def setLEDs( left='on', center='on', right='on' ):
-    """Establece el estado de los leds del S2."""
-    global s2
-    try:
-        left = 1 if left=='on' else 0
-        center = 1 if center=='on' else 0
-        right = 1 if right=='on' else 0
-        print( 'S2 setLEDs(): seteando LEDs {left}, {center}, {right}'.format( left=left, center=center, right=right ) )
-        s2.getS2LEDs().setAllLed( left, center, right )
-    except Exception as e:
-        print( 'S2 setLEDs(): Exception' )
-        print( e )
-    finally:
-        sys.stdout.flush()
-
-@command( 'S2 setMotors left: %n right: %n', blocking=True )
-def setMotors( left=50, right=50 ):
+@handler.route( '/SetMotors' )
+def SetMotors( left=50, right=50 ):
     """
     Control de los motores del S2.
 
@@ -152,30 +91,105 @@ def setMotors( left=50, right=50 ):
     """
     global s2
     try:
-        print( 'S2 setMotors(): Estableciendo motores {left}, {right}'.format( left=left, right=right ) )
-        s2.getS2Motors().setMotors( left, right )
+        print( 'S2 SetMotors(): Estableciendo motores {left}, {right} ...'.format( left=left, right=right ) )
+        sensors = _listSensors( s2.getS2Motors().setMotors( left, right ) )
+        print( sensors )
+        print( 'OK' )
+        return sensors
     except Exception as e:
-        print( 'S2 setMotors(): Exception' )
+        print( 'S2 SetMotors(): Exception' )
         print( e )
     finally:
         sys.stdout.flush()
 
-@reporter( 'S2 get mic value' )
-def getMic():
+@handler.route( '/GetSensors' )
+def GetSensors():
+    """Obtiene el valor de los sensores."""
+    global s2
+    try:
+        print( 'S2 GetSensors(): Recuperando sensores ...' )
+        sensors = _listSensors( s2.getS2Inner().getAllSensors() )
+        print( sensors )
+        print( 'OK' )
+        return sensors
+    except Exception as e:
+        print( 'S2 GetSensors(): Exception' )
+        print( e )
+        return []
+    finally:
+        sys.stdout.flush()
+
+@handler.route( '/GetName' )
+def GetName():
+    """Obtiene el nombre de este S2."""
+    global s2
+    try:
+        print( 'S2 GetName(): Recuperando nombre ...' )
+        name = s2.getS2Inner().getName()
+        print( name )
+        print( 'OK' )
+        return name
+    except Exception as e:
+        print( 'S2 GetName(): Exception' )
+        print( e )
+        return ''
+    finally:
+        sys.stdout.flush()
+
+@handler.route( '/SetName' )
+def SetName( name = 'MyBot' ):
+    """Establece un nombre para el S2."""
+    global s2
+    try:
+        print( 'S2 SetName(): Estableciendo nombre "{name}" ...'.format( name=name ) )
+        sensors = _listSensors( s2.getS2Inner().setName( name ) )
+        print( sensors )
+        print( 'OK' )
+        return sensors
+    except Exception as e:
+        print( 'S2 setName(): Exception' )
+        print( e )
+    finally:
+        sys.stdout.flush()
+
+@handler.route( '/GetMic' )
+def GetMic():
     """Obtiene valor actual del microfono del S2."""
     global s2
     try:
-        print( 'S2 getMic(): Recuperando valor del microfono' )
-        return s2.getS2Microphone().getMicEnv()
+        print( 'S2 GetMic(): Recuperando valor del microfono ...' )
+        mic = s2.getS2Microphone().getMicEnv()
+        print( mic )
+        print( 'OK' )
+        return mic
     except Exception as e:
-        print( 'S2 getMic(): Exception' )
+        print( 'S2 GetMic(): Exception' )
         print( e )
         return 0
     finally:
         sys.stdout.flush()
 
-@command( 'S2 makeSound freq: %n duration: %n volume: %n', blocking=True )
-def setSpeaker( freq=440, duration=500, volume=50 ):
+@handler.route( '/SetLEDs' )
+def SetLEDs( left='on', center='on', right='on' ):
+    """Establece el estado de los leds del S2."""
+    global s2
+    try:
+        left = 1 if left=='on' else 0
+        center = 1 if center=='on' else 0
+        right = 1 if right=='on' else 0
+        print( 'S2 SetLEDs(): seteando LEDs {left}, {center}, {right} ...'.format( left=left, center=center, right=right ) )
+        sensors = _listSensors( s2.getS2LEDs().setAllLed( left, center, right ) )
+        print( sensors )
+        print( 'OK' )
+        return sensors
+    except Exception as e:
+        print( 'S2 SetLEDs(): Exception' )
+        print( e )
+    finally:
+        sys.stdout.flush()
+
+@handler.route( '/PlayTone' )
+def PlayTone( freq=440, duration=500, volume=50 ):
     """
     Genera un sonido en el S2.
 
@@ -186,41 +200,38 @@ def setSpeaker( freq=440, duration=500, volume=50 ):
     """
     global s2
     try:
-        print( 'S2 makeSound(): Generando sonido {freq}, {duration}, {volume}'.format( freq=freq, duration=duration, volume=volume ) )
+        print( 'S2 PlayTone(): Generando sonido {freq}, {duration}, {volume} ...'.format( freq=freq, duration=duration, volume=volume ) )
         speaker = s2.getS2Speaker()
         speaker.setLoud()
         speaker.setVolume( volume )
-        speaker.setSpeaker( duration, freq, 0 )
-        speaker.setQuiet()
+        sensors = _listSensors( speaker.setSpeaker( duration, freq, 0 ) )
+        #speaker.setQuiet()
+        print( sensors )
+        print( 'OK' )
+        return sensors
     except Exception as e:
-        print( 'S2 makeSound(): Exception' )
+        print( 'S2 PlayTone(): Exception' )
         print( e )
     finally:
         sys.stdout.flush()
 
-#@reporter( 'S2 take picture' )
-#def takePicture():
-#    """Captura una imagen desde la camara de la F2.
-#
-#    Returns:
-#        bytearray: bitmap de la imagen en formato JPEG
-#
-#    """
-#    global s2
-#    try:
-#        print( 'S2 takePicture(): Capturando imagen' )
-#        cam = s2.getF2Camera()
-#        cam.setPicSize( cam.IMAGE_SMALL )
-#        return cam.getImage( cam.IMAGE_GRAYJPEG_FAST )
-#    except Exception as e:
-#        print( e )
-#        return bytearray()
+def _listSensors( allSensors ):
+    sensors = [0]*8
+    sensors[0] = allSensors.irLeft
+    sensors[1] = allSensors.irRight
+    sensors[2] = allSensors.lightLeft
+    sensors[3] = allSensors.lightCenter
+    sensors[4] = allSensors.lightRight
+    sensors[5] = allSensors.lineLeft
+    sensors[6] = allSensors.lineRight
+    sensors[7] = allSensors.stall
+    return sensors
 
+# main()
 while( True ):
     try:
-        blockext.run( 'Parallax S2 robot and Fluke2 card', 'S2Robot', 1963 )
+        snapext.main( handler, 1963 )
     except Exception as e:
         print( 'MainLoop Exception' )
         print( e )
         sys.stdout.flush()
-

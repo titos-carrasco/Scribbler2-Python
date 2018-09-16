@@ -3,11 +3,11 @@
 """Acceso a puerta serial."""
 
 import serial
-import threading
 import time
+from .SerialInterface import SerialInterface
 from . import Utils
 
-class Serial:
+class Serial( SerialInterface ):
     """Clase para interactuar con puerta serial."""
 
     def __init__( self, port, bauds, timeout ):
@@ -21,14 +21,17 @@ class Serial:
         @type timeout: integer
         @param timeout: timeout en milisegundos
         """
+        super( Serial, self ).__init__()
+
         self.maxTries = timeout
-        self.mylock = threading.Lock()
         try:
             self.serial = serial.Serial(port, baudrate=bauds, bytesize=8,
                                        parity='N', stopbits=1,
                                        timeout=0 )
             self.serial.flushInput()
             self.serial.flushOutput()
+        except serial.SerialTimeoutException:
+            raise self.TimeoutException
         except Exception as e:
             raise
 
@@ -38,6 +41,8 @@ class Serial:
             self.lock()
             self.serial.close()
             self.serial = None
+        except serial.SerialTimeoutException:
+            raise self.TimeoutException
         except Exception as e:
             raise
         finally:
@@ -54,6 +59,8 @@ class Serial:
             self.lock()
             self.serial.write( dataBytes )
             self.serial.flush()
+        except serial.SerialTimeoutException:
+            raise self.TimeoutException
         except Exception as e:
             raise
         finally:
@@ -67,7 +74,7 @@ class Serial:
         @param nbytes: numero de bytes a leer
         @rtype: bytearray
         @return: los bytes leidos
-        @raise SerialTimeoutException: si no se pudieron leer los bytes solicitados en el tiempo senalado
+        @raise TimeoutException: si no se pudieron leer los bytes solicitados en el tiempo senalado
         """
         try:
             self.lock()
@@ -75,20 +82,22 @@ class Serial:
             pos = 0
             tries = 0
             while( pos < nbytes and tries < self.maxTries ):
-                b = self.serial.read(1)
-                if( len(b)==0 ):
-                    Utils.pause(1)
+                b = self.serial.read( 1 )
+                if( len( b )==0 ):
+                    Utils.pause( 1 )
                     tries = tries + 1
                     continue
-                if( type(b) is str ):
+                if( type( b ) is str ):
                     dataBytes[pos] = ord(b)
                 else:
                     dataBytes[pos] = b[0]
                 pos = pos + 1
                 tries = 0
             if( pos < nbytes ):
-                raise serial.SerialTimeoutException
+                raise self.TimeoutException
             return dataBytes
+        except serial.SerialTimeoutException:
+            raise self.TimeoutException
         except Exception as e:
             raise
         finally:
@@ -102,7 +111,7 @@ class Serial:
         @param maxChars: maximo de caracteres ascii a leer
         @rtype: string
         @return: la linea de texto leida sin incluir el NL
-        @raise SerialTimeoutException: si no se pudieron leer la linea solicitada en el tiempo senalado
+        @raise TimeoutException: si no se pudieron leer la linea solicitada en el tiempo senalado
         """
         try:
             self.lock()
@@ -111,11 +120,11 @@ class Serial:
             tries = 0
             while( pos < maxChars + 1 and tries < self.maxTries ):
                 b = self.serial.read(1)
-                if( len(b)==0 ):
-                    Utils.pause(1)
+                if( len( b )==0 ):
+                    Utils.pause( 1 )
                     tries = tries + 1
                     continue
-                if( type(b) is str ):
+                if( type( b ) is str ):
                     if( b == '\n'):
                         return linea
                     linea = linea + b
@@ -124,13 +133,15 @@ class Serial:
                         return linea
                     linea =linea + chr(b[0])
                 tries = 0
-            raise serial.SerialTimeoutException
+            raise self.TimeoutException
+        except serial.SerialTimeoutException:
+            raise self.TimeoutException
         except Exception as e:
             raise
         finally:
             self.unlock()
 
-    def flushRead( self, timex ):
+    def ignoreInput( self, timex ):
         """
         Descarta datos presentes para lectura en la puerta serial.
 
@@ -143,71 +154,18 @@ class Serial:
             end = t + timex / 1000.0
             while( t < end ):
                 try:
-                    if( len(self.serial.read(1))==0 ):
-                        Utils.pause(1)
+                    if( len( self.serial.read( 1 ) )==0 ):
+                        Utils.pause( 1 )
                 except:
                     pass
                 t = time.time()
+        except serial.SerialTimeoutException:
+            raise self.TimeoutException
         except Exception as e:
             raise
         finally:
             self.unlock()
 
-    def readUInt8( self ):
-        """
-        Lee un entero sin signo de 8 bits.
-
-        @rtype: integer
-        @return: el entero sin signo de 8 bits
-        """
-        b = self.read(1)
-        return b[0] & 0xFF
-
-    def readUInt16( self ):
-        """
-        Lee un entero sin signo de 16 bits.
-
-        @rtype: integer
-        @return: el entero sin signo de 16 bits
-        """
-        b = self.read(2)
-        n = b[0] & 0x000000FF
-        n = ( n<<8 ) | ( b[1] & 0xFF )
-        return n
-
-    def readUInt32( self ):
-        """
-        Lee un entero sin signo de 32 bits.
-
-        @rtype: integer
-        @return: el entero sin signo de 32 bits
-        """
-        b = self.read(4)
-        n = b[0] & 0x000000FF
-        n = ( n << 8 ) | ( b[1] & 0xFF )
-        n = ( n << 8 ) | ( b[2] & 0xFF )
-        n = ( n << 8 ) | ( b[3] & 0xFF )
-        if( ( n & 0x80000000 ) != 0 ):
-            return n - 0xFFFFFFFF -1
-        else:
-            return n
-
-    def readInt32(self):
-        """
-        Lee un entero con signo de 32 bits.
-
-        @rtype: integer
-        @return: el entero con signo de 32 bits
-        """
-        n = self.readUInt32()
-        return int( n )
-
-    #### Privadas
-
-    def lock( self ):
-        """Obtiene acceso exclusivo a una zona."""
-        self.mylock.acquire()
-
-    def unlock( self ):
-        """Libera el acceso exclusivo a una zona."""
-        self.mylock.release()
+    def setDTR( self, value ):
+        """Activa/desactiva la linea DTR."""
+        self.serial.setDTR( value )

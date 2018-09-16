@@ -3,23 +3,25 @@
 
 """Test de la camara de la tarjeta F2."""
 
+# cv2 presenta errores en python3
+
 import numpy as np
 import cv2
 
-from rcr.robots.scribbler2.Scribbler2 import Scribbler2
+from rcr.robots.fluke2.Fluke2 import Fluke2
 
 def main():
     """Realiza las pruebas de la camara de la tarjeta de la F2.
 
     Las pruebas utilizan las librerias numpy y opencv, y consideran:
-        robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
+        robot = Fluke2( port="/dev/rfcomm2", bauds=9600, timeout=500 )
         f2Camera = robot.getF2Camera()
 
         f2Camera.setPicSize)
         f2Camera.getImage()
 
     """
-    robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
+    robot = Fluke2( port="/dev/rfcomm2", bauds=9600, timeout=500 )
     f2Camera = robot.getF2Camera()
 
     cv2.namedWindow( 'Frames', cv2.WINDOW_AUTOSIZE )

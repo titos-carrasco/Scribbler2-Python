@@ -4,12 +4,12 @@
 Instalación de la libreria del S2.
 
 Utilizar para uso normal:
-    - $ pip install .
-    - $ pip3 install .
+    - $ pip install --user .
+    - $ pip3 install --user .
 
 Utilizar para desarrollo:
-    - $ pip install -e .
-    - $ pip3 install -e .
+    - $ pip install --user -e .
+    - $ pip3 install --user -e .
 """
 
 from setuptools import setup
@@ -21,7 +21,7 @@ if __name__ == "__main__":
 
     setup(
         name='S2-python',
-        version='3.2.2',
+        version='3.2.4-pre',
         description='Library for controlling the Parallax Scribbler S2 robot using the Fluke2 card from BetterBots',
         #long_description=long_description,
         url='https://github.com/titos-carrasco/Scribbler2-Python',

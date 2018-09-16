@@ -55,8 +55,42 @@
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
 <h1 class="epydoc">Class Serial</h1><p class="nomargin-top"><span class="codelink"><a href="rcr.utils.Serial-pysrc.html#Serial">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+                     object --+    
+                              |    
+<a href="rcr.utils.SerialInterface.SerialInterface-class.html">SerialInterface.SerialInterface</a> --+
+                                  |
+                                 <strong class="uidshort">Serial</strong>
+</pre>
+
+<hr />
 <p>Clase para interactuar con puerta serial.</p>
 
+<!-- ==================== NESTED CLASSES ==================== -->
+<a name="section-NestedClasses"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Nested Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-NestedClasses"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="rcr.utils.SerialInterface.SerialInterface-class.html">SerialInterface.SerialInterface</a></code></b>:
+      <code><a href="rcr.utils.SerialInterface.SerialInterface.TimeoutException-class.html">TimeoutException</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
 <table class="summary" border="1" cellpadding="3"
@@ -100,7 +134,7 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="close"></a><span class="summary-sig-name">close</span>(<span class="summary-sig-arg">self</span>)</span><br />
+          <td><span class="summary-sig"><a href="rcr.utils.Serial.Serial-class.html#close" class="summary-sig-name">close</a>(<span class="summary-sig-arg">self</span>)</span><br />
       Finaliza la conexion con la puerta serial.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="rcr.utils.Serial-pysrc.html#Serial.close">source&nbsp;code</a></span>
@@ -172,79 +206,11 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="rcr.utils.Serial.Serial-class.html#flushRead" class="summary-sig-name">flushRead</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="rcr.utils.Serial.Serial-class.html#ignoreInput" class="summary-sig-name">ignoreInput</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">timex</span>)</span><br />
       Descarta datos presentes para lectura en la puerta serial.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="rcr.utils.Serial-pysrc.html#Serial.flushRead">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">integer</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="rcr.utils.Serial.Serial-class.html#readUInt8" class="summary-sig-name">readUInt8</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Lee un entero sin signo de 8 bits.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="rcr.utils.Serial-pysrc.html#Serial.readUInt8">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">integer</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="rcr.utils.Serial.Serial-class.html#readUInt16" class="summary-sig-name">readUInt16</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Lee un entero sin signo de 16 bits.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="rcr.utils.Serial-pysrc.html#Serial.readUInt16">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">integer</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="rcr.utils.Serial.Serial-class.html#readUInt32" class="summary-sig-name">readUInt32</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Lee un entero sin signo de 32 bits.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="rcr.utils.Serial-pysrc.html#Serial.readUInt32">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">integer</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="rcr.utils.Serial.Serial-class.html#readInt32" class="summary-sig-name">readInt32</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Lee un entero con signo de 32 bits.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="rcr.utils.Serial-pysrc.html#Serial.readInt32">source&nbsp;code</a></span>
+            <span class="codelink"><a href="rcr.utils.Serial-pysrc.html#Serial.ignoreInput">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -258,10 +224,11 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="lock"></a><span class="summary-sig-name">lock</span>(<span class="summary-sig-arg">self</span>)</span><br />
-      Obtiene acceso exclusivo a una zona.</td>
+          <td><span class="summary-sig"><a name="setDTR"></a><span class="summary-sig-name">setDTR</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Activa/desactiva la linea DTR.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="rcr.utils.Serial-pysrc.html#Serial.lock">source&nbsp;code</a></span>
+            <span class="codelink"><a href="rcr.utils.Serial-pysrc.html#Serial.setDTR">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -269,21 +236,55 @@
       
     </td>
   </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="unlock"></a><span class="summary-sig-name">unlock</span>(<span class="summary-sig-arg">self</span>)</span><br />
-      Libera el acceso exclusivo a una zona.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="rcr.utils.Serial-pysrc.html#Serial.unlock">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="rcr.utils.SerialInterface.SerialInterface-class.html">SerialInterface.SerialInterface</a></code></b>:
+      <code><a href="rcr.utils.SerialInterface.SerialInterface-class.html#lock">lock</a></code>,
+      <code><a href="rcr.utils.SerialInterface.SerialInterface-class.html#readInt32">readInt32</a></code>,
+      <code><a href="rcr.utils.SerialInterface.SerialInterface-class.html#readUInt16">readUInt16</a></code>,
+      <code><a href="rcr.utils.SerialInterface.SerialInterface-class.html#readUInt32">readUInt32</a></code>,
+      <code><a href="rcr.utils.SerialInterface.SerialInterface-class.html#readUInt8">readUInt8</a></code>,
+      <code><a href="rcr.utils.SerialInterface.SerialInterface-class.html#unlock">unlock</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
     </td>
   </tr>
 </table>
@@ -331,6 +332,31 @@
         <li><strong class="pname"><code>bauds</code></strong> (integer) - velocidad de comunicacion</li>
         <li><strong class="pname"><code>timeout</code></strong> (integer) - timeout en milisegundos</li>
     </ul></dd>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="close"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">close</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="rcr.utils.Serial-pysrc.html#Serial.close">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Finaliza la conexion con la puerta serial.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="rcr.utils.SerialInterface.SerialInterface-class.html#close">SerialInterface.SerialInterface.close</a>
+    </dt>
   </dl>
 </td></tr></table>
 </div>
@@ -355,6 +381,9 @@
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>dataBytes</code></strong> (byte, bytearray o equivalente) - bytes a enviar por la puerta serial</li>
     </ul></dd>
+    <dt>Overrides:
+        <a href="rcr.utils.SerialInterface.SerialInterface-class.html#write">SerialInterface.SerialInterface.write</a>
+    </dt>
   </dl>
 </td></tr></table>
 </div>
@@ -383,8 +412,11 @@
         <dd>los bytes leidos</dd>
     <dt>Raises:</dt>
     <dd><ul class="nomargin-top">
-        <li><code><strong class='fraise'>SerialTimeoutException</strong></code> - si no se pudieron leer los bytes solicitados en el tiempo senalado</li>
+        <li><code><strong class='fraise'><a href="rcr.utils.SerialInterface.SerialInterface.TimeoutException-class.html">TimeoutException</a></strong></code> - si no se pudieron leer los bytes solicitados en el tiempo senalado</li>
     </ul></dd>
+    <dt>Overrides:
+        <a href="rcr.utils.SerialInterface.SerialInterface-class.html#read">SerialInterface.SerialInterface.read</a>
+    </dt>
   </dl>
 </td></tr></table>
 </div>
@@ -414,23 +446,26 @@
         <dd>la linea de texto leida sin incluir el NL</dd>
     <dt>Raises:</dt>
     <dd><ul class="nomargin-top">
-        <li><code><strong class='fraise'>SerialTimeoutException</strong></code> - si no se pudieron leer la linea solicitada en el tiempo senalado</li>
+        <li><code><strong class='fraise'><a href="rcr.utils.SerialInterface.SerialInterface.TimeoutException-class.html">TimeoutException</a></strong></code> - si no se pudieron leer la linea solicitada en el tiempo senalado</li>
     </ul></dd>
+    <dt>Overrides:
+        <a href="rcr.utils.SerialInterface.SerialInterface-class.html#readLine">SerialInterface.SerialInterface.readLine</a>
+    </dt>
   </dl>
 </td></tr></table>
 </div>
-<a name="flushRead"></a>
+<a name="ignoreInput"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">flushRead</span>(<span class="sig-arg">self</span>,
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ignoreInput</span>(<span class="sig-arg">self</span>,
         <span class="sig-arg">timex</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="rcr.utils.Serial-pysrc.html#Serial.flushRead">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="rcr.utils.Serial-pysrc.html#Serial.ignoreInput">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
@@ -441,90 +476,9 @@
         <li><strong class="pname"><code>timex</code></strong> (integer) - tiempo en milisegundos que se leeran bytes los que seran 
           descartados</li>
     </ul></dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="readUInt8"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">readUInt8</span>(<span class="sig-arg">self</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="rcr.utils.Serial-pysrc.html#Serial.readUInt8">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Lee un entero sin signo de 8 bits.</p>
-  <dl class="fields">
-    <dt>Returns: integer</dt>
-        <dd>el entero sin signo de 8 bits</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="readUInt16"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">readUInt16</span>(<span class="sig-arg">self</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="rcr.utils.Serial-pysrc.html#Serial.readUInt16">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Lee un entero sin signo de 16 bits.</p>
-  <dl class="fields">
-    <dt>Returns: integer</dt>
-        <dd>el entero sin signo de 16 bits</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="readUInt32"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">readUInt32</span>(<span class="sig-arg">self</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="rcr.utils.Serial-pysrc.html#Serial.readUInt32">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Lee un entero sin signo de 32 bits.</p>
-  <dl class="fields">
-    <dt>Returns: integer</dt>
-        <dd>el entero sin signo de 32 bits</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="readInt32"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">readInt32</span>(<span class="sig-arg">self</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="rcr.utils.Serial-pysrc.html#Serial.readInt32">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Lee un entero con signo de 32 bits.</p>
-  <dl class="fields">
-    <dt>Returns: integer</dt>
-        <dd>el entero con signo de 32 bits</dd>
+    <dt>Overrides:
+        <a href="rcr.utils.SerialInterface.SerialInterface-class.html#ignoreInput">SerialInterface.SerialInterface.ignoreInput</a>
+    </dt>
   </dl>
 </td></tr></table>
 </div>
@@ -553,7 +507,7 @@
   <tr>
     <td align="left" class="footer">
     Generated by Epydoc 3.0.1
-    on Thu Feb 15 00:12:29 2018
+    on Sun Sep 16 22:53:18 2018
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

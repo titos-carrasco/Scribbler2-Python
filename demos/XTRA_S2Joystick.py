@@ -3,6 +3,8 @@
 
 """Demo de control del S2 via josystick e interfaz grafica."""
 
+from __future__ import print_function
+
 import gi
 gi.require_version( 'Gtk', '3.0' )
 from gi.repository import Gtk
@@ -10,7 +12,8 @@ from threading import Thread
 import pygame
 import time
 
-from rcr.robots.scribbler2.Scribbler2 import Scribbler2
+#from rcr.robots.scribbler2.Scribbler2 import Scribbler2
+from rcr.robots.fluke2.Fluke2 import Fluke2
 
 class TestJoystick:
     """Aplicacion para controlar el S2 via interfaz grafica y joystick."""
@@ -57,7 +60,9 @@ class TestJoystick:
         if(self.Connect.get_active()):
             self._SbSetMessage("Conectando...")
             try:
-                self.rob = Scribbler2(self.Port.get_text(), 9600, 500)
+                #self.rob = Scribbler2( port=self.Port.get_text(), bauds=38400, timeout=500, dtr=False )
+                self.rob = Fluke2( port=self.Port.get_text(), bauds=9600, timeout=500 )
+               #self.rob = Net2( self.Port.get_text(), 1500, 500 )
             except Exception as e:
                 self.Connect.set_active(False)
                 self._SbSetMessage("Error al conectar con el Scribbler2")

@@ -3,20 +3,22 @@
 
 """Test de los motores servo de la tarjeta F2."""
 
-from rcr.robots.scribbler2.Scribbler2 import Scribbler2
+from __future__ import print_function
+
+from rcr.robots.fluke2.Fluke2 import Fluke2
 from rcr.utils import Utils
 
 def main():
     """Realiza las pruebas de los motores servos de la tarjeta F2.
 
     Las pruebas consideran:
-        robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
+        robot = Fluke2( port="/dev/rfcomm2", bauds=9600, timeout=500 )
         f2Servos = robot.getF2Servos()
 
         f2Servos.setServo()
 
     """
-    robot = Scribbler2( "/dev/rfcomm2", 9600, 500 )
+    robot = Fluke2( port="/dev/rfcomm2", bauds=9600, timeout=500 )
     f2Servos = robot.getF2Servos()
 
     id = 0;
