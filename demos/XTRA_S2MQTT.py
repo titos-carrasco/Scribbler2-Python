@@ -13,13 +13,24 @@ from rcr.robots.fluke2.Fluke2 import Fluke2
 from rcr.utils import Utils
 import json
 import time
-import queue
 import unicodedata
+try:
+    import Queue as queue
+except:
+    import queue
 
 MQTT_SERVER = 'test.mosquitto.org'
+MQTT_PORT = 1883
 S2_TOPIC  = 'rcr/S2'
 
 messages = queue.Queue( 1 )
+
+def mqtt_on_connect( client, userdata, flag, rc ):
+    """Invocada al conectar a servidor MQTT."""
+    global S2_TOPIC, MQTT_SERVER, MQTT_PORT
+
+    client.subscribe( S2_TOPIC )
+    print( "[S2] Esperando en %s:%s - %s" % ( MQTT_SERVER, MQTT_PORT, S2_TOPIC ) )
 
 def mqtt_on_message( client, userdata, message ):
     """Invocada al recibir mensaje MQTT en algun topico suscrito."""
@@ -35,30 +46,27 @@ def mqtt_on_message( client, userdata, message ):
     try:
         messages.put_nowait( message )
     except queue.Full:
-            pass
+        pass
 
-def mqtt_on_connect( client, userdata, flag, rc ):
-    """Invocada al conectar a servidor MQTT."""
-    global S2_TOPIC, MQTT_SERVER
-
-    client.subscribe( S2_TOPIC )
-    print( "[S2] Esperando en %s - %s" % ( MQTT_SERVER, S2_TOPIC ) )
-    print( "Comandos: cmd tiempo_en_segundo. Por ejemplo" )
-    print( "  left 5" )
-    print( "  right 5" )
-    print( "  forward 5" )
-    print( "  backwward 5" )
-    print( "  exit" )
-    print( "---" )
 
 def main():
     """Realiza pruebas del S2 recibiendo comandos via MQTT."""
-    global mqtt_client, MQTT_SERVER, messages
+    global mqtt_client, MQTT_SERVER, MQTT_PORT, messages
+
+    print( "Comandos:" )
+    print( "  name" )
+    print( "  left"  )
+    print( "  right" )
+    print( "  forward" )
+    print( "  backwward" )
+    print( "  stop" )
+    print( "  exit" )
+    print( "---" )
 
     mqtt_client = paho.Client()
     mqtt_client.on_connect = mqtt_on_connect
     mqtt_client.on_message = mqtt_on_message
-    mqtt_client.connect( MQTT_SERVER, 1883 )
+    mqtt_client.connect( MQTT_SERVER, MQTT_PORT )
     mqtt_client.loop_start()
     s2 = None
     abort = False
@@ -67,7 +75,6 @@ def main():
         robot = Fluke2( port="/dev/rfcomm2", bauds=9600, timeout=500 )
         #robot = Net2( "192.168.145.1", 1500, 500 )
     except Exception as e:
-        print( e )
         abort = True
     while( not abort ):
         message = messages.get()
@@ -79,32 +86,17 @@ def main():
         if( cmd == 'exit' ):
             abort = True
         elif( cmd == 'name' ):
-            print( s2.s2Inner.getName() )
-        else:
-            delay = 0
-            try:
-                delay = float( words[1] )
-            except Exception as e:
-                #print( "[S2]", e )
-                continue
-            if( delay <= 0 ):
-                continue
-            elif( cmd == 'left' ):
-                robot.getS2Motors().setMotors( -100, 100 )
-                time.sleep( delay )
-                robot.getS2Motors().setMotors( 0, 0 )
-            elif( cmd == 'right' ):
-                robot.getS2Motors().setMotors( 100, -100 )
-                time.sleep( delay )
-                robot.getS2Motors().setMotors( 0, 0 )
-            elif( cmd == 'forward' ):
-                robot.getS2Motors().setMotors( 100, 100 )
-                time.sleep( delay )
-                robot.getS2Motors().setMotors( 0, 0 )
-            elif( cmd == 'backward' ):
-                robot.getS2Motors().setMotors( -100, -100 )
-                time.sleep( delay )
-                robot.getS2Motors().setMotors( 0, 0 )
+            print( robot.getS2Inner().getName() )
+        elif( cmd == 'left' ):
+            robot.getS2Motors().setMotors( -100, 100 )
+        elif( cmd == 'right' ):
+            robot.getS2Motors().setMotors( 100, -100 )
+        elif( cmd == 'forward' ):
+            robot.getS2Motors().setMotors( 100, 100 )
+        elif( cmd == 'backward' ):
+            robot.getS2Motors().setMotors( -100, -100 )
+        elif( cmd == 'stop' ):
+            robot.getS2Motors().setMotors( 0, 0 )
 
     mqtt_client.loop_stop()
     robot.close()
