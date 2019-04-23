@@ -29,7 +29,7 @@ def main():
     for i in range(10):
         image = f2Camera.getImage( f2Camera.IMAGE_GRAYJPEG_FAST )
         print( "Image:" + str( image ) )
-        img = cv2.imdecode( np.fromstring( str(image.image), np.uint8 ), cv2.IMREAD_ANYCOLOR )
+        img = cv2.imdecode( np.frombuffer( image.image, np.uint8 ), cv2.IMREAD_ANYCOLOR )
         cv2.imshow( 'Frames', img )
         k = cv2.waitKey(5)
     cv2.destroyAllWindows()

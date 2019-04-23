@@ -19,7 +19,7 @@ try:
 except:
     import queue
 
-MQTT_SERVER = 'test.mosquitto.org'
+MQTT_SERVER = '192.168.196.201'
 MQTT_PORT = 1883
 S2_TOPIC  = 'rcr/S2'
 
@@ -54,12 +54,12 @@ def main():
     global mqtt_client, MQTT_SERVER, MQTT_PORT, messages
 
     print( "Comandos:" )
-    print( "  name" )
-    print( "  left"  )
-    print( "  right" )
-    print( "  forward" )
-    print( "  backwward" )
-    print( "  stop" )
+    print( "  nombre" )
+    print( "  izquierda"  )
+    print( "  derecha" )
+    print( "  avanza" )
+    print( "  retrocede" )
+    print( "  detente" )
     print( "  exit" )
     print( "---" )
 
@@ -70,6 +70,7 @@ def main():
     mqtt_client.loop_start()
     s2 = None
     abort = False
+    robot = None
     try:
         #robot = Scribbler2( port="/dev/ttyUSB1", bauds=38400, timeout=500, dtr=False )
         robot = Fluke2( port="/dev/rfcomm2", bauds=9600, timeout=500 )
@@ -85,21 +86,22 @@ def main():
         cmd = words[0]
         if( cmd == 'exit' ):
             abort = True
-        elif( cmd == 'name' ):
+        elif( cmd == 'nombre' ):
             print( robot.getS2Inner().getName() )
-        elif( cmd == 'left' ):
+        elif( cmd == 'izquierda' ):
             robot.getS2Motors().setMotors( -100, 100 )
-        elif( cmd == 'right' ):
+        elif( cmd == 'derecha' ):
             robot.getS2Motors().setMotors( 100, -100 )
-        elif( cmd == 'forward' ):
+        elif( cmd == 'avanza' ):
             robot.getS2Motors().setMotors( 100, 100 )
-        elif( cmd == 'backward' ):
+        elif( cmd == 'retrocede' ):
             robot.getS2Motors().setMotors( -100, -100 )
-        elif( cmd == 'stop' ):
+        elif( cmd == 'detente' ):
             robot.getS2Motors().setMotors( 0, 0 )
 
     mqtt_client.loop_stop()
-    robot.close()
+    if( robot is not None ):
+        robot.close()
 
 if( __name__ == "__main__" ):
     main()

@@ -6,8 +6,8 @@
 from __future__ import print_function
 
 #from rcr.robots.scribbler2.Scribbler2 import Scribbler2
-#from rcr.robots.fluke2.Fluke2 import Fluke2
-from rcr.robots.net2.Net2 import Net2
+from rcr.robots.fluke2.Fluke2 import Fluke2
+#from rcr.robots.net2.Net2 import Net2
 from rcr.utils import Utils
 
 def main():
@@ -31,8 +31,8 @@ def main():
 
     """
     #robot = Scribbler2( port="/dev/ttyUSB1", bauds=38400, timeout=500, dtr=False )
-    #robot = Fluke2( port="/dev/rfcomm2", bauds=9600, timeout=500 )
-    robot = Net2( host="192.168.145.1", port=1500, timeout=500 )
+    robot = Fluke2( port="/dev/rfcomm2", bauds=9600, timeout=500 )
+    #robot = Net2( host="192.168.145.1", port=1500, timeout=500 )
     s2Inner = robot.getS2Inner()
 
     print( "getInfo: " + str( s2Inner.getInfo() ) )
