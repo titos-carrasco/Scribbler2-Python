@@ -3,16 +3,14 @@
 
 """Demo de control del S2 desde un controlador MIDI.
 
-Requiere del paquete rtmidi (pip install python-rtmidi)
+Requiere del paquete python-rtmidi (pip install python-rtmidi)
 """
 
-from __future__ import print_function
 
 import rtmidi
 
-#from rcr.robots.scribbler2.Scribbler2 import Scribbler2
-from rcr.robots.fluke2.Fluke2 import Fluke2
-from rcr.utils import Utils
+#from s2.Scribbler2 import Scribbler2
+from s2.Fluke2 import Fluke2
 
 
 def main():
@@ -22,9 +20,8 @@ def main():
     midiIn.open_virtual_port("S2 Control Port")
 
     print( "Conectando con el Scribbler2" )
-    #robot = Scribbler2( port="/dev/ttyUSB1", bauds=38400, timeout=500, dtr=False )
-    robot = Fluke2( port="/dev/rfcomm2", bauds=9600, timeout=500 )
-    #robot = Net2( "192.168.145.1", 1500, 500 )
+    #robot = Scribbler2( port="/dev/ttyUSB0", bauds=38400, timeout=500, dtr=False )
+    robot = Fluke2( port="/dev/rfcomm2", timeout=500 )
     s2Motors = robot.getS2Motors()
 
     print( "Conecte la puerta del Controlador Midi a la puerta virtual creada" )

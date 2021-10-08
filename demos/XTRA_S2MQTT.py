@@ -5,12 +5,11 @@
 
 Requiere de paho (pip install paho-mqtt)
 """
-from __future__ import print_function
 
 import paho.mqtt.client as paho
-#from rcr.robots.scribbler2.Scribbler2 import Scribbler2
-from rcr.robots.fluke2.Fluke2 import Fluke2
-from rcr.utils import Utils
+#from s2.Scribbler2 import Scribbler2
+from s2.Fluke2 import Fluke2
+
 import json
 import time
 import unicodedata
@@ -19,7 +18,7 @@ try:
 except:
     import queue
 
-MQTT_SERVER = '192.168.196.201'
+MQTT_SERVER = 'test.mosquitto.org'
 MQTT_PORT = 1883
 S2_TOPIC  = 'rcr/S2'
 
@@ -72,9 +71,8 @@ def main():
     abort = False
     robot = None
     try:
-        #robot = Scribbler2( port="/dev/ttyUSB1", bauds=38400, timeout=500, dtr=False )
-        robot = Fluke2( port="/dev/rfcomm2", bauds=9600, timeout=500 )
-        #robot = Net2( "192.168.145.1", 1500, 500 )
+        #robot = Scribbler2( port="/dev/ttyUSB0", bauds=38400, timeout=500, dtr=False )
+        robot = Fluke2( port="/dev/rfcomm2", timeout=500 )
     except Exception as e:
         abort = True
     while( not abort ):

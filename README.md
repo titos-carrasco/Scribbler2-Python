@@ -1,34 +1,26 @@
-Scribbler2-Python
-=================
+# Scribbler2-Python
 
-![](Images/snap.png)
-![](Images/S2-1.png)
-![](Images/S2-2.jpg)
-
-
-Python (2.7/3.x) library to control the IPRE Scribbler2 robot ([www.parallax.com](https://www.parallax.com/product/28136)):
-* Implements the IPRE Scribbler2's functionalities (MYRO Library)
-* Implements the IPRE [Fluke2](http://www.betterbots.com/cshop/fluke2)'s functionalities
-* Implements WIFI access to the Scribbler2 robot using a NodeMCU controller
-* Add support for [Snap](https://snap.berkeley.edu/) (block programming languaje)
-
-Notes about using the Fluke2 card:
-* The Fluke2 card has a 3000 ms timeout, so you will need a proper timout in some operations
-* You will need to stop ModemManager (Linux) because it blocks the access to the device
+Librería para controlar el robot Scribbler2  de Parallax:
+- Implementa todas las funcionalidades de la librería MYRO del IPRE
+- Implementa las funcionalidades de la tarjeta [Fluke2](http://www.betterbots.com/cshop/fluke2)
+    - La tarjeta Fluke usa un timeout de 300ms por lo cual se deberá utilizar un timeout apropiado en algunos métodos
+    - En Linux, ModemManager bloquea el acceso bluetooth a la tarjeta Fluke por lo cual debe ser desactivado
 
 
-## Instalation
-1. Install `pyserial`
-2. Download the ZIP library file from [GitHub](https://github.com/titos-carrasco/Scribbler2-Python)
-2. Run `pip install --user Scribbler2-Python-master.zip`
+## Instalación
+1. Requiere el paquete pyserial (`pyserial`)
+2. Descargue el último release desde [GitHub](https://github.com/titos-carrasco/Scribbler2-Python)
+2. Instale el wheel con `pip install s2-3-py3-none-any.whl`
 
 
 ## Demos
-See the `demos/` directory
+- Descarge los demos desde la zona de release de github
 
-## Development
-* `Geany`
-* `pydocstyle`
-* `epydoc -v --html -o doc/ *.py rcr/`
+
+## Desarrollo
+- La librería se puede instalar para desarrollo con `pip3 install --user -e .`
+- Verificar formato del código con `pydocstyle s2/`
+- La documentación se genera con `epydoc -v --html -o doc/ *.py s2/`
+- El wheel debe ser generado con `python setup.py bdist_wheel`
 
 
