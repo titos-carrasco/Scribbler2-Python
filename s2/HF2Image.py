@@ -1,28 +1,27 @@
 # -*- coding: utf-8 -*-
 
-"""Clase de ayuda (helper) para entregar informacion de la imagen capturada.
+"""Clase de ayuda (helper) para retornar informacion del S2.
 
-Es creada por la F2 y solo es util de lectura en la aplicacion
-
+Es creada exclusivamente por metodos de la clase **Fluke2** y retornadas
+a su invocador. Sus atributos pueden ser accesados directamente.
 """
+
 class HF2Image:
-    """Clase helper con la imagen capturada desde la F2."""
+    """Imagen capturada desde la F2.
 
-    def __init__( self, width, height, image ):
-        """
-        Inicializa los elemenos de lectura para la aplicacion.
+    ```
+    - width :int       - ancho de la imagen
+    - height:int       - alto de la imagen
+    - image :bytearray - bytes que componen la imagen
+    ```
+    """
 
-        @type width: integer
-        @param width: tamano de la imagen
-        @type height: integer
-        @param height: alto de la imagen
-        @type image: bytearray
-        @param image: la imagen capturada
-        """
+    def __init__(self, width:int, height:int, image:bytearray)->None:
+        """Constructor."""
         self.width = width
         self.height = height
         self.image = image
 
-    def __str__( self ):
+    def __str__(self):
         """Representacion modo texto de la clase."""
-        return "F2Camera(%d, %d, %d)" % ( self.width, self.height, len( self.image ) )
+        return "F2Camera(%d, %d, %d)" % (self.width, self.height, len(self.image))

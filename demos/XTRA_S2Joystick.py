@@ -64,12 +64,12 @@ class TestJoystick:
                 self.Connect.set_active(False)
                 self._SbSetMessage("Error al conectar con el Scribbler2")
                 return
-            self._StoreSensors( self.rob.getS2Inner().getAllSensors() )
+            self._StoreSensors( self.rob.getAllSensors() )
             self.MoveButtons.set_sensitive(True)
             self.Speed.set_sensitive(True)
             self.Port.set_sensitive(False)
-            self._SbSetMessage("Conectado a %s - Mi nombre es '%s'" % (self.Port.get_text(), self.rob.getS2Inner().getName()))
-            self.Info.set_label(self.rob.getS2Inner().getInfo())
+            self._SbSetMessage("Conectado a %s - Mi nombre es '%s'" % (self.Port.get_text(), self.rob.getName()))
+            self.Info.set_label(self.rob.getInfo())
             self.Connect.set_label("Desconectar")
 
             # Inicia el hilo de los sensores
@@ -110,39 +110,39 @@ class TestJoystick:
 
     def OnUp(self, *args):
         """Procesa el evento de avanzar - Up."""
-        self._StoreSensors( self.rob.getS2Motors().setMotors(self.SpeedValue, self.SpeedValue) )
+        self._StoreSensors( self.rob.setMotors(self.SpeedValue, self.SpeedValue) )
 
     def OnUpLeft(self, *args):
         """Procesa el evento avanzar izquierda - UpLeft."""
-        self._StoreSensors( self.rob.getS2Motors().setMotors(self.SpeedValue/4, self.SpeedValue) )
+        self._StoreSensors( self.rob.setMotors(self.SpeedValue/4, self.SpeedValue) )
 
     def OnUpRight(self, *args):
         """Procesa el evento de avanzar derecha - UpRight."""
-        self._StoreSensors( self.rob.getS2Motors().setMotors(self.SpeedValue, self.SpeedValue/4) )
+        self._StoreSensors( self.rob.setMotors(self.SpeedValue, self.SpeedValue/4) )
 
     def OnDown(self, *args):
         """Procesa el evento de retroceder - Down."""
-        self._StoreSensors( self.rob.getS2Motors().setMotors(-self.SpeedValue, -self.SpeedValue) )
+        self._StoreSensors( self.rob.setMotors(-self.SpeedValue, -self.SpeedValue) )
 
     def OnDownLeft(self, *args):
         """Procesa el evento de retroceder izquierda - DownLeft."""
-        self._StoreSensors( self.rob.getS2Motors().setMotors(-self.SpeedValue/4, -self.SpeedValue) )
+        self._StoreSensors( self.rob.setMotors(-self.SpeedValue/4, -self.SpeedValue) )
 
     def OnDownRight(self, *args):
         """Procesa el evento de retroceder derecha - DownRight."""
-        self._StoreSensors( self.rob.getS2Motors().setMotors(-self.SpeedValue, -self.SpeedValue/4) )
+        self._StoreSensors( self.rob.setMotors(-self.SpeedValue, -self.SpeedValue/4) )
 
     def OnLeft(self, *args):
         """Procesa el evento mover izquierda - Left."""
-        self._StoreSensors( self.rob.getS2Motors().setMotors(-self.SpeedValue, self.SpeedValue) )
+        self._StoreSensors( self.rob.setMotors(-self.SpeedValue, self.SpeedValue) )
 
     def OnRight(self, *args):
         """Procesa el evento de mover derecha - Right."""
-        self._StoreSensors( self.rob.getS2Motors().setMotors(self.SpeedValue, -self.SpeedValue) )
+        self._StoreSensors( self.rob.setMotors(self.SpeedValue, -self.SpeedValue) )
 
     def OnStop(self, *args):
         """Procesa el evento de detener - Stop."""
-        self._StoreSensors( self.rob.getS2Motors().setMotorsOff() )
+        self._StoreSensors( self.rob.setMotorsOff() )
 
     def _SbSetMessage(self, msg=None):
         """Coloca un mensaje en la barra de estado."""
@@ -161,7 +161,7 @@ class TestJoystick:
             try:
                 t = time.time()
                 if((t-self.time_sensors)>1):
-                    self._StoreSensors( self.rob.getS2Inner().getAllSensors() )
+                    self._StoreSensors( self.rob.getAllSensors() )
                 self.IRLeft.set_label( str( self.sensors.irLeft) )
                 self.IRRight.set_label( str( self.sensors.irRight) )
                 self.LightLeft.set_label( str( self.sensors.lightLeft) )

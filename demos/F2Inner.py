@@ -9,20 +9,20 @@ def main():
     """Realiza las pruebas de los elementos internos de la tarjeta F2."""
 
     robot = Fluke2( port="/dev/rfcomm2", timeout=500 )
-    f2Inner = robot.getF2Inner()
 
-    print( "getVersion: "   , f2Inner.getVersion() )
-    print( "identifyRobot: ", f2Inner.identifyRobot() )
-    print( "getBattery: "   , f2Inner.getBattery() )
+    print( "getVersion    : ", robot.getVersion() )
+    print( "identifyRobot : ", robot.identifyRobot() )
+    print( "getBattery    : ", robot.getBattery() )
     print( "setForwardness: " )
-    f2Inner.setForwardness( f2Inner.SCRIBBLER_FORWARD )
+    robot.setForwardness( robot.SCRIBBLER_FORWARD )
     print( "setForwardness: " )
-    f2Inner.setForwardness( f2Inner.FLUKE_FORWARD )
+    robot.setForwardness( robot.FLUKE_FORWARD )
     print( "setForwardness: " )
-    f2Inner.setForwardness( f2Inner.SCRIBBLER_FORWARD )
-    print( "getErrors: " )
-    print( f2Inner.getErrors() )
-    f2Inner.resetScribbler()
+    robot.setForwardness( robot.SCRIBBLER_FORWARD )
+    print( "getErrors     : " )
+    print( robot.getErrors() )
+    robot.resetScribbler()
+
     robot.close()
 
 

@@ -13,24 +13,24 @@ def main():
 
     #robot = Scribbler2( port="/dev/ttyUSB0", bauds=38400, timeout=500, dtr=False )
     robot = Fluke2( port="/dev/rfcomm2", timeout=500 )
-    s2LEDs = robot.getS2LEDs()
 
-    print( "setLeftLed: "  , s2LEDs.setLeftLed( True ) )
+    print( "setLeftLed  : ", robot.setLeftLed( True ) )
     time.sleep( 2.0 )
-    print( "setLeftLed: "  , s2LEDs.setLeftLed( False ) )
+    print( "setLeftLed  : ", robot.setLeftLed( False ) )
     time.sleep( 2.0 )
-    print( "setCenterLed: ", s2LEDs.setCenterLed( True ) )
+    print( "setCenterLed: ", robot.setCenterLed( True ) )
     time.sleep( 2.0 )
-    print( "setCenterLed: ", s2LEDs.setCenterLed( False ) )
+    print( "setCenterLed: ", robot.setCenterLed( False ) )
     time.sleep( 2.0 )
-    print( "setRightLed: " , s2LEDs.setRightLed( True ) )
+    print( "setRightLed : ", robot.setRightLed( True ) )
     time.sleep( 2.0 )
-    print( "setRightLed: " , s2LEDs.setRightLed( False ) )
+    print( "setRightLed : ", robot.setRightLed( False ) )
     time.sleep( 2.0 )
-    print( "setAllLed: "   , s2LEDs.setAllLed( 1, 1, 1 ) )
+    print( "setAllLed   : ", robot.setAllLed( 1, 1, 1 ) )
     time.sleep( 2.0 )
-    print( "setAllLed: "   , s2LEDs.setAllLed( 0, 0, 0 ) )
+    print( "setAllLed   : ", robot.setAllLed( 0, 0, 0 ) )
     time.sleep( 2.0 )
+
     robot.close()
 
 

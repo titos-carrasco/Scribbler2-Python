@@ -11,14 +11,14 @@ def main():
 
     #robot = Scribbler2( port="/dev/ttyUSB0", bauds=38400, timeout=500, dtr=False )
     robot = Fluke2( port="/dev/rfcomm2", timeout=500 )
-    s2IRSensors = robot.getS2IRSensors()
 
-    for i in range( 10 ):
-        print( "getIRLeft: " , s2IRSensors.getIRLeft() )
-        print( "getIRRight: ", s2IRSensors.getIRRight() )
-        print( "getAllIR: "  , s2IRSensors.getAllIR() )
-        print( "getIrEx(0): ", s2IRSensors.getIrEx( 0, 128 ) )
-        print( "getIrEx(1): ", s2IRSensors.getIrEx( 1, 128 ) )
+    for i in range( 30 ):
+        print( "getIRLeft : ", robot.getIRLeft() )
+        print( "getIRRight: ", robot.getIRRight() )
+        print( "getAllIR  : ", robot.getAllIR() )
+        print( "getIrEx(0): ", robot.getIrEx( 0, 128 ) )
+        print( "getIrEx(1): ", robot.getIrEx( 1, 128 ) )
+
     robot.close()
 
 

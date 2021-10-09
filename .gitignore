@@ -56,4 +56,5 @@ docs/_build/
 # PyBuilder
 target/
 
-00 Revisar
+00 Revisar/
+docs/

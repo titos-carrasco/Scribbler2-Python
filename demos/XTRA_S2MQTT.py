@@ -85,17 +85,17 @@ def main():
         if( cmd == 'exit' ):
             abort = True
         elif( cmd == 'nombre' ):
-            print( robot.getS2Inner().getName() )
+            print( robot.getName() )
         elif( cmd == 'izquierda' ):
-            robot.getS2Motors().setMotors( -100, 100 )
+            robot.setMotors( -100, 100 )
         elif( cmd == 'derecha' ):
-            robot.getS2Motors().setMotors( 100, -100 )
+            robot.setMotors( 100, -100 )
         elif( cmd == 'avanza' ):
-            robot.getS2Motors().setMotors( 100, 100 )
+            robot.setMotors( 100, 100 )
         elif( cmd == 'retrocede' ):
-            robot.getS2Motors().setMotors( -100, -100 )
+            robot.setMotors( -100, -100 )
         elif( cmd == 'detente' ):
-            robot.getS2Motors().setMotors( 0, 0 )
+            robot.setMotors( 0, 0 )
 
     mqtt_client.loop_stop()
     if( robot is not None ):

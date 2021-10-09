@@ -1,25 +1,25 @@
 # -*- coding: utf-8 -*-
 
-"""Clase de ayuda (helper) para entregar informacion del estado del S2.
+"""Clase de ayuda (helper) para retornar informacion del S2.
 
-Es creada por el S2 y solo es util de lectura en la aplicacion
-
+Es creada exclusivamente por metodos de la clase **Scribbler2** y retornadas
+a su invocador. Sus atributos pueden ser accesados directamente.
 """
+
 class HS2State:
-    """Clase helper para el S2 con estado interno."""
+    """Estado interno del S2.
 
-    def __init__( self, inPins, outPins ):
-        """
-        Inicializa los elementos de lectura para la aplicacion.
+    ```
+    inPins :int - El valor de pines de entrada (bitwise)
+    outPins:int - El valor de pines de salida (bitwise)
+    ```
+    """
 
-        @type inPins: integer
-        @param inPins: valor de pines de entrada (bitwise)
-        @type outPins: integer
-        @param outPins: valor de pines de salida (bitwise)
-        """
-        self.inPins = inPins
-        self.outPins = outPins
+    def __init__(self, inPins:int, outPins:int)->None:
+        """Constructor."""
+        self.inPins:int = inPins
+        self.outPins:int = outPins
 
-    def __str__( self ):
+    def __str__(self):
         """Representacion modo texto de la clase."""
-        return "HS2State(%d, %d)" % ( self.inPins, self.outPins )
+        return "HS2State(%d, %d)" % (self.inPins, self.outPins)

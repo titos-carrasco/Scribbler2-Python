@@ -1,25 +1,25 @@
 # -*- coding: utf-8 -*-
 
-"""Clase de ayuda (helper) para entregar informacion de los encoders del S2.
+"""Clase de ayuda (helper) para retornar informacion del S2.
 
-Es creada por el S2 y solo es util de lectura en la aplicacion
-
+Es creada exclusivamente por metodos de la clase **Scribbler2** y retornadas
+a su invocador. Sus atributos pueden ser accesados directamente.
 """
+
 class HS2Encoders:
-    """Clase helper con datos de los encoders del S2."""
+    """Valores de los encoders de las ruedas del S2.
 
-    def __init__( self, left, right ):
-        """
-        Inicializa los elementos de lectura para la aplicacion.
+    ```
+    left :int - Valor del encoder de la rueda izquierda
+    right:int - Valor del encoder de la rueda derecha
+    ```
+    """
 
-        @type left: integer
-        @param left: valor del encoder izquierdo
-        @type right: integer
-        @param right: valor del encoder derecho
-        """
+    def __init__(self, left:int, right:int)->None:
+        """Constructor."""
         self.left = left
         self.right = right
 
-    def __str__( self ):
+    def __str__(self):
         """Representacion modo texto de la clase."""
-        return "HS2Encoders(%d, %d)" % ( self.left, self.right )
+        return "HS2Encoders(%d, %d)" % (self.left, self.right)

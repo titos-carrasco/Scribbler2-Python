@@ -7,284 +7,889 @@ import time
 
 from s2.Serial import Serial
 from s2.HS2Sensors import HS2Sensors
-from s2.S2Inner import S2Inner
-from s2.S2IRSensors import S2IRSensors
-from s2.S2LEDs import S2LEDs
-from s2.S2LightSensors import S2LightSensors
-from s2.S2LineSensors import S2LineSensors
-from s2.S2Microphone import S2Microphone
-from s2.S2Motors import S2Motors
-from s2.S2Speaker import S2Speaker
-from s2.S2Path import S2Path
+from s2.HS2State import HS2State
+from s2.HS2Infrared import HS2Infrared
+from s2.HS2Lights import HS2Lights
+from s2.HS2LineSensors import HS2LineSensors
+from s2.HS2MotorStats import HS2MotorStats
+from s2.HS2Encoders import HS2Encoders
 
-class Scribbler2( object ):
-    """Clase central de interaccion con el S2."""
+class Scribbler2(object):
+    """Clase para interactuar con un Sscrbbler2."""
 
     DATA_LENGTH = 8
     PACKET_LENGTH = 9
 
-    def __init__( self, port=None, bauds=38400, timeout=500, dtr=None ):
-        """
-        Corresponde al constructor de la clase.
-
-        type port: string
-        param port: la puerta a conectar con el S2
-        type bauds: integer
-        param bauds: velocidad de la conexion
-        type timeout: integer
-        param timeout: timeout para cada comando
-        """
+    def __init__(self, port:str, bauds:int=38400,
+                       timeout:int=500, dtr:bool=None)->None:
+        """Inicializa el objeto y lo conecta al S2."""
         self.mylock = threading.Lock()
-        self.s2Inner = S2Inner( self )
-        self.s2IRSensors = S2IRSensors( self )
-        self.s2LEDs = S2LEDs( self )
-        self.s2LightSensors = S2LightSensors( self )
-        self.s2LineSensors = S2LineSensors( self )
-        self.s2Microphone = S2Microphone( self )
-        self.s2Motors = S2Motors( self )
-        self.s2Speaker = S2Speaker( self )
-        self.s2Path = S2Path( self )
+        self.conn = Serial(port, bauds, timeout)
+        if(not dtr is None):
+            self.conn.setDTR(dtr)
+        time.sleep(2.0)
+        self.conn.ignoreInput(1000)
 
-        self.conn = Serial( port, bauds, timeout )
-        if( not dtr is None ):
-            self.conn.setDTR( dtr )
-        time.sleep( 2.0 )
-        self.conn.ignoreInput( 1000 )
-
-    def close( self ):
-        """Cierra la conexion al S2."""
+    def close(self)->None:
+        """Cierra la conexion hacia el S2."""
         try:
-            self.lock()
+            self._lock()
             self.conn.close()
         except Exception as e:
             raise
         finally:
-            self.unlock()
+            self._unlock()
 
-    def getS2Inner( self ):
+    def getInfo(self)->str:
+        """Obtiene datos informativos del S2."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(80)
+            self._sendS2Command(packet, 0)
+            return self._getLineResponse(128)
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def getPass(self)->str:
+        """Obtiene la clave actualmente almacenada en el S2."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(50)
+            self._sendS2Command(packet, 0)
+            pass1 = self._getBytesResponse(8)
+            packet[0] = 51
+            self._sendS2Command(packet, 0)
+            pass2 = self._getBytesResponse(8)
+            return (pass1 + pass2).decode('ascii')
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def getName(self)->str:
+        """Obtiene el nombre del S2."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(78)
+            self._sendS2Command(packet, 0)
+            name1 = self._getBytesResponse(8)
+            packet[0] = 64
+            self._sendS2Command(packet, 0)
+            name2 = self._getBytesResponse(8)
+            return (name1 + name2).decode('ascii')
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def getState(self)->HS2State:
+        """Obtiene estado del S2."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(77)
+            self._sendS2Command(packet, 0)
+            return HS2State(self._getUInt8Response(), self._getUInt8Response())
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def getData(self)->bytearray:
+        """Obtiene data almacenada en el S2."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(81)
+            self._sendS2Command(packet, 0)
+            return self._getBytesResponse(self.DATA_LENGTH)
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def setPass(self, passw:str)->HS2Sensors:
+        """Establece la clave ('passwd') a almacenar en el S2."""
+        try:
+            self._lock()
+            bPass = passw.encode('ascii')
+            packet = self._makeS2Packet(55)
+            i = 0
+            while(i<len(bPass) and i<self.DATA_LENGTH):
+                packet[i+1] = bPass[i]
+                i = i + 1
+            while(i<self.DATA_LENGTH):
+                packet[i+1] = 32
+                i = i + 1
+            self._sendS2Command(packet, 0)
+            self._getS2SensorsResponse()
+
+            packet[0] = 56
+            j = 0
+            while(i<len(bPass) and j<self.DATA_LENGTH):
+                packet[j+1] = bPass[i]
+                i = i + 1
+                j = j + 1
+            while(j<self.DATA_LENGTH):
+                packet[j+1] = 32
+                j = j + 1
+            self._sendS2Command(packet, 0)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def setSingleData(self, pos:int, data:int)->HS2Sensors:
+        """Almacena un dato en el S2.
+
+        El dato (0 a 255) es almacenado en la zona de almacenamiento interno
+        del S2 en la posicion dada por 'pos' (0 a 8)
         """
-        Obtiene acceso a los estados internos del S2.
+        try:
+            self._lock()
+            packet = self._makeS2Packet(96)
+            packet[1] = pos & 0x07
+            packet[2] = data & 0xFF
+            self._sendS2Command(packet, 0)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
 
-        @rtype: L{S2Inner}
-        @return: objeto con acceso a los datos internos del S2
+    def setData(self, data:list)->HS2Sensors:
+        """Almacena un grupo de datos (8) en la zona interna del S2."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(97)
+            i = 0
+            while(i<len(data) and  i<self.DATA_LENGTH):
+                packet[i+1] = data[i]
+                i = i + 1
+            self._sendS2Command(packet, 0)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def setName(self,  name:str)->HS2Sensors:
+        """Establece el nombre del S2."""
+        try:
+            self._lock()
+            bName = name.encode('ascii')
+            packet = self._makeS2Packet(110)
+            i = 0
+            while(i<len(bName) and i<self.DATA_LENGTH):
+                packet[i+1] = bName[i]
+                i = i + 1
+            while(i<self.DATA_LENGTH):
+                packet[i+1] = 32
+                i = i + 1
+            self._sendS2Command(packet, 0)
+            self._getS2SensorsResponse()
+
+            packet[0] = 119
+            j = 0
+            while(i<len(bName) and j<self.DATA_LENGTH):
+                packet[j+1] = bName[i]
+                i = i + 1
+                j = j + 1
+            while(j<self.DATA_LENGTH):
+                packet[j+1] = 32
+                j = j + 1
+            self._sendS2Command(packet, 0)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def getAllSensors(self)->HS2Sensors:
+        """Obtiene el valor de los principales sensores del S2."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(65)
+            self._sendS2Command(packet, 0)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def getIRLeft(self)->int:
+        """Obtiene valor del sensor IR izquierdo."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(71)
+            self._sendS2Command(packet, 0)
+            return self._getUInt8Response()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def getIRRight(self)->int:
+        """Obtiene valor del sensor IR derecho."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(72)
+            self._sendS2Command(packet, 0)
+            return self._getUInt8Response()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def getAllIR(self)->HS2Infrared:
+        """Obtiene el valor de todos los sensores IR del S2."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(73)
+            self._sendS2Command(packet, 0)
+            return HS2Infrared(self._getUInt8Response(), self._getUInt8Response())
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def getIrEx(self, sensor:int, umbral:int)->int:
+        """Obtiene el valor extendido de un sensor (0-1) infrarojo del S2."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(172)
+            packet[1] = sensor & 0x01
+            packet[2] = 0
+            packet[3] = umbral & 0xFF
+            self._sendS2Command(packet, 0)
+            return self._getUInt8Response()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def getDistanceEx(self, sensor:int)->int:
+        """Obtiene la distacia medida por un sensor (0-1)."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(175)
+            packet[1] = sensor & 0x01
+            self._sendS2Command(packet, 0)
+            return self._getUInt8Response()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+
+    def setLeftLed(self, encender:bool)->HS2Sensors:
+        """Enciende o apaga el LED izquierdo."""
+        try:
+            self._lock()
+            cmd = 100
+            if(encender):
+                cmd = 99
+            packet = self._makeS2Packet(cmd)
+            self._sendS2Command(packet, 0)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def setCenterLed(self, encender:bool)->HS2Sensors:
+        """Enciende o apaga el LED central."""
+        try:
+            self._lock()
+            cmd = 102
+            if(encender):
+                cmd = 101
+            packet = self._makeS2Packet(cmd)
+            self._sendS2Command(packet, 0)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def setRightLed(self, encender:bool)->HS2Sensors:
+        """Enciende o apaga el LED derecho."""
+        try:
+            self._lock()
+            cmd = 104
+            if(encender):
+                cmd = 103
+            packet = self._makeS2Packet(cmd)
+            self._sendS2Command(packet, 0)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def setAllLed(self, left:bool, center:bool, right:bool)->HS2Sensors:
+        """Enciende y/o apaga los LEDs del S2."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(107)
+            packet[1] = left & 0x01
+            packet[2] = center & 0x01
+            packet[3] = right & 0x01
+            self._sendS2Command(packet, 0)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def getLeftLight(self)->int:
+        """Obtiene el valor del sensor de luz izquierdo."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(67)
+            self._sendS2Command(packet, 0)
+            return self._getUInt16Response()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def getCenterLight(self)->int:
+        """Obtiene el valor del sensor de luz central."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(68)
+            self._sendS2Command(packet, 0)
+            return self._getUInt16Response()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def getRightLight(self)->int:
+        """Obtiene el valor del sensor de luz derecho."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(69)
+            self._sendS2Command(packet, 0)
+            return self._getUInt16Response()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def getAllLights(self)->HS2Lights:
+        """Obtiene el valor de los sensores de luz."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(70)
+            self._sendS2Command(packet, 0)
+            return HS2Lights(self._getUInt16Response(), self._getUInt16Response(), self._getUInt16Response())
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def getLeftLine(self)->int:
+        """Obtiene el valor del sensor de linea izquierdo."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(74)
+            self._sendS2Command(packet, 0)
+            return self._getUInt8Response()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def getRightLine(self)->int:
+        """Obtiene el valor del sensor de linea derecho."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(75)
+            self._sendS2Command(packet, 0)
+            return self._getUInt8Response()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def getAllLines(self)->HS2LineSensors:
+        """Obtiene el valor de los sensores de linea del S2."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(76)
+            self._sendS2Command(packet, 0)
+            return HS2LineSensors(self._getUInt8Response(), self._getUInt8Response())
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def getLineEx(self, sensor:int, umbral:int)->int:
+        """Obtiene el valor extendido de un sensor (o-1) de linea."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(173)
+            packet[1] = sensor & 0x01
+            packet[2] = 0
+            packet[3] = umbral & 0xFF
+            self._sendS2Command(packet, 0)
+            return self._getUInt8Response()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def getMicEnv(self)->int:
+        """Obtiene el valor del microfono del S2."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(169)
+            self._sendS2Command(packet, 0)
+            return self._getUInt32Response()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def getMotorStats(self)->HS2MotorStats:
+        """Obtiene el estado de los motores del S2."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(170)
+            self._sendS2Command(packet, 0)
+            return HS2MotorStats(self._getUInt32Response(), self._getUInt8Response())
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def getEncoders(self, preserve:int)->HS2Encoders:
+        """Obtiene estado de los encoders del S2.
+
+        'preserve' indica si se conserva (1) o borra (0) el valor de los
+        encoder al leer
         """
-        return self.s2Inner
+        try:
+            self._lock()
+            packet = self._makeS2Packet(171)
+            packet[1] = preserve & 0x01
+            self._sendS2Command(packet, 0)
+            return HS2Encoders(self._getUInt32Response(), self._getUInt32Response())
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
 
-    def getS2IRSensors( self ):
+    def getStall(self)->int:
+        """Obtiene estado de las ruedas (atrapadas o no)."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(79)
+            self._sendS2Command(packet, 0)
+            return self._getUInt8Response()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def setMotorsOff(self)->HS2Sensors:
+        """Apaga los motores del S2."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(108)
+            self._sendS2Command(packet, 0)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def setMotors(self, left:int, right:int)->HS2Sensors:
+        """Enciende los motores del S2.
+
+        'left' es el porcentaje de potencia para el motor izquierdo (-100 a 100)
+        'right' es el porcentaje de potencia para el motor derecho (-100 a 100)
         """
-        Obtiene acceso a los sensores IR del S2.
+        try:
+            self._lock()
+            if(left>100):
+                left = 100
+            elif(left<-100):
+                left = -100
+            left = left + 100
 
-        @rtype: L{S2IRSensors}
-        @return: objeto con acceso a los sensores IR
+            if(right>100):
+                right = 100
+            elif(right<-100):
+                right = -100
+            right = right + 100
+
+            packet = self._makeS2Packet(109)
+            packet[1] = int(right)
+            packet[2] = int(left)
+            self._sendS2Command(packet, 0)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def setQuiet(self)->HS2Sensors:
+        """Apaga el parlante del S2."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(112)
+            self._sendS2Command(packet, 0)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def setLoud(self)->HS2Sensors:
+        """Activa el parlante del S2."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(111)
+            self._sendS2Command(packet, 0)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
+
+    def setVolume(self, volume:int)->HS2Sensors:
+        """Establece porcentaje del nivel de volumen del parlante del S2.
+
+        'volume' corresponde al porcentaje de volumen (0 a 100) del parlante
         """
-        return self.s2IRSensors
+        try:
+            self._lock()
+            volume = volume & 0xFF
+            if(volume > 100):
+                volume= 100
+            packet = self._makeS2Packet(160)
+            packet[1] = volume
+            self._sendS2Command(packet, 0)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
 
-    def getS2LEDs( self ):
+    def setSpeaker(self, duration:int, freq1:int, freq2:int=0)->HS2Sensors:
+        """Genera sonido a traves del parlante del S2.
+
+        'duration' es la duracion del sonido en ms (no superior a 2500)
+        'freq1' es la frecuencia principal en Hz
+        'freq2' es la frecuencia secundaria en Hz
         """
-        Obtiene acceso a los LEDs del S2.
+        try:
+            self._lock()
+            duration = duration & 0xFFFF
+            if(duration > 2500):
+                duration = 2500
+            freq1 = freq1 & 0xFFFF
+            freq2 = freq2 & 0xFFFF
+            packet = self._makeS2Packet(114)
+            packet[1] = (duration >>8) & 0xFF
+            packet[2] = duration & 0xFF
+            packet[3] = (freq1 >> 8) & 0xFF
+            packet[4] = freq1 & 0xFF
+            packet[5] = (freq2 >> 8) & 0xFF
+            packet[6] = freq2 & 0xFF
+            self._sendS2Command(packet, duration/1000.0)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
 
-        @rtype: L{S2LEDs}
-        @return: objeto con acceso a los LEDs del S2
+    # metodos para mover al robot en un plano cartesiano
+
+    def beginPath(self, speed:int)->HS2Sensors:
+        """Colocal al S2 en modo de desplazamiento en sistema cartesiano (path).
+
+        'speed' es la velocidad de desplazamiento (0 a 15)
         """
-        return self.s2LEDs
+        try:
+            self._lock()
+            packet = self._makeS2Packet(161)
+            packet[1] = 1
+            packet[2] = 0
+            packet[3] = speed & 0x0F
+            self._sendS2Command(packet, 0)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
 
-    def getS2LightSensors( self ):
-        """
-        Obtiene acceso a los sensores de luz del S2.
+    def endPath(self)->HS2Sensors:
+        """Finaliza el modo path."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(161)
+            packet[1] = 0
+            self._sendS2PathCommand(packet)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
 
-        @rtype: L{S2LightSensors}
-        @return: objeto con acceso a los sensores de luz del S2
-        """
-        return self.s2LightSensors
+    def getPosn(self)->tuple:
+        """Obtiene ubicacion (x, y) del S2 en el plano cartesiano."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(165)
+            self._sendS2Command(packet, 0)
+            return (self._getInt32Response(), self._getInt32Response())
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
 
-    def getS2LineSensors( self ):
-        """
-        Obtiene acceso a los sensores de linea del S2.
+    def getAngle(self)->int:
+        """Obtiene angulo en el que se encuentra orientado el S2."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(167)
+            self._sendS2Command(packet, 0)
+            return self._getInt32Response()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
 
-        @rtype: L{S2LineSensors}
-        @return: objeto con acceso a los sensores de linea del S2
-        """
-        return self.s2LineSensors
+    def setPosn(self, x:int, y:int)->HS2Sensors:
+        """Establece posicion (x, y) del S2 en el plano (no lo desplaza)."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(166)
+            packet[1] = (x >> 24) & 0xFF
+            packet[2] = (x >> 16) & 0xFF
+            packet[3] = (x >> 8) & 0xFF
+            packet[4] = x & 0xFF
+            packet[5] = (y >> 24) & 0xFF
+            packet[6] = (y >> 16) & 0xFF
+            packet[7] = (y >> 8) & 0xFF
+            packet[8] = y & 0xFF
+            self._sendS2Command(packet, 0)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
 
-    def getS2Microphone( self ):
-        """
-        Obtiene acceso al microfono del S2.
+    def setAngle(self, angle:int)->HS2Sensors:
+        """Establece angulo de orientacion del S2 (no lo desplaza)."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(168)
+            packet[1] = (angle >> 24) & 0xFF
+            packet[2] = (angle >> 16) & 0xFF
+            packet[3] = (angle >> 8) & 0xFF
+            packet[4] = angle & 0xFF
+            self._sendS2Command(packet, 0)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
 
-        @rtype: L{S2Microphone}
-        @return: objeto con acceso al micofono del del S2
-        """
-        return self.s2Microphone
+    def moveTo(self, x:int, y:int)->HS2Sensors:
+        """Desplaza el S2 a la posicion (x, y)."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(162)
+            packet[1] = 2 + 1
+            packet[2] = (x >> 8) & 0xFF
+            packet[3] = x & 0xFF
+            packet[4] = (y >> 8) & 0xFF
+            packet[5] = y & 0xFF
+            self._sendS2PathCommand(packet)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
 
-    def getS2Motors( self ):
-        """
-        Obtiene acceso a los motores del S2.
+    def moveBy(self, x:int, y:int)->HS2Sensors:
+        """Desplaza de manera relativa el S2 una distancia de (x, y)."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(162)
+            packet[1] = 4 + 1
+            packet[2] = (x >> 8) & 0xFF
+            packet[3] = x & 0xFF
+            packet[4] = (y >> 8) & 0xFF
+            packet[5] = y & 0xFF
+            self._sendS2PathCommand(packet)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
 
-        @rtype: L{S2Motors}
-        @return: objeto con acceso a los motores del S2
-        """
-        return self.s2Motors
+    def turnTo(self, angle:int)->HS2Sensors:
+        """Mueve al S2 orientandolo a un angulo dado."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(164)
+            packet[1] = 2 + 1
+            packet[2] = (angle >> 8) & 0xFF
+            packet[3] = angle & 0xFF
+            self._sendS2PathCommand(packet)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
 
-    def getS2Speaker( self ):
-        """
-        Obtiene acceso al parlante del S2.
+    def turnBy(self, angle:int)->HS2Sensors:
+        """Gira de manera relativa el S2 un numero dado de grados."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(164)
+            packet[1] = 4 + 1
+            packet[2] = (angle >> 8) & 0xFF
+            packet[3] = angle & 0xFF
+            self._sendS2PathCommand(packet)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
 
-        @rtype: L{S2Speaker}
-        @return: objeto con acceso al parlante del S2
-        """
-        return self.s2Speaker
+    def arcTo(self, x:int, y:int, radius:int)->HS2Sensors:
+        """Traza un arco hasta la posicion (x, y) de radio dado."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(163)
+            packet[1] = 2 + 1
+            packet[2] = (x >> 8) & 0xFF
+            packet[3] = x & 0xFF
+            packet[4] = (y >> 8) & 0xFF
+            packet[5] = y & 0xFF
+            packet[6] = (radius >> 8) & 0xFF
+            packet[7] = radius & 0xFF
+            self._sendS2PathCommand(packet)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
 
-    def getS2Path( self ):
-        """
-        Obtiene acceso al modulo de trazado del S2.
+    def arcBy(self, x:int, y:int, radius:int)->HS2Sensors:
+        """Traza un arco de manera relativa y de radio dado."""
+        try:
+            self._lock()
+            packet = self._makeS2Packet(163)
+            packet[1] = 4 + 1
+            packet[2] = (x >> 8) & 0xFF
+            packet[3] = x & 0xFF
+            packet[4] = (y >> 8) & 0xFF
+            packet[5] = y & 0xFF
+            packet[6] = (radius >> 8) & 0xFF
+            packet[7] = radius & 0xFF
+            self._sendS2PathCommand(packet)
+            return self._getS2SensorsResponse()
+        except Exception as e:
+            raise
+        finally:
+            self._unlock()
 
-        @rtype: L{S2Path}
-        @return: objeto con acceso al modulo de trazado del S2
-        """
-        return self.s2Path
+    ## protected -------------------------------
 
-
-    ## protected
-
-    def makeS2Packet( self, cmd ):
-        """
-        Crea un paquete estandar utilizado como comando para el S2.
-
-        @type cmd: byte
-        @param cmd: comando a enviar
-        @rtype: bytearray
-        @return: paquete a completar con los parametros del comando (cmd)
-        """
-        packet = bytearray( self.PACKET_LENGTH )
+    def _makeS2Packet(self, cmd:int)->bytearray:
+        """Crea un paquete estandar utilizado como comando para el S2."""
+        packet = bytearray(self.PACKET_LENGTH)
         packet[0] = cmd & 0xFF
         return packet
 
-    def sendS2Command( self, packet, pause ):
-        """
-        Envia un comando al S2.
+    def _sendS2Command(self, packet:bytearray, pause:int=0)->bool:
+        """Envia un comando al S2.
 
-        @type packet: bytearray
-        @param packet: comando a enviar
-        @type pause: integer
-        @param pause: tiempo en ms a esperar por la respuesta luego de enviar el comando
-        @rtype: bool
-        @return: Verdadero si el ACK enviado por el S2 corresponde al esperado
+        'pause' especifica el tiempo en ms a esperar por la respuesta luego
+        de enviar el comando
         """
-        self.conn.write( packet )
-        if( pause > 0 ):
-            time.sleep( pause )
-        if( packet[0] != 0x50 ):
-            b = self.conn.read( self.PACKET_LENGTH )
-            if( packet != b ):
-                print( "Packet Mismatch:" )
+        self.conn.write(packet)
+        if(pause > 0):
+            time.sleep(pause)
+        if(packet[0] != 0x50):
+            b = self.conn.read(self.PACKET_LENGTH)
+            if(packet != b):
+                print("Packet Mismatch:")
                 return False
         return True
 
-    def sendS2PathCommand( self, packet ):
-        """
-        Envia comando de trazado (path) al S2.
-
-        @type packet: bytearray
-        @param packet: comando de trazado a enviar
-        """
-        self.conn.write( packet )
+    def _sendS2PathCommand(self, packet:bytearray)->None:
+        """Envia comando de trazado (path) al S2."""
+        self.conn.write(packet)
         t = time.time()
-        while( time.time() - t  < 3.5 ):
+        while(time.time() - t  < 3.5):
             try:
-                b = self.conn.read( self.PACKET_LENGTH )
-                if( packet != b ):
-                    print( "Packet Mismatch (path):" )
+                b = self.conn.read(self.PACKET_LENGTH)
+                if(packet != b):
+                    print("Packet Mismatch (path):")
                     raise self.conn.TimeoutException
                 return
             except self.conn.TimeoutException as e:
                 pass
 
         # necesitamos sincronizar las respuestas, lo hacemos con GetAll()
-        packet = self.makeS2Packet( 65 )
-        while( True ):
-            self.conn.write( packet )
+        packet = self._makeS2Packet(65)
+        while(True):
+            self.conn.write(packet)
             try:
-                self.conn.read( 11 ) # estos bytes quedaron sin ser recibidos
-                self.conn.read( self.PACKET_LENGTH )
+                self.conn.read(11) # estos bytes quedaron sin ser recibidos
+                self.conn.read(self.PACKET_LENGTH)
                 break
             except self.conn.TimeoutException as e:
                 pass
 
         # solicitamos el estado de los sensores
-        self.sendS2Command( packet, 0 )
+        self._sendS2Command(packet, 0)
 
+    def _getS2SensorsResponse(self)->HS2Sensors:
+        """Obtiene estado de los principales sensores del S2."""
+        return HS2Sensors(self._getUInt8Response() , self._getUInt8Response() ,
+                          self._getUInt16Response(), self._getUInt16Response(), self._getUInt16Response(),
+                          self._getUInt8Response() , self._getUInt8Response() ,
+                          self._getUInt8Response())
 
-    def getS2SensorsResponse( self ):
-        """
-        Obtiene estado de los principales sensores del S2.
+    def _getLineResponse(self, maxChars:int)->str:
+        """Obtiene una respuesta del S2 como un string ascii."""
+        return self.conn.readLine(maxChars)
 
-        @rtype: L{HS2Sensors}
-        @return: objeto con el valor de los principales sensores del S2
-        """
-        return HS2Sensors( self.getUInt8Response() , self.getUInt8Response() ,
-                           self.getUInt16Response(), self.getUInt16Response(), self.getUInt16Response(),
-                           self.getUInt8Response() , self.getUInt8Response() ,
-                           self.getUInt8Response() )
-
-    def getLineResponse( self, maxChars ):
-        """
-        Obtiene una respuesta del S2 como un string ascii.
-
-        @rtype: string
-        @return: la respuesta del S2 como un string ascii
-        """
-        return self.conn.readLine( maxChars )
-
-    def getUInt8Response( self ):
-        """
-        Obtiene una respuesta del S2 como un entero de 8 bits sin signo.
-
-        @rtype: integer
-        @return: la respuesta del S2 como uint8
-        """
+    def _getUInt8Response(self)->int:
+        """Obtiene una respuesta del S2 como un entero de 8 bits sin signo."""
         return self.conn.readUInt8()
 
-    def getUInt16Response( self ):
-        """
-        Obtiene una respuesta del S2 como un entero de 16 bits sin signo.
-
-        @rtype: integer
-        @return: la respuesta del S2 como uint16
-        """
+    def _getUInt16Response(self)->int:
+        """Obtiene una respuesta del S2 como un entero de 16 bits sin signo."""
         return self.conn.readUInt16()
 
-    def getUInt32Response( self ):
-        """
-        Obtiene una respuesta del S2 como un entero de 32 bits sin signo.
-
-        @rtype: integer
-        @return: la respuesta del S2 como uint32
-        """
+    def _getUInt32Response(self)->int:
+        """Obtiene una respuesta del S2 como un entero de 32 bits sin signo."""
         return self.conn.readUInt32()
 
-    def getInt32Response( self ):
-        """
-        Obtiene una respuesta del S2 como un entero de 32 bits con signo.
-
-        @rtype: integer
-        @return: la respuesta del S2 como int32
-        """
+    def _getInt32Response(self)->int:
+        """Obtiene una respuesta del S2 como un entero de 32 bits con signo."""
         return self.conn.readInt32()
 
-    def getBytesResponse( self, nbytes ):
-        """
-        Obtiene una respuesta del S2 como un conjunto de bytes.
+    def _getBytesResponse(self, nbytes:int)->bytearray:
+        """Obtiene una respuesta del S2 como un conjunto de bytes."""
+        return self.conn.read(nbytes)
 
-        @type nbytes: integer
-        @param nbytes: numero de bytes a leer
-        @rtype: bytearray
-        @return: la respuesta del S2
-        """
-        return self.conn.read( nbytes )
-
-    def lock( self ):
-        """Obtiene acceso exclusivo."""
+    def _lock(self)->None:
+        """Obtiene acceso exclusivo al S2."""
         self.mylock.acquire()
 
-    def unlock( self ):
-        """Libera el acceso exclusivo."""
+    def _unlock(self)->None:
+        """Libera el acceso exclusivo al S2."""
         self.mylock.release()

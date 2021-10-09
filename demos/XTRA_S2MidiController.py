@@ -22,7 +22,6 @@ def main():
     print( "Conectando con el Scribbler2" )
     #robot = Scribbler2( port="/dev/ttyUSB0", bauds=38400, timeout=500, dtr=False )
     robot = Fluke2( port="/dev/rfcomm2", timeout=500 )
-    s2Motors = robot.getS2Motors()
 
     print( "Conecte la puerta del Controlador Midi a la puerta virtual creada" )
     while( True ):
@@ -41,15 +40,15 @@ def main():
                 velocity = msg[2]
                 print( channel, note, velocity )
                 if( note == 48 ):
-                    s2Motors.setMotors( 100, -100)
+                    robot.setMotors( 100, -100)
                 elif( note == 49 ):
-                    s2Motors.setMotors( -100, 100)
+                    robot.setMotors( -100, 100)
                 elif( note == 50 ):
-                    s2Motors.setMotors( 100, 100)
+                    robot.setMotors( 100, 100)
                 elif( note == 51 ):
-                    s2Motors.setMotors( -100, -100)
+                    robot.setMotors( -100, -100)
                 elif( note == 52 ):
-                    s2Motors.setMotorsOff()
+                    robot.setMotorsOff()
     midiIn.close()
     robot.close()
 

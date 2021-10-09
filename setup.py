@@ -4,8 +4,8 @@ from setuptools import setup
 import sys
 
 SETUP = {
-    "name"             : "s2",
-    "version"          : "3.2.4",
+    "name"             : "scribbler2",
+    "version"          : "4.0.0",
     "description"      : "Control del robot Scribbler S2 (Parallax) y tarjeta Fluke2 (BetterBots)",
     "license"          : "MIT",
     "author"           : "Roberto Carrasco",
