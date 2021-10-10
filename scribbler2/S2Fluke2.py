@@ -4,10 +4,11 @@
 
 import time
 
-from s2.Scribbler2 import Scribbler2
-from s2.HF2Image import HF2Image
+from scribbler2.robot.Scribbler2 import Scribbler2
+from scribbler2.Serial import Serial
+from scribbler2.HF2Image import HF2Image
 
-class Fluke2(Scribbler2):
+class S2Fluke2(Scribbler2):
     """Clase para interactuar con un Scribbler2 que posee una Fluke2."""
 
     FLUKE_FORWARD       = 1
@@ -25,7 +26,9 @@ class Fluke2(Scribbler2):
         self.image_width  = 0
         self.image_height = 0
 
-        super(Fluke2, self).__init__(port=port, bauds=bauds, timeout=timeout)
+        conn = Serial(port, bauds, timeout)
+        time.sleep(2.0)
+        super(S2Fluke2, self).__init__(conn)
 
     def setPicSize(self, size:int):
         """Establece tamano de la imagen a capturar desde la F2.

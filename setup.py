@@ -12,8 +12,8 @@ SETUP = {
     "author_email"     : "titos.carrasco@gmail.com",
     "maintainer"       : "Roberto Carrasco",
     "maintainer_email" : "titos.carrasco@gmail.com",
-    "packages"         : [ "s2" ],
-    "package_dir"      : { "s2": "s2/" },
+    "packages"         : [ "scribbler2" ],
+    "package_dir"      : { "scribbler2": "scribbler2/" },
 }
 
 setup( **SETUP )

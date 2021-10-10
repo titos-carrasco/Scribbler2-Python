@@ -3,14 +3,16 @@
 
 """Test de las operaciones en plano cartesiano del S2."""
 
-#from s2.Scribbler2 import Scribbler2
-from s2.Fluke2 import Fluke2
+import time
+
+#from scribbler2.S2Serial import S2Serial
+from scribbler2.S2Fluke2 import S2Fluke2
 
 def main():
     """Realiza las pruebas de movimiento en plano cartesiano del S2."""
 
-    #robot = Scribbler2( port="/dev/ttyUSB0", bauds=38400, timeout=20000, dtr=False )
-    robot = Fluke2( port="/dev/rfcomm2", timeout=20000 )
+    #robot = S2Serial( port="/dev/ttyUSB0", timeout=20000 )
+    robot = S2Fluke2( "/dev/rfcomm2" )
 
     print( "beginPath         : ", robot.beginPath( 15 ) )
 

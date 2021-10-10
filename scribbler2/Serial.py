@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 
-"""Acceso a puerta serial.
-
-Es utilizada exclusivamente por la clase **Scribbler2**.
-"""
+"""Acceso a puerta serial."""
 
 import serial
 import time
 
-from s2.SerialInterface import SerialInterface
+from scribbler2.robot.ISerial import ISerial
 
-class Serial(SerialInterface):
+class Serial(ISerial):
     """Clase para interactuar con puerta serial."""
 
     def __init__(self, port:str, bauds:int, timeout:int)->None:
@@ -36,33 +33,26 @@ class Serial(SerialInterface):
     def close(self)->None:
         """Finaliza la conexion con la puerta serial."""
         try:
-            self.lock()
             self.serial.close()
             self.serial = None
         except serial.SerialTimeoutException:
             raise self.TimeoutException
         except Exception as e:
             raise
-        finally:
-            self.unlock()
 
     def write(self, dataBytes:bytes)->None:
         """Envia 'dataBytes' por la puerta serial."""
         try:
-            self.lock()
             self.serial.write(dataBytes)
             self.serial.flush()
         except serial.SerialTimeoutException:
             raise self.TimeoutException
         except Exception as e:
             raise
-        finally:
-            self.unlock()
 
     def read(self, nbytes)->bytes:
         """Lee 'nbytes' desde la puerta serial."""
         try:
-            self.lock()
             dataBytes = bytearray(nbytes)
             pos = 0
             tries = 0
@@ -85,8 +75,6 @@ class Serial(SerialInterface):
             raise self.TimeoutException
         except Exception as e:
             raise
-        finally:
-            self.unlock()
 
     def readLine(self, maxChars)->str:
         """Lee una linea de texto finalizada en NL.
@@ -95,7 +83,6 @@ class Serial(SerialInterface):
         El caracter NL no es incluido en la linea retornada
         """
         try:
-            self.lock()
             linea = ''
             pos = 0
             tries = 0
@@ -119,13 +106,10 @@ class Serial(SerialInterface):
             raise self.TimeoutException
         except Exception as e:
             raise
-        finally:
-            self.unlock()
 
     def ignoreInput(self, timex:int)->None:
         """Descarta durante 'timex' ms los datos presentes para lectura."""
         try:
-            self.lock()
             t = time.time()
             end = t + timex / 1000.0
             while(t < end):
@@ -139,8 +123,6 @@ class Serial(SerialInterface):
             raise self.TimeoutException
         except Exception as e:
             raise
-        finally:
-            self.unlock()
 
     def setDTR(self, value:bool)->None:
         """Activa/desactiva la linea DTR."""

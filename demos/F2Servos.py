@@ -5,12 +5,12 @@
 
 import time
 
-from s2.Fluke2 import Fluke2
+from scribbler2.S2Fluke2 import S2Fluke2
 
 def main():
     """Realiza las pruebas de los motores servos de la tarjeta F2."""
 
-    robot = Fluke2( port="/dev/rfcomm2", timeout=500 )
+    robot = S2Fluke2( "/dev/rfcomm2" )
 
     id = 0;
     for value in range(0, 256, 5):

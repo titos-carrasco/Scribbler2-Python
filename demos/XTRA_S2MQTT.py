@@ -7,8 +7,6 @@ Requiere de paho (pip install paho-mqtt)
 """
 
 import paho.mqtt.client as paho
-#from s2.Scribbler2 import Scribbler2
-from s2.Fluke2 import Fluke2
 
 import json
 import time
@@ -17,6 +15,9 @@ try:
     import Queue as queue
 except:
     import queue
+
+#from scribbler2.S2Serial import S2Serial
+from scribbler2.S2Fluke2 import S2Fluke2
 
 MQTT_SERVER = 'test.mosquitto.org'
 MQTT_PORT = 1883
@@ -71,8 +72,8 @@ def main():
     abort = False
     robot = None
     try:
-        #robot = Scribbler2( port="/dev/ttyUSB0", bauds=38400, timeout=500, dtr=False )
-        robot = Fluke2( port="/dev/rfcomm2", timeout=500 )
+        #robot = S2Serial( "/dev/ttyUSB0" )
+        robot = S2Fluke2( "/dev/rfcomm2" )
     except Exception as e:
         abort = True
     while( not abort ):

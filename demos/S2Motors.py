@@ -5,14 +5,14 @@
 
 import time
 
-#from s2.Scribbler2 import Scribbler2
-from s2.Fluke2 import Fluke2
+#from scribbler2.S2Serial import S2Serial
+from scribbler2.S2Fluke2 import S2Fluke2
 
 def main():
     """Realiza las pruebas de los motores del S2."""
 
-    #robot = Scribbler2( port="/dev/ttyUSB0", bauds=38400, timeout=500, dtr=False )
-    robot = Fluke2( port="/dev/rfcomm2", timeout=500 )
+    #robot = S2Serial( "/dev/ttyUSB0" )
+    robot = S2Fluke2( "/dev/rfcomm2" )
 
     print( "getMotorStats       : ", robot.getMotorStats() )
     print( "getEncoders         : ", robot.getEncoders( 1 ) )

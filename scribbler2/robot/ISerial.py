@@ -1,18 +1,14 @@
 # -*- coding: utf-8 -*-
 
-"""Interface de acceso a un dispositivo de manera serial."""
+"""Interface para acceso a un dispositivo de manera serial."""
 
 import threading
 
-class SerialInterface():
+class ISerial():
     """Interface para interactuar de manera serial con un dispositivo."""
 
     class TimeoutException(Exception):
         """Timeout on data."""
-
-    def __init__(self)->None:
-        """Inicializa la conexión."""
-        self.mylock = threading.Lock()
 
     def close(self)->None:
         """Finaliza la conexion."""
@@ -33,6 +29,7 @@ class SerialInterface():
     def ignoreInput(self, timex:int):
         """Descarta durante 'timex' ms los datos presentes para lectura."""
         pass
+
 
     def readUInt8(self)->int:
         """Lee un entero, sin signo, de 8 bits."""
@@ -63,12 +60,3 @@ class SerialInterface():
         n = self.readUInt32()
         return int(n)
 
-    #### Privadas
-
-    def lock(self)->None:
-        """Obtiene acceso exclusivo a una zona."""
-        self.mylock.acquire()
-
-    def unlock(self)->None:
-        """Libera el acceso exclusivo a una zona."""
-        self.mylock.release()

@@ -19,8 +19,8 @@ Librería para controlar el robot Scribbler2  de Parallax:
 
 ## Desarrollo
 - La librería se puede instalar para desarrollo con `pip3 install --user -e .`
-- Verificar formato del código con `pydocstyle s2`
-- La documentación se genera con `pdoc -o docs/  s2/`
+- Verificar formato del código con `pydocstyle scribbler2`
+- La documentación se genera con `pdoc -o docs/  scribbler2 scribbler2.robot`
 - El wheel debe ser generado con `python setup.py bdist_wheel`
 
 

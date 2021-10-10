@@ -3,21 +3,23 @@
 
 """Test de los elementos internos de la tarjeta F2."""
 
-from s2.Fluke2 import Fluke2
+import time
+
+from scribbler2.S2Fluke2 import S2Fluke2
 
 def main():
     """Realiza las pruebas de los elementos internos de la tarjeta F2."""
 
-    robot = Fluke2( port="/dev/rfcomm2", timeout=500 )
+    robot = S2Fluke2( "/dev/rfcomm2" )
 
-    print( "getVersion    : ", robot.getVersion() )
-    print( "identifyRobot : ", robot.identifyRobot() )
-    print( "getBattery    : ", robot.getBattery() )
-    print( "setForwardness: " )
+    print( "getVersion    :", robot.getVersion() )
+    print( "identifyRobot :", robot.identifyRobot() )
+    print( "getBattery    :", robot.getBattery() )
+    print( "setForwardness: SCRIBBLER_FORWARD" )
     robot.setForwardness( robot.SCRIBBLER_FORWARD )
-    print( "setForwardness: " )
+    print( "setForwardness: FLUKE_FORWARD" )
     robot.setForwardness( robot.FLUKE_FORWARD )
-    print( "setForwardness: " )
+    print( "setForwardness: SCRIBBLER_FORWARD" )
     robot.setForwardness( robot.SCRIBBLER_FORWARD )
     print( "getErrors     : " )
     print( robot.getErrors() )

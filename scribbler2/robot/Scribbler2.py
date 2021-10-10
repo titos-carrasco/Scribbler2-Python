@@ -5,29 +5,25 @@
 import threading
 import time
 
-from s2.Serial import Serial
-from s2.HS2Sensors import HS2Sensors
-from s2.HS2State import HS2State
-from s2.HS2Infrared import HS2Infrared
-from s2.HS2Lights import HS2Lights
-from s2.HS2LineSensors import HS2LineSensors
-from s2.HS2MotorStats import HS2MotorStats
-from s2.HS2Encoders import HS2Encoders
+from scribbler2.robot.HS2Sensors import HS2Sensors
+from scribbler2.robot.HS2State import HS2State
+from scribbler2.robot.HS2Infrared import HS2Infrared
+from scribbler2.robot.HS2Lights import HS2Lights
+from scribbler2.robot.HS2LineSensors import HS2LineSensors
+from scribbler2.robot.HS2MotorStats import HS2MotorStats
+from scribbler2.robot.HS2Encoders import HS2Encoders
+from scribbler2.robot.ISerial import ISerial
 
 class Scribbler2(object):
-    """Clase para interactuar con un Sscrbbler2."""
+    """Clase para base interactuar con un Scribbler2."""
 
     DATA_LENGTH = 8
     PACKET_LENGTH = 9
 
-    def __init__(self, port:str, bauds:int=38400,
-                       timeout:int=500, dtr:bool=None)->None:
+    def __init__(self, conn:ISerial)->None:
         """Inicializa el objeto y lo conecta al S2."""
         self.mylock = threading.Lock()
-        self.conn = Serial(port, bauds, timeout)
-        if(not dtr is None):
-            self.conn.setDTR(dtr)
-        time.sleep(2.0)
+        self.conn = conn
         self.conn.ignoreInput(1000)
 
     def close(self)->None:
@@ -858,7 +854,8 @@ class Scribbler2(object):
     def _getS2SensorsResponse(self)->HS2Sensors:
         """Obtiene estado de los principales sensores del S2."""
         return HS2Sensors(self._getUInt8Response() , self._getUInt8Response() ,
-                          self._getUInt16Response(), self._getUInt16Response(), self._getUInt16Response(),
+                          self._getUInt16Response(), self._getUInt16Response(),
+                          self._getUInt16Response(),
                           self._getUInt8Response() , self._getUInt8Response() ,
                           self._getUInt8Response())
 

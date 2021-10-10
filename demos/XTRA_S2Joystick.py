@@ -10,8 +10,8 @@ from threading import Thread
 import pygame
 import time
 
-#from s2.Scribbler2 import Scribbler2
-from s2.Fluke2 import Fluke2
+#from scribbler2.S2Serial import S2Serial
+from scribbler2.S2Fluke2 import S2Fluke2
 
 class TestJoystick:
     """Aplicacion para controlar el S2 via interfaz grafica y joystick."""
@@ -58,8 +58,8 @@ class TestJoystick:
         if(self.Connect.get_active()):
             self._SbSetMessage("Conectando...")
             try:
-                #self.rob = Scribbler2( port=self.Port.get_text(), bauds=38400, timeout=500, dtr=False )
-                self.rob = Fluke2( port=self.Port.get_text(), timeout=500 )
+                #self.rob = S2Serial( port=self.Port.get_text() )
+                self.rob = S2Fluke2( port=self.Port.get_text() )
             except Exception as e:
                 self.Connect.set_active(False)
                 self._SbSetMessage("Error al conectar con el Scribbler2")

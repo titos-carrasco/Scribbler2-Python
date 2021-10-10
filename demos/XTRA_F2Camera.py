@@ -6,12 +6,12 @@
 import numpy as np
 import cv2
 
-from s2.Fluke2 import Fluke2
+from scribbler2.S2Fluke2 import S2Fluke2
 
 def main():
     """Realiza las pruebas de la camara de la tarjeta de la F2."""
 
-    robot = Fluke2( port="/dev/rfcomm2", timeout=500 )
+    robot = S2Fluke2( "/dev/rfcomm2" )
 
     cv2.namedWindow( 'Frames', cv2.WINDOW_AUTOSIZE )
     robot.setPicSize( robot.IMAGE_SMALL )
