@@ -30,7 +30,6 @@ class ISerial():
         """Descarta durante 'timex' ms los datos presentes para lectura."""
         pass
 
-
     def readUInt8(self)->int:
         """Lee un entero, sin signo, de 8 bits."""
         b = self.read(1)

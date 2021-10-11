@@ -12,7 +12,7 @@ SETUP = {
     "author_email"     : "titos.carrasco@gmail.com",
     "maintainer"       : "Roberto Carrasco",
     "maintainer_email" : "titos.carrasco@gmail.com",
-    "packages"         : [ "scribbler2" ],
+    "packages"         : [ "scribbler2", "scribbler2.robot" ],
     "package_dir"      : { "scribbler2": "scribbler2/" },
 }
 
