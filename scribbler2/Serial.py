@@ -23,8 +23,8 @@ class Serial(ISerial):
             self.serial = serial.Serial(port, baudrate=bauds, bytesize=8,
                                        parity='N', stopbits=1,
                                        timeout=0)
-            self.serial.flushInput()
-            self.serial.flushOutput()
+            self.serial.reset_input_buffer()
+            self.serial.reset_output_buffer()
         except serial.SerialTimeoutException:
             raise self.TimeoutException
         except Exception as e:
@@ -70,7 +70,7 @@ class Serial(ISerial):
                 tries = 0
             if(pos < nbytes):
                 raise self.TimeoutException
-            return dataBytes
+            return bytes(dataBytes)
         except serial.SerialTimeoutException:
             raise self.TimeoutException
         except Exception as e:

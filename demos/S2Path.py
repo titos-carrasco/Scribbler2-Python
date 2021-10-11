@@ -1,7 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Test de las operaciones en plano cartesiano del S2."""
+"""Test de las operaciones en plano cartesiano del S2.
+
+El S2 acumula los comandos de desplazamiento bajo criterio propio
+y envia as respuestas cuando ese grupo ha finalizado
+"""
 
 import time
 
@@ -12,7 +16,7 @@ def main():
     """Realiza las pruebas de movimiento en plano cartesiano del S2."""
 
     #robot = S2Serial( port="/dev/ttyUSB0", timeout=20000 )
-    robot = S2Fluke2( "/dev/rfcomm2" )
+    robot = S2Fluke2( "/dev/rfcomm2", timeout=500 )
 
     print( "beginPath         : ", robot.beginPath( 15 ) )
 

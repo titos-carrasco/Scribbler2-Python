@@ -25,12 +25,12 @@ def main():
     print( "setName      : ", robot.setName( "TitosBot" ) )
     print( "getName      : ", robot.getName() )
     print( "getState     : ", robot.getState() )
-    print( "setData      : ", robot.setData( bytearray( [ 8, 7, 6, 5, 4, 3, 2, 1 ] ) ) )
-    print( "getData      : ", bytearray.hex( robot.getData() ) )
+    print( "setData      : ", robot.setData( bytes( [ 8, 7, 6, 5, 4, 3, 2, 1 ] ) ) )
+    print( "getData      : ", bytes.hex( robot.getData() ) )
     print( "setSingleData: ", robot.setSingleData( 4, 44 ) )
-    print( "getData      : ", bytearray.hex( robot.getData() ) )
-    print( "setData      : ", robot.setData( bytearray( [ 1, 2, 3, 4, 5, 6, 7, 8 ] ) ) )
-    print( "getData      : ", bytearray.hex( robot.getData() ) )
+    print( "getData      : ", bytes.hex( robot.getData() ) )
+    print( "setData      : ", robot.setData( bytes( [ 1, 2, 3, 4, 5, 6, 7, 8 ] ) ) )
+    print( "getData      : ", bytes.hex( robot.getData() ) )
 
     robot.close()
 

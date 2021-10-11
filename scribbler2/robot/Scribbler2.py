@@ -92,7 +92,7 @@ class Scribbler2(object):
         finally:
             self._unlock()
 
-    def getData(self)->bytearray:
+    def getData(self)->bytes:
         """Obtiene data almacenada en el S2."""
         try:
             self._lock()
@@ -607,7 +607,7 @@ class Scribbler2(object):
     # metodos para mover al robot en un plano cartesiano
 
     def beginPath(self, speed:int)->HS2Sensors:
-        """Colocal al S2 en modo de desplazamiento en sistema cartesiano (path).
+        """Coloca al S2 en modo de desplazamiento en sistema cartesiano (path).
 
         'speed' es la velocidad de desplazamiento (0 a 15)
         """
@@ -824,7 +824,7 @@ class Scribbler2(object):
         return True
 
     def _sendS2PathCommand(self, packet:bytearray)->None:
-        """Envia comando de trazado (path) al S2."""
+        """Envia comando de desplazamiento (en modo path) al S2."""
         self.conn.write(packet)
         t = time.time()
         while(time.time() - t  < 3.5):
@@ -835,6 +835,7 @@ class Scribbler2(object):
                     raise self.conn.TimeoutException
                 return
             except self.conn.TimeoutException as e:
+                print( "Timeout *****" )
                 pass
 
         # necesitamos sincronizar las respuestas, lo hacemos con GetAll()
@@ -879,7 +880,7 @@ class Scribbler2(object):
         """Obtiene una respuesta del S2 como un entero de 32 bits con signo."""
         return self.conn.readInt32()
 
-    def _getBytesResponse(self, nbytes:int)->bytearray:
+    def _getBytesResponse(self, nbytes:int)->bytes:
         """Obtiene una respuesta del S2 como un conjunto de bytes."""
         return self.conn.read(nbytes)
 

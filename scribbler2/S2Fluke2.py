@@ -28,6 +28,7 @@ class S2Fluke2(Scribbler2):
 
         conn = Serial(port, bauds, timeout)
         time.sleep(2.0)
+
         super(S2Fluke2, self).__init__(conn)
 
     def setPicSize(self, size:int):
@@ -91,6 +92,7 @@ class S2Fluke2(Scribbler2):
 
             header_len = self._getUInt8Response() + (self._getUInt8Response() << 8)
             image = self._getBytesResponse(header_len)
+            image = bytearray( image )
 
             packet = bytearray(2)
             packet[0] = cmd
