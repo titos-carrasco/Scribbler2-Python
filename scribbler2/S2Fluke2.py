@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 
-"""Acceso a todas las funcionalidades del Scribbler2 y de la Fluke2 via BT."""
+"""Acceso a todas las funcionalidades del Scribbler2 y de la Fluke2 via BT.
+
+la Fluke2 tieme un timeout interno de 300ms para que los comandos redireccionados
+al S2 envien su respuesta
+"""
 
 import time
 
@@ -21,13 +25,14 @@ class S2Fluke2(Scribbler2):
     IMAGE_JPEG_FAST     = 4
 
 
-    def __init__(self, port:str="", bauds:int=115200, timeout:int=500)->None:
+    def __init__(self, port:str="", bauds:int=115200, timeout:int=3500)->None:
         """Inicializa el objeto y lo conecta a la Fluke2."""
         self.image_width  = 0
         self.image_height = 0
 
         conn = Serial(port, bauds, timeout)
         time.sleep(2.0)
+        conn.ignoreInput(100)
 
         super(S2Fluke2, self).__init__(conn)
 
@@ -51,10 +56,10 @@ class S2Fluke2(Scribbler2):
             packet = bytearray(2)
             packet[0] = 11
             packet[1] = s
-            self._sendF2Command(packet, 0.1)
+            self._sendF2Command(packet)
             self.image_width = w
             self.image_height = h
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -88,7 +93,7 @@ class S2Fluke2(Scribbler2):
                 cmd = 138
             packet = bytearray(1)
             packet[0] = cmd_header
-            self._sendF2Command(packet, 0.1)
+            self._sendF2Command(packet)
 
             header_len = self._getUInt8Response() + (self._getUInt8Response() << 8)
             image = self._getBytesResponse(header_len)
@@ -97,7 +102,7 @@ class S2Fluke2(Scribbler2):
             packet = bytearray(2)
             packet[0] = cmd
             packet[1] = reg
-            self._sendF2Command(packet, 0.1)
+            self._sendF2Command(packet)
 
             last = 0x00
             while(True):
@@ -110,7 +115,7 @@ class S2Fluke2(Scribbler2):
                     break
                 last = b
             return HF2Image(self.image_width, self.image_height, image)
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -121,8 +126,8 @@ class S2Fluke2(Scribbler2):
             self._lock()
             packet = bytearray(1)
             packet[0] = 129
-            self._sendF2Command(packet, 0.1)
-        except Exception as e:
+            self._sendF2Command(packet)
+        except:
             raise
         finally:
             self._unlock()
@@ -133,8 +138,8 @@ class S2Fluke2(Scribbler2):
             self._lock()
             packet = bytearray(1)
             packet[0] = 130
-            self._sendF2Command(packet, 0.1)
-        except Exception as e:
+            self._sendF2Command(packet)
+        except:
             raise
         finally:
             self._unlock()
@@ -147,8 +152,8 @@ class S2Fluke2(Scribbler2):
             packet[0] = 131
             packet[1] = addr & 0xFF
             packet[2] = value & 0xFF
-            self._sendF2Command(packet, 0.1)
-        except Exception as e:
+            self._sendF2Command(packet)
+        except:
             raise
         finally:
             self._unlock()
@@ -171,8 +176,8 @@ class S2Fluke2(Scribbler2):
             packet[9] = yHigh & 0xFF
             packet[10] = xStep & 0xFF
             packet[11] = yStep & 0xFF
-            self._sendF2Command(packet, 0.1)
-        except Exception as e:
+            self._sendF2Command(packet)
+        except:
             raise
         finally:
             self._unlock()
@@ -183,9 +188,9 @@ class S2Fluke2(Scribbler2):
             self._lock()
             packet = bytearray(1)
             packet[0] = 142
-            self._sendF2Command(packet, 0.1)
+            self._sendF2Command(packet)
             return self._getLineResponse(128)
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -196,11 +201,11 @@ class S2Fluke2(Scribbler2):
             self._lock()
             packet = bytearray(1)
             packet[0] = 156
-            self._sendF2Command(packet, 0.1)
+            self._sendF2Command(packet)
             id = self._getLineResponse(128)
             time.sleep(4.0)
             return id
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -211,9 +216,9 @@ class S2Fluke2(Scribbler2):
             self._lock()
             packet = bytearray(1)
             packet[0] = 89
-            self._sendF2Command(packet, 0.1)
+            self._sendF2Command(packet)
             return self._getUInt16Response() / 20.9813
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -234,8 +239,8 @@ class S2Fluke2(Scribbler2):
             packet = bytearray(2)
             packet[0] = 128
             packet[1] = f
-            self._sendF2Command(packet, 0.1)
-        except Exception as e:
+            self._sendF2Command(packet)
+        except:
             raise
         finally:
             self._unlock()
@@ -246,11 +251,11 @@ class S2Fluke2(Scribbler2):
             self._lock()
             packet = bytearray(1)
             packet[0] = 10
-            self._sendF2Command(packet, 0.1)
+            self._sendF2Command(packet)
             n = self._getUInt16Response()
             log = self._getBytesResponse(n)
             return log.decode('ascii')
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -261,9 +266,9 @@ class S2Fluke2(Scribbler2):
             self._lock()
             packet = bytearray(1)
             packet[0] = 124
-            self._sendF2Command(packet, 0.1)
+            self._sendF2Command(packet)
             time.sleep(4.0)
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -275,8 +280,8 @@ class S2Fluke2(Scribbler2):
             packet = bytearray(2)
             packet[0] = 120
             packet[1] = pwm & 0xFF
-            self._sendF2Command(packet, 0.1)
-        except Exception as e:
+            self._sendF2Command(packet)
+        except:
             raise
         finally:
             self._unlock()
@@ -287,9 +292,9 @@ class S2Fluke2(Scribbler2):
             self._lock()
             packet = bytearray(1)
             packet[0] = 86
-            self._sendF2Command(packet, 0.1)
+            self._sendF2Command(packet)
             return self._getUInt16Response()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -301,8 +306,8 @@ class S2Fluke2(Scribbler2):
             packet = bytearray(2)
             packet[0] = 126
             packet[1] = pwm & 0xFF
-            self._sendF2Command(packet, 0.1)
-        except Exception as e:
+            self._sendF2Command(packet)
+        except:
             raise
         finally:
             self._unlock()
@@ -315,16 +320,16 @@ class S2Fluke2(Scribbler2):
             packet[0] = 12
             packet[1] = idservo & 0x03
             packet[2] = value & 0xFF
-            self._sendF2Command(packet, 0.1)
-        except Exception as e:
+            self._sendF2Command(packet)
+        except:
             raise
         finally:
             self._unlock()
 
     ## protected
 
-    def _sendF2Command(self, packet:bytearray, pause:int=0)->None:
-        """Envia comando a la tarjeta F2 espeficando una pausa."""
+    def _sendF2Command(self, packet:bytearray, pause:int=100)->None:
+        """Envia comando a la tarjeta F2 especificando una pausa en ms."""
         self.conn.write(packet)
         if(pause > 0):
-            time.sleep(pause)
+            time.sleep(pause/1000.0)

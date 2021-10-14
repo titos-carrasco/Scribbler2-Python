@@ -13,27 +13,34 @@ import time
 from scribbler2.S2Fluke2 import S2Fluke2
 
 def main():
-    """Realiza las pruebas de movimiento en plano cartesiano del S2."""
+    """Realiza las pruebas de movimiento en plano cartesiano del S2.
 
-    #robot = S2Serial( port="/dev/ttyUSB0", timeout=20000 )
-    robot = S2Fluke2( "/dev/rfcomm2", timeout=500 )
+    Los comandos de movimiento no deben tardar mas de 3000ms o se generara
+    error
+    """
+
+    #robot = S2Serial( port="/dev/ttyUSB0")
+    robot = S2Fluke2( port="/dev/rfcomm2")
 
     print( "beginPath         : ", robot.beginPath( 15 ) )
 
-    print( "setPosn -100, -200: ", robot.setPosn( -100, -200 ) )
-    print( "getPosn           : ", robot.getPosn() )
-    print( "setPosn 0, 0      : ", robot.setPosn( 0, 0 ) )
+    print( "setPosn -100, -100: ", robot.setPosn( -100, -100 ) )
     print( "getPosn           : ", robot.getPosn() )
     print( "setAngle -90      : ", robot.setAngle( -90 ) )
     print( "getAngle          : ", robot.getAngle() )
     print( "setAngle 90       : ", robot.setAngle( 90 ) )
     print( "getAngle          : ", robot.getAngle() )
+    print( "setPosn 0, 0      : ", robot.setPosn( 0, 0 ) )
+    print( "getPosn           : ", robot.getPosn() )
 
     print( "moveTo 0, 100     : ", robot.moveTo( 0, 100 ) )
-    print( "moveTo 0, -1000   : ", robot.moveTo( 0, -1000) )
-    print( "moveTo 0, 1000    : ", robot.moveTo( 0, 1000 ) )
+    print( "getAngle          : ", robot.getAngle() )
+    print( "moveTo 0, -100    : ", robot.moveTo( 0, -100) )
+    print( "getAngle          : ", robot.getAngle() )
+    print( "moveTo 0, 100     : ", robot.moveTo( 0, 100 ) )
+    print( "getAngle          : ", robot.getAngle() )
 
-    print( "moveTo 0, 2000    : ", robot.moveTo( 0, 2000 ) )
+    print( "moveTo 0, 200     : ", robot.moveTo( 0, 200 ) )
     print( "getPosn           : ", robot.getPosn() )
     print( "getAngle          : ", robot.getAngle() )
     print( "moveBy 0, 50      : ", robot.moveBy( 0, 50 ) )
@@ -48,7 +55,7 @@ def main():
     print( "arcTo 100, 100, 45: ", robot.arcTo( 100, 100, 45 ) )
     print( "getPosn           : ", robot.getPosn() )
     print( "getAngle          : ", robot.getAngle() )
-    print( "arcBy 100         : ", robot.arcBy( 100, 100, 45 ) )
+    print( "arcBy 100, 100, 45: ", robot.arcBy( 100, 100, 45 ) )
     print( "getPosn           : ", robot.getPosn() )
     print( "getAngle          : ", robot.getAngle() )
 

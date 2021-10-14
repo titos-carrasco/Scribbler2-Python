@@ -18,63 +18,40 @@ class Serial(ISerial):
         """
         super(Serial, self).__init__()
 
-        self.maxTries = timeout
-        try:
-            self.serial = serial.Serial(port, baudrate=bauds, bytesize=8,
-                                       parity='N', stopbits=1,
-                                       timeout=0)
-            self.serial.reset_input_buffer()
-            self.serial.reset_output_buffer()
-        except serial.SerialTimeoutException:
-            raise self.TimeoutException
-        except Exception as e:
-            raise
+        self.serial = serial.Serial(port, baudrate=bauds, bytesize=8,
+                                   parity='N', stopbits=1,
+                                   timeout=timeout/1000.0)
+        self.serial.reset_input_buffer()
+        self.serial.reset_output_buffer()
 
     def close(self)->None:
         """Finaliza la conexion con la puerta serial."""
         try:
             self.serial.close()
-            self.serial = None
-        except serial.SerialTimeoutException:
-            raise self.TimeoutException
-        except Exception as e:
-            raise
+        except:
+            pass
+        self.serial = None
 
     def write(self, dataBytes:bytes)->None:
         """Envia 'dataBytes' por la puerta serial."""
-        try:
-            self.serial.write(dataBytes)
-            self.serial.flush()
-        except serial.SerialTimeoutException:
-            raise self.TimeoutException
-        except Exception as e:
-            raise
+        self.serial.write(dataBytes)
+        self.serial.flush()
+
+    def available(self)->int:
+        """El numero de bytes disponibles para lectura."""
+        return self.serial.in_waiting
 
     def read(self, nbytes)->bytes:
         """Lee 'nbytes' desde la puerta serial."""
-        try:
-            dataBytes = bytearray(nbytes)
-            pos = 0
-            tries = 0
-            while(pos < nbytes and tries < self.maxTries):
-                b = self.serial.read(1)
-                if(len(b)==0):
-                    time.sleep(0.001)
-                    tries = tries + 1
-                    continue
-                if(type(b) is str):
-                    dataBytes[pos] = ord(b)
-                else:
-                    dataBytes[pos] = b[0]
-                pos = pos + 1
-                tries = 0
-            if(pos < nbytes):
-                raise self.TimeoutException
-            return bytes(dataBytes)
-        except serial.SerialTimeoutException:
-            raise self.TimeoutException
-        except Exception as e:
-            raise
+        dataBytes = bytearray(nbytes)
+        pos = 0
+        while(pos < nbytes):
+            b = self.serial.read(1)
+            if( len(b) == 0 ):
+                raise Exception("Read: no hay datos")
+            dataBytes[pos] = b[0]
+            pos = pos + 1
+        return bytes(dataBytes)
 
     def readLine(self, maxChars)->str:
         """Lee una linea de texto finalizada en NL.
@@ -82,47 +59,30 @@ class Serial(ISerial):
         'maxChars' especifica el máximo número de caracteres a leer.
         El caracter NL no es incluido en la linea retornada
         """
-        try:
-            linea = ''
-            pos = 0
-            tries = 0
-            while(pos < maxChars + 1 and tries < self.maxTries):
-                b = self.serial.read(1)
-                if(len(b)==0):
-                    time.sleep(0.001)
-                    tries = tries + 1
-                    continue
-                if(type(b) is str):
-                    if(b == '\n'):
-                        return linea
-                    linea = linea + b
-                else:
-                    if(b[0]==10):
-                        return linea
-                    linea =linea + chr(b[0])
-                tries = 0
-            raise self.TimeoutException
-        except serial.SerialTimeoutException:
-            raise self.TimeoutException
-        except Exception as e:
-            raise
+        linea = ''
+        pos = 0
+        while(pos < maxChars + 1):
+            b = self.serial.read(1)
+            if( len(b) == 0 ):
+                raise Exception("Readline: no hay datos")
+            if(b[0]==10):
+                return linea
+            linea =linea + chr(b[0])
+        raise Exception("ReadLine: no hay newline")
 
     def ignoreInput(self, timex:int)->None:
         """Descarta durante 'timex' ms los datos presentes para lectura."""
-        try:
+        timeout = self.serial.timeout
+        self.serial.timeout = 0
+        t = time.time()
+        end = t + timex/1000.0
+        while(t < end):
+            if( self.serial.in_waiting>0):
+                self.serial.read(1)
+            else:
+                time.sleep(0.010)
             t = time.time()
-            end = t + timex / 1000.0
-            while(t < end):
-                try:
-                    if(len(self.serial.read(1))==0):
-                        time.sleep(0.001)
-                except:
-                    pass
-                t = time.time()
-        except serial.SerialTimeoutException:
-            raise self.TimeoutException
-        except Exception as e:
-            raise
+        self.serial.timeout = timeout
 
     def setDTR(self, value:bool)->None:
         """Activa/desactiva la linea DTR."""

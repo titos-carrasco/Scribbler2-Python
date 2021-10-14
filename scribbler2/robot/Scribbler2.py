@@ -24,14 +24,13 @@ class Scribbler2(object):
         """Inicializa el objeto y lo conecta al S2."""
         self.mylock = threading.Lock()
         self.conn = conn
-        self.conn.ignoreInput(1000)
 
     def close(self)->None:
         """Cierra la conexion hacia el S2."""
         try:
             self._lock()
             self.conn.close()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -41,9 +40,9 @@ class Scribbler2(object):
         try:
             self._lock()
             packet = self._makeS2Packet(80)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getLineResponse(128)
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -53,13 +52,13 @@ class Scribbler2(object):
         try:
             self._lock()
             packet = self._makeS2Packet(50)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             pass1 = self._getBytesResponse(8)
             packet[0] = 51
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             pass2 = self._getBytesResponse(8)
             return (pass1 + pass2).decode('ascii')
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -69,13 +68,13 @@ class Scribbler2(object):
         try:
             self._lock()
             packet = self._makeS2Packet(78)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             name1 = self._getBytesResponse(8)
             packet[0] = 64
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             name2 = self._getBytesResponse(8)
             return (name1 + name2).decode('ascii')
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -85,9 +84,9 @@ class Scribbler2(object):
         try:
             self._lock()
             packet = self._makeS2Packet(77)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return HS2State(self._getUInt8Response(), self._getUInt8Response())
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -97,9 +96,9 @@ class Scribbler2(object):
         try:
             self._lock()
             packet = self._makeS2Packet(81)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getBytesResponse(self.DATA_LENGTH)
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -117,7 +116,7 @@ class Scribbler2(object):
             while(i<self.DATA_LENGTH):
                 packet[i+1] = 32
                 i = i + 1
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             self._getS2SensorsResponse()
 
             packet[0] = 56
@@ -129,9 +128,9 @@ class Scribbler2(object):
             while(j<self.DATA_LENGTH):
                 packet[j+1] = 32
                 j = j + 1
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -147,9 +146,9 @@ class Scribbler2(object):
             packet = self._makeS2Packet(96)
             packet[1] = pos & 0x07
             packet[2] = data & 0xFF
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -163,9 +162,9 @@ class Scribbler2(object):
             while(i<len(data) and  i<self.DATA_LENGTH):
                 packet[i+1] = data[i]
                 i = i + 1
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -183,7 +182,7 @@ class Scribbler2(object):
             while(i<self.DATA_LENGTH):
                 packet[i+1] = 32
                 i = i + 1
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             self._getS2SensorsResponse()
 
             packet[0] = 119
@@ -195,9 +194,9 @@ class Scribbler2(object):
             while(j<self.DATA_LENGTH):
                 packet[j+1] = 32
                 j = j + 1
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -207,9 +206,9 @@ class Scribbler2(object):
         try:
             self._lock()
             packet = self._makeS2Packet(65)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -219,9 +218,9 @@ class Scribbler2(object):
         try:
             self._lock()
             packet = self._makeS2Packet(71)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getUInt8Response()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -231,9 +230,9 @@ class Scribbler2(object):
         try:
             self._lock()
             packet = self._makeS2Packet(72)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getUInt8Response()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -243,9 +242,9 @@ class Scribbler2(object):
         try:
             self._lock()
             packet = self._makeS2Packet(73)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return HS2Infrared(self._getUInt8Response(), self._getUInt8Response())
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -258,9 +257,9 @@ class Scribbler2(object):
             packet[1] = sensor & 0x01
             packet[2] = 0
             packet[3] = umbral & 0xFF
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getUInt8Response()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -271,9 +270,9 @@ class Scribbler2(object):
             self._lock()
             packet = self._makeS2Packet(175)
             packet[1] = sensor & 0x01
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getUInt8Response()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -287,9 +286,9 @@ class Scribbler2(object):
             if(encender):
                 cmd = 99
             packet = self._makeS2Packet(cmd)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -302,9 +301,9 @@ class Scribbler2(object):
             if(encender):
                 cmd = 101
             packet = self._makeS2Packet(cmd)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -317,9 +316,9 @@ class Scribbler2(object):
             if(encender):
                 cmd = 103
             packet = self._makeS2Packet(cmd)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -332,9 +331,9 @@ class Scribbler2(object):
             packet[1] = left & 0x01
             packet[2] = center & 0x01
             packet[3] = right & 0x01
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -344,9 +343,9 @@ class Scribbler2(object):
         try:
             self._lock()
             packet = self._makeS2Packet(67)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getUInt16Response()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -356,9 +355,9 @@ class Scribbler2(object):
         try:
             self._lock()
             packet = self._makeS2Packet(68)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getUInt16Response()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -368,9 +367,9 @@ class Scribbler2(object):
         try:
             self._lock()
             packet = self._makeS2Packet(69)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getUInt16Response()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -380,9 +379,9 @@ class Scribbler2(object):
         try:
             self._lock()
             packet = self._makeS2Packet(70)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return HS2Lights(self._getUInt16Response(), self._getUInt16Response(), self._getUInt16Response())
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -392,9 +391,9 @@ class Scribbler2(object):
         try:
             self._lock()
             packet = self._makeS2Packet(74)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getUInt8Response()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -404,9 +403,9 @@ class Scribbler2(object):
         try:
             self._lock()
             packet = self._makeS2Packet(75)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getUInt8Response()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -416,9 +415,9 @@ class Scribbler2(object):
         try:
             self._lock()
             packet = self._makeS2Packet(76)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return HS2LineSensors(self._getUInt8Response(), self._getUInt8Response())
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -431,9 +430,9 @@ class Scribbler2(object):
             packet[1] = sensor & 0x01
             packet[2] = 0
             packet[3] = umbral & 0xFF
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getUInt8Response()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -443,9 +442,9 @@ class Scribbler2(object):
         try:
             self._lock()
             packet = self._makeS2Packet(169)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getUInt32Response()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -455,9 +454,9 @@ class Scribbler2(object):
         try:
             self._lock()
             packet = self._makeS2Packet(170)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return HS2MotorStats(self._getUInt32Response(), self._getUInt8Response())
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -472,9 +471,9 @@ class Scribbler2(object):
             self._lock()
             packet = self._makeS2Packet(171)
             packet[1] = preserve & 0x01
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return HS2Encoders(self._getUInt32Response(), self._getUInt32Response())
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -484,9 +483,9 @@ class Scribbler2(object):
         try:
             self._lock()
             packet = self._makeS2Packet(79)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getUInt8Response()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -496,9 +495,9 @@ class Scribbler2(object):
         try:
             self._lock()
             packet = self._makeS2Packet(108)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -526,9 +525,9 @@ class Scribbler2(object):
             packet = self._makeS2Packet(109)
             packet[1] = int(right)
             packet[2] = int(left)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -538,9 +537,9 @@ class Scribbler2(object):
         try:
             self._lock()
             packet = self._makeS2Packet(112)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -550,9 +549,9 @@ class Scribbler2(object):
         try:
             self._lock()
             packet = self._makeS2Packet(111)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -569,9 +568,9 @@ class Scribbler2(object):
                 volume= 100
             packet = self._makeS2Packet(160)
             packet[1] = volume
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -597,9 +596,9 @@ class Scribbler2(object):
             packet[4] = freq1 & 0xFF
             packet[5] = (freq2 >> 8) & 0xFF
             packet[6] = freq2 & 0xFF
-            self._sendS2Command(packet, duration/1000.0)
+            self._sendS2Command(packet, duration)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -617,9 +616,9 @@ class Scribbler2(object):
             packet[1] = 1
             packet[2] = 0
             packet[3] = speed & 0x0F
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -632,7 +631,7 @@ class Scribbler2(object):
             packet[1] = 0
             self._sendS2PathCommand(packet)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -642,9 +641,9 @@ class Scribbler2(object):
         try:
             self._lock()
             packet = self._makeS2Packet(165)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return (self._getInt32Response(), self._getInt32Response())
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -654,9 +653,9 @@ class Scribbler2(object):
         try:
             self._lock()
             packet = self._makeS2Packet(167)
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getInt32Response()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -674,9 +673,9 @@ class Scribbler2(object):
             packet[6] = (y >> 16) & 0xFF
             packet[7] = (y >> 8) & 0xFF
             packet[8] = y & 0xFF
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -690,9 +689,9 @@ class Scribbler2(object):
             packet[2] = (angle >> 16) & 0xFF
             packet[3] = (angle >> 8) & 0xFF
             packet[4] = angle & 0xFF
-            self._sendS2Command(packet, 0)
+            self._sendS2Command(packet)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -709,7 +708,7 @@ class Scribbler2(object):
             packet[5] = y & 0xFF
             self._sendS2PathCommand(packet)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -726,7 +725,7 @@ class Scribbler2(object):
             packet[5] = y & 0xFF
             self._sendS2PathCommand(packet)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -741,7 +740,7 @@ class Scribbler2(object):
             packet[3] = angle & 0xFF
             self._sendS2PathCommand(packet)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -756,7 +755,7 @@ class Scribbler2(object):
             packet[3] = angle & 0xFF
             self._sendS2PathCommand(packet)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -775,7 +774,7 @@ class Scribbler2(object):
             packet[7] = radius & 0xFF
             self._sendS2PathCommand(packet)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -794,7 +793,7 @@ class Scribbler2(object):
             packet[7] = radius & 0xFF
             self._sendS2PathCommand(packet)
             return self._getS2SensorsResponse()
-        except Exception as e:
+        except:
             raise
         finally:
             self._unlock()
@@ -815,8 +814,9 @@ class Scribbler2(object):
         """
         self.conn.write(packet)
         if(pause > 0):
-            time.sleep(pause)
+            time.sleep(pause/1000.0)
         if(packet[0] != 0x50):
+            # recibe el echo
             b = self.conn.read(self.PACKET_LENGTH)
             if(packet != b):
                 print("Packet Mismatch:")
@@ -826,31 +826,29 @@ class Scribbler2(object):
     def _sendS2PathCommand(self, packet:bytearray)->None:
         """Envia comando de desplazamiento (en modo path) al S2."""
         self.conn.write(packet)
-        t = time.time()
-        while(time.time() - t  < 3.5):
-            try:
-                b = self.conn.read(self.PACKET_LENGTH)
-                if(packet != b):
-                    print("Packet Mismatch (path):")
-                    raise self.conn.TimeoutException
-                return
-            except self.conn.TimeoutException as e:
-                print( "Timeout *****" )
-                pass
 
-        # necesitamos sincronizar las respuestas, lo hacemos con GetAll()
-        packet = self._makeS2Packet(65)
+        # recibe el echo
+        b = self.conn.read(self.PACKET_LENGTH)
+        if(packet != b):
+            print("Packet Mismatch (path):")
+
+        # recibe la respuesta del comando
+        self._getS2SensorsResponse()
+
+        # espera a que los motores se detengan
+        packet = self._makeS2Packet(170)
         while(True):
-            self.conn.write(packet)
-            try:
-                self.conn.read(11) # estos bytes quedaron sin ser recibidos
-                self.conn.read(self.PACKET_LENGTH)
-                break
-            except self.conn.TimeoutException as e:
-                pass
+            self._sendS2Command(packet)
+            stat = HS2MotorStats(self._getUInt32Response(), self._getUInt8Response())
+            moving = (stat.stat & 0x03)!=0 #or stat.moveReady==0
+            if(moving):
+                time.sleep(0.5)
+            else:
+                break;
 
-        # solicitamos el estado de los sensores
-        self._sendS2Command(packet, 0)
+        # dejamosla respuesta apropiada para ser leida por quien invoca
+        packet = self._makeS2Packet(65)
+        self._sendS2Command(packet)
 
     def _getS2SensorsResponse(self)->HS2Sensors:
         """Obtiene estado de los principales sensores del S2."""

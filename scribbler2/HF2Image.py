@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 """Clase de ayuda (helper) para retornar informacion del S2.
 
 Es creada exclusivamente por metodos de la clase **Fluke2** y retornadas

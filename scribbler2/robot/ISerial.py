@@ -7,15 +7,16 @@ import threading
 class ISerial():
     """Interface para interactuar de manera serial con un dispositivo."""
 
-    class TimeoutException(Exception):
-        """Timeout on data."""
-
     def close(self)->None:
         """Finaliza la conexion."""
         pass
 
     def write(self, dataBytes:bytes)->None:
         """Envia los 'dataBytes' al dispositivo."""
+        pass
+
+    def available(self)->int:
+        """El numero de bytes disponibles para lectura."""
         pass
 
     def read(self, nbytes)->bytes:
