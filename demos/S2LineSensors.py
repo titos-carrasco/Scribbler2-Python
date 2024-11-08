@@ -1,29 +1,23 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-"""Test de los sensores de linea del S2."""
-
 import time
-
-#from scribbler2.S2Serial import S2Serial
 from scribbler2.S2Fluke2 import S2Fluke2
 
-def main():
-    """Realiza las pruebas de los sensores de linea del S2."""
 
-    #robot = S2Serial( "/dev/ttyUSB0" )
-    robot = S2Fluke2( "/dev/rfcomm2" )
+class App:
+    def __init__(self, dev):
+        self.robot = S2Fluke2(dev)
 
-    for i in range( 10 ):
-        print( "getLineEx 0 : ", robot.getLineEx( 0, 128 ) )
-        print( "getLineEx 1 : ", robot.getLineEx( 1, 128 ) )
-        print( "getAllLines : ", robot.getAllLines() )
-        print( "getLeftLine : ", robot.getLeftLine() )
-        print( "getRightLine: ", robot.getRightLine() )
-        time.sleep( 0.200 )
+    def run(self):
+        for i in range(10):
+            print("getLineEx 0 : ", self.robot.getLineEx(0, 128))
+            print("getLineEx 1 : ", self.robot.getLineEx(1, 128))
+            print("getAllLines : ", self.robot.getAllLines())
+            print("getLeftLine : ", self.robot.getLeftLine())
+            print("getRightLine: ", self.robot.getRightLine())
+            time.sleep(0.200)
 
-    robot.close()
+        self.robot.close()
 
 
-if( __name__ == "__main__" ):
-    main()
+# ---
+app = App("/dev/rfcomm2")
+app.run()

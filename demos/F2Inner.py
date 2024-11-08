@@ -1,32 +1,27 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-"""Test de los elementos internos de la tarjeta F2."""
-
-import time
-
 from scribbler2.S2Fluke2 import S2Fluke2
 
-def main():
-    """Realiza las pruebas de los elementos internos de la tarjeta F2."""
 
-    robot = S2Fluke2( "/dev/rfcomm2" )
+class App:
+    def __init__(self, dev):
+        self.robot = S2Fluke2(dev)
 
-    print( "getVersion    :", robot.getVersion() )
-    print( "identifyRobot :", robot.identifyRobot() )
-    print( "getBattery    :", robot.getBattery() )
-    print( "setForwardness: SCRIBBLER_FORWARD" )
-    robot.setForwardness( robot.SCRIBBLER_FORWARD )
-    print( "setForwardness: FLUKE_FORWARD" )
-    robot.setForwardness( robot.FLUKE_FORWARD )
-    print( "setForwardness: SCRIBBLER_FORWARD" )
-    robot.setForwardness( robot.SCRIBBLER_FORWARD )
-    print( "getErrors     : " )
-    print( robot.getErrors() )
-    robot.resetScribbler()
+    def run(self):
+        print("getVersion    :", self.robot.getVersion())
+        print("identifyRobot :", self.robot.identifyRobot())
+        print("getBattery    :", self.robot.getBattery())
+        print("setForwardness: SCRIBBLER_FORWARD")
+        self.robot.setForwardness(self.robot.SCRIBBLER_FORWARD)
+        print("setForwardness: FLUKE_FORWARD")
+        self.robot.setForwardness(self.robot.FLUKE_FORWARD)
+        print("setForwardness: SCRIBBLER_FORWARD")
+        self.robot.setForwardness(self.robot.SCRIBBLER_FORWARD)
+        print("getErrors     : ")
+        print(self.robot.getErrors())
+        self.robot.resetScribbler()
 
-    robot.close()
+        self.robot.close()
 
 
-if( __name__ == "__main__" ):
-    main()
+# ---
+app = App("/dev/rfcomm2")
+app.run()

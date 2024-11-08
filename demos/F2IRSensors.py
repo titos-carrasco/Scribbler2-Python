@@ -1,26 +1,22 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-"""Test de los sensores infrarojos de la tarjeta F2."""
-
 import time
-
 from scribbler2.S2Fluke2 import S2Fluke2
 
-def main():
-    """Realiza las pruebas de los sensores infrarojos de la tarjeta F2."""
 
-    robot = S2Fluke2( "/dev/rfcomm2" )
+class App:
+    def __init__(self, dev):
+        self.robot = S2Fluke2(dev)
 
-    print( "setIRPower 255 " )
-    robot.setIRPower( 255 )
+    def run(self):
+        print("setIRPower 255 ")
+        self.robot.setIRPower(255)
 
-    for i in range( 20 ):
-        print( "getIR: ", robot.getIR() )
-        time.sleep( 0.200 )
+        for i in range(20):
+            print("getIR: ", self.robot.getIR())
+            time.sleep(0.200)
 
-    robot.close()
+        self.robot.close()
 
 
-if( __name__ == "__main__" ):
-    main()
+# ---
+app = App("/dev/rfcomm2")
+app.run()

@@ -1,30 +1,28 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-"""Test de la camara de la tarjeta F2."""
-
-import numpy as np
-import cv2
-
+import numpy as np  # pip install numpy
+import cv2  # pip install opencv-python
 from scribbler2.S2Fluke2 import S2Fluke2
 
-def main():
-    """Realiza las pruebas de la camara de la tarjeta de la F2."""
 
-    robot = S2Fluke2( "/dev/rfcomm2" )
+class App:
+    def __init__(self, dev):
+        self.robot = S2Fluke2(dev)
 
-    cv2.namedWindow( 'Frames', cv2.WINDOW_AUTOSIZE )
-    robot.setPicSize( robot.IMAGE_SMALL )
-    for i in range(10):
-        image = robot.getImage( robot.IMAGE_GRAYJPEG_FAST )
-        print( "Image:", image )
-        img = cv2.imdecode( np.frombuffer( image.image, np.uint8 ), cv2.IMREAD_ANYCOLOR )
-        cv2.imshow( 'Frames', img )
-        k = cv2.waitKey(5)
-    cv2.destroyAllWindows()
+    def run(self):
+        cv2.namedWindow("Frames", cv2.WINDOW_AUTOSIZE)
+        self.robot.setPicSize(self.robot.IMAGE_SMALL)
+        for i in range(10):
+            image = self.robot.getImage(self.robot.IMAGE_GRAYJPEG_FAST)
+            print("Image:", image)
+            img = cv2.imdecode(
+                np.frombuffer(image.image, np.uint8), cv2.IMREAD_ANYCOLOR
+            )
+            cv2.imshow("Frames", img)
+            k = cv2.waitKey(5)
+        cv2.destroyAllWindows()
 
-    robot.close()
+        self.robot.close()
 
 
-if( __name__ == "__main__" ):
-    main()
+# ---
+app = App("/dev/rfcomm2")
+app.run()
