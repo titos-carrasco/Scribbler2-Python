@@ -1,20 +1,14 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-"""Demo de control del S2 via josystick e interfaz grafica."""
-
-import gi
-gi.require_version( 'Gtk', '3.0' )
-from gi.repository import Gtk
-from threading import Thread
-import pygame
 import time
-
-#from scribbler2.S2Serial import S2Serial
+from threading import Thread
+import pygame  # pip install pygame
+import gi  # pip install pygobject
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk
 from scribbler2.S2Fluke2 import S2Fluke2
 
+
+
 class TestJoystick:
-    """Aplicacion para controlar el S2 via interfaz grafica y joystick."""
 
     def __init__(self):
         """Construye la GUI desde el archivo glade."""
@@ -24,201 +18,188 @@ class TestJoystick:
         self.window = self.builder.get_object("MainWindow")
         self.window.show_all()
         self.rob = None
-        self.MoveButtons = self.builder.get_object("MoveButtons")
-        self.Speed = self.builder.get_object("Speed")
-        self.Speed.props.adjustment=self.builder.get_object("SpeedAdjustment")
-        self.SpeedValue = 0
-        self.Port = self.builder.get_object("Port")
-        self.Connect = self.builder.get_object("Connect")
-        self.StatusBar = self.builder.get_object("StatusBar")
-        self.SbContextId = self.StatusBar.get_context_id("MainMessages")
-        self.Info = self.builder.get_object("Info")
-        self.IRLeft = self.builder.get_object("IRLeft")
-        self.IRRight = self.builder.get_object("IRRight")
-        self.LightLeft = self.builder.get_object("LightLeft")
-        self.LightCenter = self.builder.get_object("LightCenter")
-        self.LightRight = self.builder.get_object("LightRight")
-        self.LineLeft = self.builder.get_object("LineLeft")
-        self.LineRight = self.builder.get_object("LineRight")
-        self.Stall = self.builder.get_object("Stall")
-        self.TJoystick = None
-        self.TSensors = None
+        self.move_buttons = self.builder.get_object("MoveButtons")
+        self.speed = self.builder.get_object("Speed")
+        self.speed.props.adjustment = self.builder.get_object("SpeedAdjustment")
+        self.speed_value = 0
+        self.port = self.builder.get_object("Port")
+        self.connect = self.builder.get_object("Connect")
+        self.status_bar = self.builder.get_object("StatusBar")
+        self.sb_context_id = self.status_bar.get_context_id("MainMessages")
+        self.info = self.builder.get_object("Info")
+        self.ir_left = self.builder.get_object("IRLeft")
+        self.ir_right = self.builder.get_object("IRRight")
+        self.light_left = self.builder.get_object("LightLeft")
+        self.light_center = self.builder.get_object("LightCenter")
+        self.light_right = self.builder.get_object("LightRight")
+        self.line_left = self.builder.get_object("LineLeft")
+        self.line_right = self.builder.get_object("LineRight")
+        self.stall = self.builder.get_object("Stall")
+        self.tjoystick = None
+        self.tsensors = None
 
-    def OnDeleteWindow(self, *args):
-        """Procesa el evento de cerrar ventana - Delete Window."""
-        self.OnQuit(*args)
+        self.time_sensors = time.time()
+        self.sensors = None
 
-    def OnQuit(self, *args):
-        """Procesa el evento de salir - Quit."""
-        self.Connect.set_active(False)
+    def onDeleteWindow(self, *args):
+        self.onQuit(*args)
+
+    def onQuit(self, *args):
+        self.connect.set_active(False)
         Gtk.main_quit()
 
-    def OnConnect(self, *args):
-        """Procesa el evento OnConnect del boton On/Off tipo switch."""
-        if(self.Connect.get_active()):
+    def onConnect(self, *args):
+        if self.connect.get_active():
             self._SbSetMessage("Conectando...")
             try:
-                #self.rob = S2Serial( port=self.Port.get_text() )
-                self.rob = S2Fluke2( port=self.Port.get_text() )
-            except Exception as e:
-                self.Connect.set_active(False)
+                # self.rob = S2Serial( port=self.Port.get_text() )
+                self.rob = S2Fluke2(port=self.port.get_text())
+            except Exception as _e:
+                self.connect.set_active(False)
                 self._SbSetMessage("Error al conectar con el Scribbler2")
                 return
-            self._StoreSensors( self.rob.getAllSensors() )
-            self.MoveButtons.set_sensitive(True)
-            self.Speed.set_sensitive(True)
-            self.Port.set_sensitive(False)
-            self._SbSetMessage("Conectado a %s - Mi nombre es '%s'" % (self.Port.get_text(), self.rob.getName()))
-            self.Info.set_label(self.rob.getInfo())
-            self.Connect.set_label("Desconectar")
+            self._StoreSensors(self.rob.getAllSensors())
+            self.move_buttons.set_sensitive(True)
+            self.speed.set_sensitive(True)
+            self.port.set_sensitive(False)
+            self._SbSetMessage(
+                "Conectado a %s - Mi nombre es '%s'"
+                % (self.port.get_text(), self.rob.getName())
+            )
+            self.info.set_label(self.rob.getInfo())
+            self.connect.set_label("Desconectar")
 
             # Inicia el hilo de los sensores
-            self.TSensors = Thread(target=self._Sensors, args=())
-            self.TSensors.start()
+            self.tsensors = Thread(target=self._Sensors, args=())
+            self.tsensors.start()
 
             # Inicia el hilo del joystick
             pygame.init()
-            if(pygame.joystick.get_count()>0):
-                self.TJoystick = Thread(target=self._Joystick, args=())
-                self.TJoystick.start()
+            if pygame.joystick.get_count() > 0:
+                self.tjoystick = Thread(target=self._Joystick, args=())
+                self.tjoystick.start()
         else:
-            if(self.rob!=None):
+            if self.rob is not None:
                 self.rob.close()
                 self.rob = None
-                self.MoveButtons.set_sensitive(False)
-                self.Speed.set_sensitive(False)
-                self.Port.set_sensitive(True)
-                self.Info.set_label("")
+                self.move_buttons.set_sensitive(False)
+                self.speed.set_sensitive(False)
+                self.port.set_sensitive(True)
+                self.info.set_label("")
                 self._SbSetMessage("Desconectado")
-                self.Connect.set_label("Conectar")
+                self.connect.set_label("Conectar")
 
                 # Detiene el hilo de sensors
-                if(self.TSensors!=None):
-                    self.TSensors.join()
-                    self.TSensors = None
+                if self.tsensors is not None:
+                    self.tsensors.join()
+                    self.tsensors = None
 
                 # Detiene  el hilo del joystick
-                if(self.TJoystick!=None):
-                    self.TJoystick.join()
-                    self.TJoystick = None
+                if self.tjoystick is not None:
+                    self.tjoystick.join()
+                    self.tjoystick = None
                 pygame.quit()
         return
 
-    def OnSpeedChanged(self, *args):
-        """Procesa el evento de cambio de velocidad - SpeedChange."""
-        self.SpeedValue = int(self.Speed.props.adjustment.get_value())
+    def onSpeedChanged(self, *args):
+        self.speed_value = int(self.speed.props.adjustment.get_value())
 
-    def OnUp(self, *args):
-        """Procesa el evento de avanzar - Up."""
-        self._StoreSensors( self.rob.setMotors(self.SpeedValue, self.SpeedValue) )
+    def onUp(self, *args):
+        self._StoreSensors(self.rob.setMotors(self.speed_value, self.speed_value))
 
-    def OnUpLeft(self, *args):
-        """Procesa el evento avanzar izquierda - UpLeft."""
-        self._StoreSensors( self.rob.setMotors(self.SpeedValue/4, self.SpeedValue) )
+    def onUpLeft(self, *args):
+        self._StoreSensors(self.rob.setMotors(self.speed_value / 4, self.speed_value))
 
-    def OnUpRight(self, *args):
-        """Procesa el evento de avanzar derecha - UpRight."""
-        self._StoreSensors( self.rob.setMotors(self.SpeedValue, self.SpeedValue/4) )
+    def onUpRight(self, *args):
+        self._StoreSensors(self.rob.setMotors(self.speed_value, self.speed_value / 4))
 
-    def OnDown(self, *args):
-        """Procesa el evento de retroceder - Down."""
-        self._StoreSensors( self.rob.setMotors(-self.SpeedValue, -self.SpeedValue) )
+    def onDown(self, *args):
+        self._StoreSensors(self.rob.setMotors(-self.speed_value, -self.speed_value))
 
-    def OnDownLeft(self, *args):
-        """Procesa el evento de retroceder izquierda - DownLeft."""
-        self._StoreSensors( self.rob.setMotors(-self.SpeedValue/4, -self.SpeedValue) )
+    def onDownLeft(self, *args):
+        self._StoreSensors(self.rob.setMotors(-self.speed_value / 4, -self.speed_value))
 
-    def OnDownRight(self, *args):
-        """Procesa el evento de retroceder derecha - DownRight."""
-        self._StoreSensors( self.rob.setMotors(-self.SpeedValue, -self.SpeedValue/4) )
+    def onDownRight(self, *args):
+        self._StoreSensors(self.rob.setMotors(-self.speed_value, -self.speed_value / 4))
 
-    def OnLeft(self, *args):
-        """Procesa el evento mover izquierda - Left."""
-        self._StoreSensors( self.rob.setMotors(-self.SpeedValue, self.SpeedValue) )
+    def onLeft(self, *args):
+        self._StoreSensors(self.rob.setMotors(-self.speed_value, self.speed_value))
 
-    def OnRight(self, *args):
-        """Procesa el evento de mover derecha - Right."""
-        self._StoreSensors( self.rob.setMotors(self.SpeedValue, -self.SpeedValue) )
+    def onRight(self, *args):
+        self._StoreSensors(self.rob.setMotors(self.speed_value, -self.speed_value))
 
-    def OnStop(self, *args):
-        """Procesa el evento de detener - Stop."""
-        self._StoreSensors( self.rob.setMotorsOff() )
+    def onStop(self, *args):
+        self._StoreSensors(self.rob.setMotorsOff())
 
     def _SbSetMessage(self, msg=None):
-        """Coloca un mensaje en la barra de estado."""
-        self.StatusBar.pop(self.SbContextId)
-        if(msg!=None):
-            self.StatusBar.push(self.SbContextId, msg)
+        self.status_bar.pop(self.sb_context_id)
+        if msg is not None:
+            self.status_bar.push(self.sb_context_id, msg)
 
     def _StoreSensors(self, sensors):
-        """Almacena el estado de los sensores."""
         self.time_sensors = time.time()
         self.sensors = sensors
 
     def _Sensors(self, *args):
         """Hilo que procesa el despliegue de los sensores."""
-        while(self.rob!=None):
+        while self.rob is not None:
             try:
                 t = time.time()
-                if((t-self.time_sensors)>1):
-                    self._StoreSensors( self.rob.getAllSensors() )
-                self.IRLeft.set_label( str( self.sensors.irLeft) )
-                self.IRRight.set_label( str( self.sensors.irRight) )
-                self.LightLeft.set_label( str( self.sensors.lightLeft) )
-                self.LightCenter.set_label( str( self.sensors.lightCenter) )
-                self.LightRight.set_label( str( self.sensors.lightRight) )
-                self.LineLeft.set_label( str( self.sensors.lineLeft ) )
-                self.LineRight.set_label( str( self.sensors.lineRight ) )
-                self.Stall.set_label( str( self.sensors.stall ) )
+                if (t - self.time_sensors) > 1:
+                    self._StoreSensors(self.rob.getAllSensors())
+                self.ir_left.set_label(str(self.sensors.irLeft))
+                self.ir_right.set_label(str(self.sensors.irRight))
+                self.light_left.set_label(str(self.sensors.lightLeft))
+                self.light_center.set_label(str(self.sensors.lightCenter))
+                self.light_right.set_label(str(self.sensors.lightRight))
+                self.line_left.set_label(str(self.sensors.lineLeft))
+                self.line_right.set_label(str(self.sensors.lineRight))
+                self.stall.set_label(str(self.sensors.stall))
                 time.sleep(1)
             except Exception as e:
-                print( e )
+                print(e)
                 break
 
     def _Joystick(self, *args):
         """Hilo que procesa los eventos del joystick."""
         joystick = pygame.joystick.Joystick(0)
         joystick.init()
-        axes = [0]*joystick.get_numaxes()
+        axes = [0] * joystick.get_numaxes()
         (_x, _y) = (0, 0)
 
         # procesa mientras el objeto del robot exista
-        while(self.rob!=None):
+        while self.rob is not None:
             try:
                 events = pygame.event.get()
                 for event in events:
-                    if(event.type == pygame.JOYAXISMOTION and event.joy == 0):
+                    if event.type == pygame.JOYAXISMOTION and event.joy == 0:
                         axes[event.axis] = int(round(event.value, 0))
                 (x, y) = (axes[0], -axes[1])
-                if((_x, _y)!=(x, y)):
+                if (_x, _y) != (x, y):
                     (_x, _y) = (x, y)
-                    if(x==0 and y==1):
-                        self.OnUp()
-                    elif(x==0 and y==-1):
-                        self.OnDown()
-                    elif(x==-1 and y==1):
-                        self.OnUpLeft()
-                    elif(x==1 and y==1):
-                        self.OnUpRight()
-                    elif(x==-1 and y==-1):
-                        self.OnDownLeft()
-                    elif(x==1 and y==-1):
-                        self.OnDownRight()
-                    elif(x==-1 and y==0):
-                        self.OnLeft()
-                    elif(x==1 and y==0):
-                        self.OnRight()
+                    if x == 0 and y == 1:
+                        self.onUp()
+                    elif x == 0 and y == -1:
+                        self.onDown()
+                    elif x == -1 and y == 1:
+                        self.onUpLeft()
+                    elif x == 1 and y == 1:
+                        self.onUpRight()
+                    elif x == -1 and y == -1:
+                        self.onDownLeft()
+                    elif x == 1 and y == -1:
+                        self.onDownRight()
+                    elif x == -1 and y == 0:
+                        self.onLeft()
+                    elif x == 1 and y == 0:
+                        self.onRight()
                     else:
-                        self.OnStop()
+                        self.onStop()
                 time.sleep(0.1)
-            except:
+            except Exception as _e:
                 break
 
 
-def main():
-    """Demo de control del S2 con interfaz GUI."""
-    app = TestJoystick()
-    Gtk.main()
-
-if( __name__ == "__main__" ):
-    main()
+# ---
+app = TestJoystick()
+Gtk.main()

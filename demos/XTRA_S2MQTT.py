@@ -1,106 +1,83 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-"""Test del S2 via MQTT.
-
-Requiere de paho (pip install paho-mqtt)
-"""
-
-import paho.mqtt.client as paho
-
-import json
 import time
-import unicodedata
-try:
-    import Queue as queue
-except:
-    import queue
-
-#from scribbler2.S2Serial import S2Serial
+import queue
+import paho.mqtt.client as paho  # pip install paho-mqtt
 from scribbler2.S2Fluke2 import S2Fluke2
 
-MQTT_SERVER = 'test.mosquitto.org'
-MQTT_PORT = 1883
-S2_TOPIC  = 'rcr/S2'
 
-messages = queue.Queue( 1 )
+class App:
+    def __init__(self, dev, server, port, topic):
+        self.server = server
+        self.port = port
+        self.topic = topic
 
-def mqtt_on_connect( client, userdata, flag, rc ):
-    """Invocada al conectar a servidor MQTT."""
-    global S2_TOPIC, MQTT_SERVER, MQTT_PORT
+        self.robot = S2Fluke2(dev)
 
-    client.subscribe( S2_TOPIC )
-    print( "[S2] Esperando en %s:%s - %s" % ( MQTT_SERVER, MQTT_PORT, S2_TOPIC ) )
+        self.messages = queue.Queue(1)
+        self.mqtt_client = paho.Client()
+        self.mqtt_client.on_connect = self._mqttOnConnect
+        self.mqtt_client.on_message = self._mqttOnMessage
+        self.mqtt_client.connect(server, port)
+        self.mqtt_client.loop_start()
 
-def mqtt_on_message( client, userdata, message ):
-    """Invocada al recibir mensaje MQTT en algun topico suscrito."""
-    global messages
+    def _mqttOnConnect(self, client, userdata, flag, rc):
+        """Invocada al conectar a servidor MQTT."""
 
-    # si no se ha procesado el ultimo mensaje lo eliminamos
-    try:
-        messages.get_nowait()
-    except queue.Empty:
-        pass
+        client.subscribe(self.topic)
+        print(f"Esperando en {self.server}:{self.port}/{self.topic}")
 
-    # agregamos el mensaje
-    try:
-        messages.put_nowait( message )
-    except queue.Full:
-        pass
+    def _mqttOnMessage(self, client, userdata, message):
+        """Invocada al recibir mensaje MQTT en algun topico suscrito."""
+
+        # si no se ha procesado el ultimo mensaje lo eliminamos
+        try:
+            self.messages.get_nowait()
+        except queue.Empty:
+            pass
+
+        # agregamos el mensaje
+        try:
+            self.messages.put_nowait(message)
+        except queue.Full:
+            pass
+
+    def run(self):
+        """Realiza pruebas del S2 recibiendo comandos via MQTT."""
+        print("Comandos:")
+        print("  nombre")
+        print("  izquierda")
+        print("  derecha")
+        print("  avanza")
+        print("  retrocede")
+        print("  detente")
+        print("  exit")
+        print("---")
+
+        running = True
+        while running:
+            message = self.messages.get()
+            payload = message.payload.decode("utf-8")
+            print("Mensaje recibido:", payload)
+
+            words = payload.split()
+            cmd = words[0]
+            if cmd == "exit":
+                running = False
+            elif cmd == "nombre":
+                print(self.robot.getName())
+            elif cmd == "izquierda":
+                self.robot.setMotors(-100, 100)
+            elif cmd == "derecha":
+                self.robot.setMotors(100, -100)
+            elif cmd == "avanza":
+                self.robot.setMotors(100, 100)
+            elif cmd == "retrocede":
+                self.robot.setMotors(-100, -100)
+            elif cmd == "detente":
+                self.robot.setMotors(0, 0)
+        self.mqtt_client.loop_stop()
+        self.robot.close()
 
 
-def main():
-    """Realiza pruebas del S2 recibiendo comandos via MQTT."""
-    global mqtt_client, MQTT_SERVER, MQTT_PORT, messages
-
-    print( "Comandos:" )
-    print( "  nombre" )
-    print( "  izquierda"  )
-    print( "  derecha" )
-    print( "  avanza" )
-    print( "  retrocede" )
-    print( "  detente" )
-    print( "  exit" )
-    print( "---" )
-
-    mqtt_client = paho.Client()
-    mqtt_client.on_connect = mqtt_on_connect
-    mqtt_client.on_message = mqtt_on_message
-    mqtt_client.connect( MQTT_SERVER, MQTT_PORT )
-    mqtt_client.loop_start()
-    s2 = None
-    abort = False
-    robot = None
-    try:
-        #robot = S2Serial( "/dev/ttyUSB0" )
-        robot = S2Fluke2( "/dev/rfcomm2" )
-    except Exception as e:
-        abort = True
-    while( not abort ):
-        message = messages.get()
-        payload = message.payload.decode( 'utf-8' )
-        print( "[S2] Mensaje recibido:", payload )
-
-        words = payload.split()
-        cmd = words[0]
-        if( cmd == 'exit' ):
-            abort = True
-        elif( cmd == 'nombre' ):
-            print( robot.getName() )
-        elif( cmd == 'izquierda' ):
-            robot.setMotors( -100, 100 )
-        elif( cmd == 'derecha' ):
-            robot.setMotors( 100, -100 )
-        elif( cmd == 'avanza' ):
-            robot.setMotors( 100, 100 )
-        elif( cmd == 'retrocede' ):
-            robot.setMotors( -100, -100 )
-        elif( cmd == 'detente' ):
-            robot.setMotors( 0, 0 )
-
-    mqtt_client.loop_stop()
-    if( robot is not None ):
-        robot.close()
-
-if( __name__ == "__main__" ):
-    main()
+# ---
+app = App("/dev/rfcomm2", "test.mosquitto.org", 1883, "rcr/s2")
+app.run()
