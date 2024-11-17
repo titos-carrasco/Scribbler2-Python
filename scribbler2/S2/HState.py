@@ -6,20 +6,21 @@ Es creada exclusivamente por metodos de la clase **Scribbler2** y retornadas
 a su invocador. Sus atributos pueden ser accesados directamente.
 """
 
-class HS2State:
+
+class HState:
     """Estado interno del S2.
 
     ```
-    inPins :int - El valor de pines de entrada (bitwise)
-    outPins:int - El valor de pines de salida (bitwise)
+    in_pins :int - El valor de pines de entrada (bitwise)
+    out_pins:int - El valor de pines de salida (bitwise)
     ```
     """
 
-    def __init__(self, inPins:int, outPins:int)->None:
+    def __init__(self, in_pins: int, out_pins: int) -> None:
         """Constructor."""
-        self.inPins:int = inPins
-        self.outPins:int = outPins
+        self.in_pins: int = in_pins
+        self.out_pins: int = out_pins
 
     def __str__(self):
         """Representacion modo texto de la clase."""
-        return "HS2State(%d, %d)" % (self.inPins, self.outPins)
+        return f"HS2State({self.in_pins}, {self.out_pins})"

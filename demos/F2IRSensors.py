@@ -1,10 +1,10 @@
 import time
-from scribbler2.S2Fluke2 import S2Fluke2
+from scribbler2.Fluke2 import Robot  # conexion via bluethoot a la Fluke2
 
 
 class App:
     def __init__(self, dev):
-        self.robot = S2Fluke2(dev)
+        self.robot = Robot(dev)
 
     def run(self):
         print("setIRPower 255 ")

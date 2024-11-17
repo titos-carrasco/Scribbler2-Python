@@ -10,7 +10,7 @@ Librería para controlar el robot Scribbler2  de Parallax:
 ## Instalación
 1. Requiere el paquete pyserial (`pyserial`)
 2. Descargue el último release desde [GitHub](https://github.com/titos-carrasco/Scribbler2-Python)
-2. Instale el wheel con `pip install scribbler2-4.0.0-py3-none-any.whl`
+2. Instale el wheel con `pip install scribbler2-x.y.z-py3-none-any.whl`
 
 
 ## Demos
@@ -18,9 +18,9 @@ Librería para controlar el robot Scribbler2  de Parallax:
 
 
 ## Desarrollo
-- La librería se puede instalar para desarrollo con `pip3 install --user -e .`
-- Verificar formato del código con `pydocstyle scribbler2`
-- La documentación se genera con `pdoc -o docs/  scribbler2 scribbler2.robot`
+- Utilizar venv
+- La librería se puede instalar para desarrollo con `pip install -e .`
+- La documentación se genera con `pdoc -o docs/ scribbler2`
 - El wheel debe ser generado con `python setup.py bdist_wheel`
 
 

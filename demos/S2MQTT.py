@@ -1,47 +1,40 @@
 import time
 import queue
-import paho.mqtt.client as paho  # pip install paho-mqtt
-from scribbler2.S2Fluke2 import S2Fluke2
+import paho.mqtt.client as mqtt  # pip install paho-mqtt
+from scribbler2.Fluke2 import Robot  # conexion via bluethoot a la Fluke2
 
 
 class App:
-    def __init__(self, dev, server, port, topic):
-        self.server = server
-        self.port = port
-        self.topic = topic
-
-        self.robot = S2Fluke2(dev)
+    def __init__(self, dev, mqtt_server, mqtt_port, mqtt_topic):
+        self.robot = Robot(dev)
 
         self.messages = queue.Queue(1)
-        self.mqtt_client = paho.Client()
-        self.mqtt_client.on_connect = self._mqttOnConnect
-        self.mqtt_client.on_message = self._mqttOnMessage
-        self.mqtt_client.connect(server, port)
-        self.mqtt_client.loop_start()
+        self.mqtt_server = mqtt_server
+        self.mqtt_port = mqtt_port
+        self.mqtt_topic = mqtt_topic
+        self.mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+        self.mqtt_client.on_connect = self.mqttOnConnect
+        self.mqtt_client.on_message = self.mqttOnMessage
 
-    def _mqttOnConnect(self, client, userdata, flag, rc):
+    def mqttOnConnect(self, client, _userdata, _flags, _reason_code, _properties):
         """Invocada al conectar a servidor MQTT."""
+        client.subscribe(self.mqtt_topic)
+        print(f"Esperando en {self.mqtt_server}:{self.mqtt_port}/{self.mqtt_topic}")
 
-        client.subscribe(self.topic)
-        print(f"Esperando en {self.server}:{self.port}/{self.topic}")
-
-    def _mqttOnMessage(self, client, userdata, message):
+    def mqttOnMessage(self, _client, _userdata, msg):
         """Invocada al recibir mensaje MQTT en algun topico suscrito."""
-
-        # si no se ha procesado el ultimo mensaje lo eliminamos
         try:
             self.messages.get_nowait()
-        except queue.Empty:
+        except Exception as _:  # pylint: disable=broad-except
             pass
-
-        # agregamos el mensaje
-        try:
-            self.messages.put_nowait(message)
-        except queue.Full:
-            pass
+        self.messages.put_nowait(msg)
 
     def run(self):
         """Realiza pruebas del S2 recibiendo comandos via MQTT."""
+        self.mqtt_client.connect(self.mqtt_server, self.mqtt_port)
+        self.mqtt_client.loop_start()
+        time.sleep(2)
+
         print("Comandos:")
         print("  nombre")
         print("  izquierda")

@@ -2,10 +2,10 @@ import time
 from threading import Thread
 import pygame  # pip install pygame
 import gi  # pip install pygobject
+
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
-from scribbler2.S2Fluke2 import S2Fluke2
-
+from scribbler2.Fluke2 import Robot  # conexion via bluethoot a la Fluke2
 
 
 class TestJoystick:
@@ -44,17 +44,16 @@ class TestJoystick:
     def onDeleteWindow(self, *args):
         self.onQuit(*args)
 
-    def onQuit(self, *args):
+    def onQuit(self, *_args):
         self.connect.set_active(False)
         Gtk.main_quit()
 
-    def onConnect(self, *args):
+    def onConnect(self, *_args):
         if self.connect.get_active():
             self._SbSetMessage("Conectando...")
             try:
-                # self.rob = S2Serial( port=self.Port.get_text() )
-                self.rob = S2Fluke2(port=self.port.get_text())
-            except Exception as _e:
+                self.rob = Robot(port=self.port.get_text())
+            except Exception:  # pylint: disable=broad-except
                 self.connect.set_active(False)
                 self._SbSetMessage("Error al conectar con el Scribbler2")
                 return
@@ -63,8 +62,7 @@ class TestJoystick:
             self.speed.set_sensitive(True)
             self.port.set_sensitive(False)
             self._SbSetMessage(
-                "Conectado a %s - Mi nombre es '%s'"
-                % (self.port.get_text(), self.rob.getName())
+                f"Conectado a {self.port.get_text()} - Mi nombre es '{self.rob.getName()}'"
             )
             self.info.set_label(self.rob.getInfo())
             self.connect.set_label("Desconectar")
@@ -101,34 +99,34 @@ class TestJoystick:
                 pygame.quit()
         return
 
-    def onSpeedChanged(self, *args):
+    def onSpeedChanged(self, *_args):
         self.speed_value = int(self.speed.props.adjustment.get_value())
 
-    def onUp(self, *args):
+    def onUp(self, *_args):
         self._StoreSensors(self.rob.setMotors(self.speed_value, self.speed_value))
 
-    def onUpLeft(self, *args):
+    def onUpLeft(self, *_args):
         self._StoreSensors(self.rob.setMotors(self.speed_value / 4, self.speed_value))
 
-    def onUpRight(self, *args):
+    def onUpRight(self, *_args):
         self._StoreSensors(self.rob.setMotors(self.speed_value, self.speed_value / 4))
 
-    def onDown(self, *args):
+    def onDown(self, *_args):
         self._StoreSensors(self.rob.setMotors(-self.speed_value, -self.speed_value))
 
-    def onDownLeft(self, *args):
+    def onDownLeft(self, *_args):
         self._StoreSensors(self.rob.setMotors(-self.speed_value / 4, -self.speed_value))
 
-    def onDownRight(self, *args):
+    def onDownRight(self, *_args):
         self._StoreSensors(self.rob.setMotors(-self.speed_value, -self.speed_value / 4))
 
-    def onLeft(self, *args):
+    def onLeft(self, *_args):
         self._StoreSensors(self.rob.setMotors(-self.speed_value, self.speed_value))
 
-    def onRight(self, *args):
+    def onRight(self, *_args):
         self._StoreSensors(self.rob.setMotors(self.speed_value, -self.speed_value))
 
-    def onStop(self, *args):
+    def onStop(self, *_args):
         self._StoreSensors(self.rob.setMotorsOff())
 
     def _SbSetMessage(self, msg=None):
@@ -140,27 +138,27 @@ class TestJoystick:
         self.time_sensors = time.time()
         self.sensors = sensors
 
-    def _Sensors(self, *args):
+    def _Sensors(self, *_args):
         """Hilo que procesa el despliegue de los sensores."""
         while self.rob is not None:
             try:
                 t = time.time()
                 if (t - self.time_sensors) > 1:
                     self._StoreSensors(self.rob.getAllSensors())
-                self.ir_left.set_label(str(self.sensors.irLeft))
-                self.ir_right.set_label(str(self.sensors.irRight))
-                self.light_left.set_label(str(self.sensors.lightLeft))
-                self.light_center.set_label(str(self.sensors.lightCenter))
-                self.light_right.set_label(str(self.sensors.lightRight))
-                self.line_left.set_label(str(self.sensors.lineLeft))
-                self.line_right.set_label(str(self.sensors.lineRight))
+                self.ir_left.set_label(str(self.sensors.ir_left))
+                self.ir_right.set_label(str(self.sensors.ir_right))
+                self.light_left.set_label(str(self.sensors.light_left))
+                self.light_center.set_label(str(self.sensors.light_center))
+                self.light_right.set_label(str(self.sensors.light_right))
+                self.line_left.set_label(str(self.sensors.line_left))
+                self.line_right.set_label(str(self.sensors.line_right))
                 self.stall.set_label(str(self.sensors.stall))
                 time.sleep(1)
-            except Exception as e:
+            except Exception as e:  # pylint: disable=broad-except
                 print(e)
                 break
 
-    def _Joystick(self, *args):
+    def _Joystick(self, *_args):
         """Hilo que procesa los eventos del joystick."""
         joystick = pygame.joystick.Joystick(0)
         joystick.init()
@@ -196,7 +194,8 @@ class TestJoystick:
                     else:
                         self.onStop()
                 time.sleep(0.1)
-            except Exception as _e:
+            except Exception as e:  # pylint: disable=broad-except
+                print(e)
                 break
 
 

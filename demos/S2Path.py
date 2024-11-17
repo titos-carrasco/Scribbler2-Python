@@ -4,12 +4,13 @@ El S2 acumula los comandos de desplazamiento bajo criterio propio
 y envia las respuestas cuando ese grupo ha finalizado
 """
 
-from scribbler2.S2Fluke2 import S2Fluke2
+# from scribbler2.S2 import Robot  # conexion via cable serial
+from scribbler2.Fluke2 import Robot  # conexion via bluethoot a la Fluke2
 
 
 class App:
     def __init__(self, dev):
-        self.robot = S2Fluke2(dev)
+        self.robot = Robot(dev)
 
     def run(self):
         """

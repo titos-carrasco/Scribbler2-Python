@@ -446,7 +446,6 @@
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="label" translatable="yes">Línea Derecho:</property>
-                        <property name="xalign">1</property>
                       </object>
                       <packing>
                         <property name="left-attach">2</property>

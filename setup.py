@@ -1,19 +1,21 @@
-# {dist}-{version}(-{build})?-{python}-{abi}-{platform}.whl
+# $ pip install setuptools
+# $ pip install wheel
+# $ python setup.py bdist_wheel
+# revisar dist/
 
 from setuptools import setup
-import sys
 
 SETUP = {
-    "name"             : "scribbler2",
-    "version"          : "4.0.0",
-    "description"      : "Control del robot Scribbler S2 (Parallax) y tarjeta Fluke2 (BetterBots)",
-    "license"          : "MIT",
-    "author"           : "Roberto Carrasco",
-    "author_email"     : "titos.carrasco@gmail.com",
-    "maintainer"       : "Roberto Carrasco",
-    "maintainer_email" : "titos.carrasco@gmail.com",
-    "packages"         : [ "scribbler2", "scribbler2.robot" ],
-    "package_dir"      : { "scribbler2": "scribbler2/" },
+    "name": "scribbler2",
+    "version": "4.1.0",
+    "description": "Control del robot Scribbler S2 (Parallax) y tarjeta Fluke2 (BetterBots)",
+    "license": "MIT",
+    "author": "Roberto Carrasco",
+    "author_email": "titos.carrasco@gmail.com",
+    "maintainer": "Roberto Carrasco",
+    "maintainer_email": "titos.carrasco@gmail.com",
+    "packages": ["scribbler2", "scribbler2.Fluke2", "scribbler2.S2"],
+    "package_dir": {"scribbler2": "scribbler2/"},
 }
 
-setup( **SETUP )
+setup(**SETUP)

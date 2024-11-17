@@ -1,25 +1,24 @@
-# -*- coding: utf-8 -*-
-
 """Clase de ayuda (helper) para retornar informacion del S2.
 
 Es creada exclusivamente por metodos de la clase **Scribbler2** y retornadas
 a su invocador. Sus atributos pueden ser accesados directamente.
 """
 
-class HS2LineSensors:
+
+class HLineSensors:
     """Valores de los sensores de linea del S2.
 
     ```
-    lineLeft :int - Valor del sensor de linea izquierdo
-    lineRight:int - Valor del sensor de linea derecho
+    line_left :int - Valor del sensor de linea izquierdo
+    line_right:int - Valor del sensor de linea derecho
     ```
     """
 
-    def __init__(self, lineLeft:int, lineRight:int)->None:
+    def __init__(self, line_left: int, line_right: int) -> None:
         """Constructor."""
-        self.lineLeft = lineLeft
-        self.lineRight = lineRight
+        self.line_left = line_left
+        self.line_right = line_right
 
     def __str__(self):
         """Representacion modo texto de la clase."""
-        return "HS2LineSensors(%d, %d)" % (self.lineLeft, self.lineRight)
+        return f"HLineSensors({self.line_left}, {self.line_right})"
