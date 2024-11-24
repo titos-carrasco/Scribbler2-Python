@@ -1,6 +1,8 @@
 import time
 import queue
 import paho.mqtt.client as mqtt  # pip install paho-mqtt
+
+# from scribbler2.S2 import Robot  # conexion via cable serial
 from scribbler2.Fluke2 import Robot  # conexion via bluethoot a la Fluke2
 
 

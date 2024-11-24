@@ -21,9 +21,9 @@ class Robot(scribbler2.S2.Robot):
     IMAGE_JPEG = 3
     IMAGE_JPEG_FAST = 4
 
-    def __init__(self, port: str, timeout: int = 4) -> None:
+    def __init__(self, port: str, timeout: int = 4, dtr: bool = None) -> None:
         """Inicializa el objeto y lo conecta a la Fluke2."""
-        super().__init__(port, baudrate=115200, timeout=timeout)
+        super().__init__(port, baudrate=115200, timeout=timeout, dtr=dtr)
         self.image_width = 0
         self.image_height = 0
 
@@ -193,12 +193,12 @@ class Robot(scribbler2.S2.Robot):
         log = self._getBytesResponse(n)
         return log.decode("ascii")
 
-    def resetScribbler(self) -> None:
+    def reset(self, timeout: float = 3.0) -> None:
         """Resetea el S2/F2."""
         packet = bytearray(1)
         packet[0] = 124
         self._sendF2Command(packet)
-        time.sleep(4.0)
+        time.sleep(timeout)
 
     def setIRPower(self, pwm: int):
         """Establece el valor de energia (0-255) para el sensor IR."""

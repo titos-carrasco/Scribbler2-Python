@@ -17,7 +17,7 @@ class App:
         self.robot.setForwardness(self.robot.SCRIBBLER_FORWARD)
         print("getErrors     : ")
         print(self.robot.getErrors())
-        self.robot.resetScribbler()
+        self.robot.reset()
 
         self.robot.close()
 

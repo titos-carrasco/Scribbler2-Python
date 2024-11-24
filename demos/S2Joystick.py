@@ -5,6 +5,8 @@ import gi  # pip install pygobject
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
+
+# from scribbler2.S2 import Robot  # conexion via cable serial
 from scribbler2.Fluke2 import Robot  # conexion via bluethoot a la Fluke2
 
 

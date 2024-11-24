@@ -10,7 +10,7 @@ class App:
         print("setIRPower 255 ")
         self.robot.setIRPower(255)
 
-        for i in range(20):
+        for _i in range(20):
             print("getIR: ", self.robot.getIR())
             time.sleep(0.200)
 

@@ -18,22 +18,32 @@ class Robot(object):
     DATA_LENGTH = 8
     PACKET_LENGTH = 9
 
-    def __init__(self, port: str, baudrate: int = 38400, timeout: int = 4) -> None:
+    def __init__(
+        self, port: str, baudrate: int = 38400, timeout: float = 4.0, dtr: bool = None
+    ) -> None:
         """Inicializa el objeto y lo conecta al S2."""
         self.conn = serial.Serial(port=port, baudrate=baudrate, timeout=timeout)
 
-        # reseteamos el robot esperando a que se active
-        self.conn.setDTR(1)
-        self.conn.setDTR(0)
-        time.sleep(3)
+        # cuando nos comunicamos directo por el DB9 el S2 requiere un voltaje alto en DTR
+        if not dtr is None:
+            self.conn.setDTR(dtr)
+            time.sleep(2.0)
 
-        # descartamos los residuos
-        self.conn.reset_input_buffer()
+        # limpiamos residuos
         self.conn.reset_output_buffer()
+        self.conn.reset_input_buffer()
+        self.conn.read(1000)
 
     def close(self) -> None:
         """Cierra la conexion hacia el S2."""
         self.conn.close()
+
+    def reset(self, timeout: float = 3.0) -> None:
+        """Resetea el S2 utilizando DTR. En RS232 la senal esta invertida"""
+        self.conn.setDTR(1)
+        time.sleep(0.010)
+        self.conn.setDTR(0)
+        time.sleep(timeout)
 
     def getInfo(self) -> str:
         """Obtiene datos informativos del S2."""
