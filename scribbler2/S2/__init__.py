@@ -19,31 +19,46 @@ class Robot(object):
     PACKET_LENGTH = 9
 
     def __init__(
-        self, port: str, baudrate: int = 38400, timeout: float = 4.0, dtr: bool = None
+        self,
+        port: str,
+        baudrate: int = 38400,
+        timeout: float = 1.0,
+        delay: float = 3.0,
     ) -> None:
         """Inicializa el objeto y lo conecta al S2."""
         self.conn = serial.Serial(port=port, baudrate=baudrate, timeout=timeout)
 
-        # cuando nos comunicamos directo por el DB9 el S2 requiere un voltaje alto en DTR
-        if not dtr is None:
-            self.conn.setDTR(dtr)
-            time.sleep(2.0)
+        # el S2 se resetea y debemos esperar a que este listo
+        time.sleep(delay)
 
-        # limpiamos residuos
+        # limpiamos cualquier residuo
+        self.flushBuffers()
+
+    def flushBuffers(self) -> None:
+        """Limpia los buffers de entrada y salida de la puerta serial."""
         self.conn.reset_output_buffer()
         self.conn.reset_input_buffer()
         self.conn.read(1000)
+
+    def setDTR(self, dtr: bool, delay: float = 0.001) -> None:
+        """Manipula la linea DTR para el robot."""
+        self.conn.setDTR(dtr)
+        time.sleep(delay)
+
+    def setTimeout(self, timeout: float) -> None:
+        """Establece el timeout para la entrada y salida."""
+        self.conn.timeout = timeout
 
     def close(self) -> None:
         """Cierra la conexion hacia el S2."""
         self.conn.close()
 
-    def reset(self, timeout: float = 3.0) -> None:
-        """Resetea el S2 utilizando DTR. En RS232 la senal esta invertida"""
-        self.conn.setDTR(1)
-        time.sleep(0.010)
-        self.conn.setDTR(0)
-        time.sleep(timeout)
+    def reset(self, delay: float = 3.0) -> None:
+        """Resetea el S2 por software"""
+        packet = self._makeS2Packet(33)
+        self._sendS2Command(packet)
+        time.sleep(delay)
+        self.flushBuffers()
 
     def getInfo(self) -> str:
         """Obtiene datos informativos del S2."""
@@ -539,12 +554,14 @@ class Robot(object):
         self.conn.flush()
         if pause > 0:
             time.sleep(pause / 1000.0)
+
         # recibe el echo
-        if packet[0] != 0x50:
-            b = self.conn.read(self.PACKET_LENGTH)
-            if packet != b:
-                print("Packet Mismatch:")
-                return False
+        if packet[0] != 0x50:  # GetInfo no da echo
+            if packet[0] != 0x21:  # SoftReset da echo parcial
+                b = self.conn.read(self.PACKET_LENGTH)
+                if packet != b:
+                    print("Packet Mismatch:")
+                    return False
         return True
 
     def _sendS2PathCommand(self, packet: bytearray) -> None:

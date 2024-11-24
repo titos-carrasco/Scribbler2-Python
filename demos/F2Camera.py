@@ -6,6 +6,7 @@ from scribbler2.Fluke2 import Robot  # conexion via bluethoot a la Fluke2
 class App:
     def __init__(self, dev):
         self.robot = Robot(dev)
+        self.robot.setTimeout(5.0)
 
     def run(self):
         cv2.namedWindow("Frames", cv2.WINDOW_AUTOSIZE)
