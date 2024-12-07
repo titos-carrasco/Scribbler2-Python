@@ -5,6 +5,8 @@ al S2 envien su respuesta
 """
 
 import time
+import serial
+
 import scribbler2.S2
 from scribbler2.Fluke2.HImage import HImage
 
@@ -21,11 +23,20 @@ class Robot(scribbler2.S2.Robot):
     IMAGE_JPEG = 3
     IMAGE_JPEG_FAST = 4
 
-    def __init__(self, port: str, timeout: float = 1.0, delay: float = 0.0) -> None:
+    def __init__(self, port: str, timeout: float = 1.0) -> None:
         """Inicializa el objeto y lo conecta a la Fluke2."""
-        super().__init__(port, baudrate=115200, timeout=timeout, delay=delay)
+        self.conn = serial.Serial(port=port, baudrate=115200, timeout=timeout)
+
+        # limpiamos cualquier residuo
+        self.flushBuffers()
+
+        # variables internas
         self.image_width = 0
         self.image_height = 0
+
+    def setDTR(self, dtr: bool, delay: float = 0.001) -> None:
+        """No utilizada con la Fluke2."""
+        pass
 
     def setPicSize(self, size: int):
         """Establece tamano de la imagen a capturar desde la F2.

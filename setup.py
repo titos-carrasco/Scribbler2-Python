@@ -1,13 +1,8 @@
-# $ pip install setuptools
-# $ pip install wheel
-# $ python setup.py bdist_wheel
-# revisar dist/
-
 from setuptools import setup
 
 SETUP = {
     "name": "scribbler2",
-    "version": "4.1.0",
+    "version": "4.1.1",
     "description": "Control del robot Scribbler S2 (Parallax) y tarjeta Fluke2 (BetterBots)",
     "license": "MIT",
     "author": "Roberto Carrasco",

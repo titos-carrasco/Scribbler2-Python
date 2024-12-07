@@ -18,15 +18,9 @@ class Robot(object):
     DATA_LENGTH = 8
     PACKET_LENGTH = 9
 
-    def __init__(
-        self,
-        port: str,
-        baudrate: int = 38400,
-        timeout: float = 1.0,
-        delay: float = 3.0,
-    ) -> None:
+    def __init__(self, port: str, timeout: float = 1.0, delay: float = 3.0) -> None:
         """Inicializa el objeto y lo conecta al S2."""
-        self.conn = serial.Serial(port=port, baudrate=baudrate, timeout=timeout)
+        self.conn = serial.Serial(port=port, baudrate=38400, timeout=timeout)
 
         # el S2 se resetea y debemos esperar a que este listo
         time.sleep(delay)
